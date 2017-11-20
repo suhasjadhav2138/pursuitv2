@@ -33,12 +33,13 @@ def index_view(request):
         # person_details = dict(person_details)
         print person_details
         # if request.user == None:
+        print person_details
         user = "Guest"
         data_update = Search_details(user=user, run_id=002, date_pulled=datetime.now(),
                                      first_name=person_details[0]['first_name'], last_name=person_details[0]["last_name"],
                                      name=person_details[0]["name"], company_url=person_details[0]["company_url"],
                                      email_guess=person_details[0]["email_guess"],
-                                     email_score=person_details[0]["email_score"])
+                                     email_score=person_details[0]["email_score"],)
         data_update.save()
         try:
 

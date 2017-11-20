@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime
 from django.contrib.sessions.models import Session
 from django.conf import settings
 from django.contrib.auth.signals import user_logged_in
@@ -29,7 +30,7 @@ class Document(models.Model):
 class Search_details(models.Model):
     user = models.CharField( max_length=100, null=True, blank=True)
     run_id = models.CharField(max_length=3)
-    date_pulled = models.CharField(max_length=15)
+    date_pulled = models.DateTimeField(default=datetime.now(), blank=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     name = models.CharField(max_length=100)
