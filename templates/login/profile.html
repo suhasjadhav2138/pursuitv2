@@ -79,33 +79,7 @@
             </div>
         </div>
     </header>
-    {#    <ul>#}
-    {#        {% for document in documents %}#}
-    {#            <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>#}
-    {#        {% endfor %}#}
-    {#    </ul>#}
-    {##}
-    {#    <!-- Upload form. Note enctype attribute! -->#}
-    {#    <form action="/profile/" method="post" enctype="multipart/form-data">#}
-    {#        {% csrf_token %}#}
-    {#        <p>{{ form.non_field_errors }}</p>#}
-    {##}
-    {#        <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>#}
-    {##}
-    {#        <p>#}
-    {#            {{ form.docfile.errors }}#}
-    {#            {{ form.docfile }}#}
-    {#        </p>#}
-    {##}
-    {#        <p><input type="submit" value="Upload"/></p>#}
-    {#    </form>#}
-    {##}
-    {#    <form action="/validate/" method="post" enctype="multipart/form-data">{% csrf_token %}#}
-    {#        <input type="text" name="first_name">#}
-    {#        <input type="text" name="last_name">#}
-    {#        <input type="text" name="domain">#}
-    {#        <input type="submit">#}
-    {#    </form>#}
+
     <div class="CSVPageBg">
         <div class="row">
             <div class="col-md-12">
@@ -145,16 +119,16 @@
                         </button>
                         <div class="row customcsvRow">
                             <div class="col-md-12 cvscols">
-                                <table class="table searchreult">
-                                    <tr>
-                                        <h3>Search Results</h3>
-
-                                        <td>
-                                            <span class="xyz">{{ details }}</span>
-                                            <!-- {{ details }} -->
-                                        </td>
-                                    </tr>
-                                </table>
+                                {#                                <table class="table searchreult">#}
+                                {#                                    <tr>#}
+                                {#                                        <h3>Search Results</h3>#}
+                                {##}
+                                {#                                        <td>#}
+                                {#                                            <span class="xyz">{{ details }}</span>#}
+                                {#                                            <!-- {{ details }} -->#}
+                                {#                                        </td>#}
+                                {#                                    </tr>#}
+                                {#                                </table>#}
                             </div>
                         </div>
                     </form>
@@ -168,113 +142,144 @@
             <div class="exort"><span class="Export">Export</span><span
                     class="glyphicon glyphicon-download-alt downloadcsv"></span></div>
             <div class="col-md-12 cvscols">
+{#                ---------------------------------------------------------#}
+{#                <table class="table">#}
+{#                    <tr>#}
+{#                        <th class="cvsCheckbox">#}
+{#                            <input class="" type="checkbox"/>#}
+{#                        </th>#}
+{#                        <th>First Name</th>#}
+{#                        <th>Last Name</th>#}
+{#                        <th>Company Url</th>#}
+{#                        <th>Email Score</th>#}
+{#                        <th>Email guess</th>#}
+{#                    </tr>#}
+{#                    {% for i in details %}#}
+{#                        <tr>#}
+{#                            <td>#}
+{#                                {{ i.first_name }}#}
+{#                            </td>#}
+{#                            <td>#}
+{#                                {{ i.last_name }}#}
+{#                            </td>#}
+{#                            <td>#}
+{#                                {{ i.company_url }}#}
+{#                            </td>#}
+{#                            <td>#}
+{#                                {{ i.email_score }}#}
+{#                            </td>#}
+{#                            <td>#}
+{#                                {{ i.email_guess }}#}
+{#                            </td>#}
+{#                        </tr>#}
+{#                    {% endfor %}#}
+{#                </table>#}
+{#                ----------------------------------------------------------#}
                 <table class="table">
                     <thead>
+
                     <tr>
                         <th class="cvsCheckbox">
                             <input class="" type="checkbox"/>
                         </th>
-                        <th>
-                            First Name
-                        </th>
-                        <th>
-                            Last Name
-                        </th>
-                        <th>
-                            Domain
-                        </th>
-                        <th>
-                            Email
-                        </th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Company Url</th>
+                        <th>Email Score</th>
+                        <th>Email guess</th>
                         <th>
 
                         </th>
                     </tr>
+
                     </thead>
                     <tbody>
+                    {% for i in details %}
+
                     <tr>
                         <td class="cvsCheckbox">
                             <input class="" type="checkbox"/>
                         </td>
                         <td>
-                            Tyler
+                            {{ i.first_name }}
                         </td>
                         <td>
-                            Grady
+                            {{ i.last_name }}
                         </td>
                         <td>
-                            www.gmail.com
+                            {{ i.company_url }}
                         </td>
-                        <!-- <td>
-                        <div class="Tablecircle CircleTwo"></div>
-                    </td> -->
                         <td>
-                            xyz@gmail.com
+                            {{ i.email_score }}
+                        </td>
+                        <td>
+                            {{ i.email_guess }}
                         </td>
                         <td style="padding: 15px 0px;">
                             <div class="Tablecircle CircleTwo"></div>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="cvsCheckbox" style="width:13%;">
-                            <input class="" type="checkbox"/>
-                        </td>
-                        <td>
-                            Tyler
-                        </td>
-                        <td>
-                            Grady
-                        </td>
-                        <td>
-                            www.gmail.com
-                        </td>
-                        <td>
-                            xyz@gmail.com
-                        </td>
-                        <td>
-                            <div class="Tablecircle"><p class="checkSymbollP">&#10004;</p></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="cvsCheckbox">
-                            <input class="" type="checkbox"/>
-                        </td>
-                        <td>
-                            Tyler
-                        </td>
-                        <td>
-                            Grady
-                        </td>
-                        <td>
-                            www.gmail.com
-                        </td>
-                        <td>
-                            xyz@gmail.com
-                        </td>
-                        <td style="padding: 15px 0px;">
-                            <div class="Tablecircle CircleTwo"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="cvsCheckbox">
-                            <input class="" type="checkbox"/>
-                        </td>
-                        <td>
-                            Tyler
-                        </td>
-                        <td>
-                            Grady
-                        </td>
-                        <td>
-                            www.gmail.com
-                        </td>
-                        <td>
-                            xyz@gmail.com
-                        </td>
-                        <td style="padding: 15px 0px;">
-                            <div class="Tablecircle CircleThree"></div>
-                        </td>
-                    </tr>
+                    {% endfor %}
+{#                    <tr>#}
+{#                        <td class="cvsCheckbox" style="width:13%;">#}
+{#                            <input class="" type="checkbox"/>#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            Tyler#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            Grady#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            www.gmail.com#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            xyz@gmail.com#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            <div class="Tablecircle"><p class="checkSymbollP">&#10004;</p></div>#}
+{#                        </td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <td class="cvsCheckbox">#}
+{#                            <input class="" type="checkbox"/>#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            Tyler#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            Grady#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            www.gmail.com#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            xyz@gmail.com#}
+{#                        </td>#}
+{#                        <td style="padding: 15px 0px;">#}
+{#                            <div class="Tablecircle CircleTwo"></div>#}
+{#                        </td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <td class="cvsCheckbox">#}
+{#                            <input class="" type="checkbox"/>#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            Tyler#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            Grady#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            www.gmail.com#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            xyz@gmail.com#}
+{#                        </td>#}
+{#                        <td style="padding: 15px 0px;">#}
+{#                            <div class="Tablecircle CircleThree"></div>#}
+{#                        </td>#}
+{#                    </tr>#}
                     </tbody>
                 </table>
                 <div class="col-md-12 text-center">

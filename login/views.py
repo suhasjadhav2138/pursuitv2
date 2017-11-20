@@ -36,10 +36,11 @@ def index_view(request):
         print person_details
         user = "Guest"
         data_update = Search_details(user=user, run_id=002, date_pulled=datetime.now(),
-                                     first_name=person_details[0]['first_name'], last_name=person_details[0]["last_name"],
+                                     first_name=person_details[0]['first_name'],
+                                     last_name=person_details[0]["last_name"],
                                      name=person_details[0]["name"], company_url=person_details[0]["company_url"],
                                      email_guess=person_details[0]["email_guess"],
-                                     email_score=person_details[0]["email_score"],)
+                                     email_score=person_details[0]["email_score"], )
         data_update.save()
         try:
 
@@ -129,19 +130,29 @@ def validate_view(request):
         # if request.user == None:
         user = request.user
         data_update = Search_details(user=user, run_id=002, date_pulled=datetime.now(),
-                                     first_name=person_details[0]['first_name'], last_name=person_details[0]["last_name"],
+                                     first_name=person_details[0]['first_name'],
+                                     last_name=person_details[0]["last_name"],
                                      name=person_details[0]["name"], company_url=person_details[0]["company_url"],
                                      email_guess=person_details[0]["email_guess"],
                                      email_score=person_details[0]["email_score"])
         data_update.save()
-        try:
+        # try:
+        #
+        #     person_details = person_details[0]['email_guess']
+        # except:
+        #     person_details = "domain not found"
+        # person_details = person_details[0]
+        person_data = Search_details.objects.filter(user=request.user)
+        print person_details, "oooooooooooooooooooooooooooooo"
 
-            person_details = person_details[0]['email_guess']
-        except:
-            person_details = "domain not found"
-        return render(request, 'login/index.html', {'details': person_details})
+        return render(request, 'login/profile.html', {'details': person_data})
+
     if request.method == 'GET':
-        return render(request, "login/index.html", {})
+        person_data = Search_details.objects.filter(user=request.user)
+        for i in person_data:
+            print i.first_name,"]]]]]]]]]]]]]]]]]]"
+
+        return render(request, "login/profile.html", {'details': person_data})
 
 
 @login_required
