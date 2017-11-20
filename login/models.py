@@ -29,15 +29,15 @@ class Document(models.Model):
 
 class Search_details(models.Model):
     user = models.CharField( max_length=100, null=True, blank=True)
-    run_id = models.CharField(max_length=3)
+    run_id = models.CharField(max_length=100)
     date_pulled = models.DateTimeField(default=datetime.now(), blank=True)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
     # email_original = models.EmailField(max_length=30)
-    company_url = models.CharField(max_length=30)
-    email_guess = models.CharField(max_length=30)
-    email_score = models.CharField(max_length=3)
+    company_url = models.CharField(max_length=100)
+    email_guess = models.CharField(max_length=100)
+    email_score = models.CharField(max_length=100)
 
 # class UserSession(models.Model):
 #     user = models.ForeignKey(settings.AUTH_USER_MODEL)
