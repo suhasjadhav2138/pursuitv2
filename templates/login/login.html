@@ -1,0 +1,161 @@
+{% extends 'login/base.html' %}
+{% load staticfiles %}
+
+	<body class="loginBg">
+{% block content %}
+
+                <header>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12 customnav">
+                                <div id="header-wrap">
+                                            <div id="header" class="clear">
+                                    <nav class="navbar navbar-default" role="navigation">
+                                        <div class="navbar-header">
+                                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                                <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                                            </button>
+                                          <div class="logoI">
+                                                <a href="http://pursuit.ai/">
+                                                    <img src="{% static 'images/logo.png' %}" height="30" width="131" alt="Pursuit">
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                            <ul class="nav navbar-nav navbar-right">
+                                                <li class="dropdown">
+                                                                  <a href="http://pursuit.ai/email-finder" class="dropdown-toggle" data-toggle="dropdown">Email Hunter <b class="caret"></b></a>
+                                                                  <ul class="dropdown-menu">
+                                                                    <li><a href="#">Free Email</a></li>
+                                                                    <li><a href="http://pursuit.ai/pricing/">Plans & Pricing</a></li>
+                                                                  </ul>
+                                                </li>
+                                                <li class="dropdown">
+                                                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">SDR Outsourcing <b class="caret"></b></a>
+                                                      <ul class="dropdown-menu">
+                                                        <li><a href="http://pursuit.ai/lead-generation/">Lead Generation</a></li>
+                                                        <li><a href="http://pursuit.ai/prospect-outreach/">Prospect Outreach</a></li>
+                                                        <li><a href="http://pursuit.ai/sdr-oursourcing/">Why Outsource?</a></li>
+                                                        <li><a href="http://pursuit.ai/pricing/">Plans & Pricing</a></li>
+                                                      </ul>
+                                                    </li>
+                                                <li class="dropdown">
+                                                      <a href="http://pursuit.ai/about/" class="dropdown-toggle" data-toggle="dropdown">Company <b class="caret"></b></a>
+                                                      <ul class="dropdown-menu">
+                                                        <li><a href="http://pursuit.ai/blog/">Blog</a></li>
+                                                        <li><a href="http://pursuit.ai/careers/">Careers</a></li>
+                                                      </ul>
+                                                </li>
+                                                <li class="GetInTouchCls">
+                                                    <a href="http://pursuit.ai/contact/">Get In Touch</a>
+                                                </li>
+                                                <li>
+                                                        <a href="/app">Home</a>
+
+                                                    </li>
+                                                    <li>
+                                                            <a href="/accounts/register/">Signup</a>
+
+                                                        </li>
+
+                                            </ul>
+                                        </div>
+
+                                    </nav>
+                                </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        </header>
+                    <div class="loginBg">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="loginborder">
+                                    <h2 class="text-center">
+                                Login 
+                            </h2>
+                                    <form action="/accounts/login/" method="POST" role="form" class="text-center ">{% csrf_token %}
+                                        <div class="form-group">
+                                            <input type="text" class="form-control Logininput" placeholder="User Name" name="username" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control Logininput" placeholder="Password" name="password" />
+                                        </div>
+                                        <button type="submit" style="width:100%;" class="btn btn-default LoginUploadBtn">
+                                            Login
+                                        </button>
+                                    </form>
+                                    <div class="login_text">
+                                       <span> <a href="/password_reset">If you forgot your password, Click here.</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <footer>
+                        <div class="row FooterMain">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
+                                <div class="col-md-3 col-sm-6 text-center FooterOne">
+                                    <h4>About</h4>
+                                    <p>Pursuit finds prospects and schedules meetings for your sales team</p>
+                                    <h4 class="ConnectFooter">Connect</h4>
+                                    <a href="https://www.facebook.com/PursuitSDR/"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
+                                    <a href="https://twitter.com/pursuit_sdr"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
+                                    <a href="https://www.linkedin.com/pursuitsdr"><i id="social-gp" class="fa fa-linkedin-square fa-3x social"></i></a>
+                
+                                </div>
+                                <div class="col-md-3 col-sm-6 text-center FooterCom">
+                                    <h4>Platform</h4>
+                                    <ul id="menu-footer-1" class="menu"><li class="menu-email-hunter"><a href="http://pursuit.ai/email-finder">Email Hunter</a></li>
+                                        <li class="menu-lead-generation"><a href="http://pursuit.ai/lead-generation/">Lead Generation</a></li>
+                                        <li class="menu-prospect-outreach"><a href="http://pursuit.ai/prospect-outreach/">Prospect Outreach</a></li>
+                                        <li class="menu-why-outsource"><a href="http://pursuit.ai/sdr-oursourcing/">Why Outsource?</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3 col-sm-6 text-center FooterCom">
+                                    <h4>Company</h4>
+                                    <ul>
+                                        <li class="menu-about"><a href="http://pursuit.ai/about/">About</a></li>
+                                        <li class="menu-blog"><a href="http://pursuit.ai/blog/">Blog</a></li>
+                                        <li class="menu-careers"><a href="http://pursuit.ai/careers/">Careers</a></li>
+                                        <li class="menu-pricing"><a href="http://pursuit.ai/pricingplans/">Pricing</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3 col-sm-6 text-center">
+                                    <h4>Contact</h4>
+                                    <div class="form-area footFrom">
+                                        <form role="form">
+                                            <br style="clear:both">
+                                            <div class="form-group">
+                                        <input type="text"  class="form-control Logininput" placeholder="User Name" name="username"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control Logininput" placeholder="Password" name="password"/>
+                                    </div>
+                                    <button type="submit" class="btn btn-default LoginUploadBtn">
+                                        Login
+                                    </button>
+                                            </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1"></div>
+                            <div class="footer-btm-bar">
+                                <div class="footer-copyright row">
+                                    <div class="col-md-12">
+                                        <p><span class="footer_copy">&nbsp;© 2017 Remote Society</span> </p>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                    </footer>
+{% endblock %}
+{#<script src="{% static 'js/jquery.min.js' %}"></script>#}
+{#<script src="{% static 'js/script.js' %}"></script>#}
+  </body>
+{#</html>#}

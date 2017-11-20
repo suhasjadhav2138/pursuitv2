@@ -1,0 +1,998 @@
+
+@font-face {
+    font-family: 'latoregular';
+    src: url('../fonts/lato-regular-webfont.eot');
+    src: url('../fonts/lato-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/lato-regular-webfont.woff2') format('woff2'),
+         url('../fonts/lato-regular-webfont.woff') format('woff'),
+         url('../fonts/lato-regular-webfont.ttf') format('truetype'),
+         url('../fonts/lato-regular-webfont.svg?#latoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+html,
+body {
+    overflow-x: hidden;
+    margin: 0;
+    background: #fff;
+    font-family: latoregular;
+}
+a{
+	text-decoration: none !important;
+}
+h1,
+h2 {
+    font-family:latoregular;
+}
+/* Nav Bar Css */
+.customnav {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.navbar-default {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    line-height: 4.5;
+    margin: 0;
+    border-radius: 0;
+	    margin: 0 105px;
+}
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
+    padding: 0px;
+    margin: 5px 0px;
+}
+
+.navbar-nav>li {
+    border-bottom: 1px solid transparent;
+    border-radius: 0px;
+       margin:4px 11px;
+    padding: 0 5px;
+	    margin-left: 12px;
+}
+
+.navbar-nav>li:hover {
+    border-bottom: 1px solid #fff;
+    border-radius: 0;
+     margin:4px 11px;
+    padding: 0 5px;
+	    margin-left: 12px;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-nav>li>a:hover {
+    color: #fff;
+}
+
+.navbar-right {
+    margin-top: 16px;
+	    margin-right: -14px;
+}
+.logoI{ 
+	     margin: 6px 0 0 0;  
+ }
+.GetInTouchCls {
+    border:1px solid rgba(255,255,255,0.65);
+    border-radius: 25px !important;
+    padding: 3px 18px !important;
+    border-bottom: 1px solid rgba(255,255,255,0.65) !important;
+	    margin: 0 -2px 0 0 !important;
+} 
+ /* .fixed .navbar-default {  */
+	/* line-height: 4;  */
+ /* }  */
+/* .fixed  .navbar-right {  */
+     /* margin-top: 11px;  */
+	/* margin-right: -14px;  */
+ /* }  */
+/* .fixed  .logoI {  */
+     /* margin: 1px 0 5px 0;  */
+/* }  */
+.dropdown-menu > li.kopie > a {
+    padding-left:5px;
+}
+ 
+.dropdown-submenu {
+    position:relative;
+}
+.dropdown-submenu>.dropdown-menu {
+   top:0;left:100%;
+   margin-top:-6px;margin-left:-1px;
+   -webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;
+ }
+  
+.dropdown-submenu > a:after {
+  border-color: transparent transparent transparent #333;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  content: " ";
+  display: block;
+  float: right;  
+  height: 0;     
+  margin-right: -10px;
+  margin-top: 5px;
+  width: 0;
+}
+ 
+.dropdown-submenu:hover>a:after {
+    border-left-color:#555;
+ }
+
+.dropdown-menu > li > a:hover, .dropdown-menu > .active > a:hover {
+  text-decoration: underline;
+}  
+.navbar-nav>li>.dropdown-menu {
+    margin-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: #353c40;
+    border-radius: 0 !important;
+    color: #fff;
+}
+.navbar .navbar-nav .dropdown-menu li a {
+    font-size: 13px;
+    text-align: left;
+    padding: 8px 20px;
+    color: #c8c8c8;
+}
+.navbar .navbar-nav .dropdown-menu li a{
+	text-decoration:none;
+}
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover{
+	background-color:transparent;
+}
+.navbar .navbar-nav .dropdown-menu li a:hover{
+	color:#ffffff;
+}
+.caret{
+	display:none;
+}
+/* Nav Br Css End Here */
+label {
+    color: #5c5c5c;
+}
+.headtext {
+    font-size: 18px;
+}
+.headtextN {
+    padding-top: 15px;
+	text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+	color:#565555;
+}
+.CvsFormTitle{
+	text-align: center;
+    font-size: 24px;	
+    margin: 15px 0;
+	font-weight: bold;
+	 color: #5c5c5c;
+}
+.headinput {
+    margin: 0 auto;
+}
+.headerTextMain {
+    border-radius: 5px;
+    margin: 155px auto 0 auto;
+    width: 50%;
+    background-color: #fff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.15);
+}
+.CustRowOne {
+    background-image: url("../images/SecondImg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 600px;
+}
+.CardDetailsM {
+    background-image: url("../images/SecondImg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 600px;
+}
+.CSVPageBg {
+    background-image: url("../images/SecondImg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 600px
+}
+.loginBg {
+    background-image: url("../images/SecondImg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+	min-height: 600px;
+}
+.CSVPageF {
+    border: 1px solid #c7c7c7;
+    border-radius: 5px;
+    margin: 155px auto 5px auto;
+    width: 50%;
+    background-color: #fff;
+    padding: 0;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.15);
+}
+.CardDetailsM h2,
+h4 {
+    color: #fff;
+}
+.CreateAcco h4 {
+    color: #5c5c5c;
+    text-align: center;
+    padding-top: 15px;
+    font-size: 24px;
+    font-weight: bold;
+}
+.CardF {
+    border: 1px solid #c7c7c7;
+    border-radius: 5px;
+    margin: 155px auto 0 auto;
+    width: 50%;
+    background-color: #fff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.15);
+}
+.CreateAcco {
+    border: 1px solid #c7c7c7;
+    border-radius: 5px;
+    margin: 130px auto 0 auto;
+    width: 50%;
+    background-color: #fff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.15);
+}
+.customrowfirst {
+    padding: 30px 0;
+}
+.customrowfirst img {
+    width: 100%;
+}
+.Pricingcls {
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+}
+.PricingSub {
+    padding: 35px 0;
+    border-bottom: 1px solid #e8e8e8;
+    border-top: 1px solid #e8e8e8;
+    border-left: 1px solid #e8e8e8;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.15);
+}
+.pricLastColumn {
+    border-right: 1px solid #e8e8e8;
+}
+.PricingSub.ACTIVE {
+    background-color: #5778c1;
+    color: #ffffff;
+    margin-top: -25px;
+    border-bottom: 2px solid #5778c1;
+    border-top: 2px solid #5778c1;
+    border-left: 2px solid #5778c1;
+    height: 598px;
+}
+.BGSection {
+    background-color: #f9f9f9;
+    padding-bottom: 40px;
+    padding-top: 40px;
+}
+.BGSectionWhite {
+    padding-bottom: 40px;
+    padding-top: 40px;
+}
+.BGSectionWhite  h2{
+	color:#515151;
+}
+.CardDetailsM h2,
+h4 {
+    color:#5c5c5c;
+}
+/* .PlanTwoHeadingNav { */
+    /* margin-top: 12%; */
+/* } */
+.PricingSub h1 {
+    color: #5778c1;
+    font-size: 46px;
+    font-weight: 600;
+}
+.Tablecircle {
+    width:11px;
+    height: 11px;
+    border-radius: 10px;
+       margin-right: 5px;
+    cursor: pointer;
+}
+.CircleTwo {
+    background-color: red;
+}
+.CircleThree {
+    background-color: orange;
+}
+.PricingSub.ACTIVE h1 {
+    color: #ffffff;
+    margin-top: 42px;
+}
+.PricingSub p {
+    width: 80%;
+    margin: 0 auto;
+    font-size: 15px;
+    color: #5c5c5c;
+    padding: 16px 0;
+    border-bottom: 1px solid #e7e7e7;
+}
+.PricingSub h3 {
+    font-size: 20px;
+    color: #515151;
+    font-weight: 600;
+}
+.PricingSub,
+.ACTIVE p {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+.PricingSub,
+.ACTIVE h3 {
+    color: #ffffff;
+}
+.PricingSub.ACTIVE button {
+    background-color: #ffffff !important;
+    color: #5778c1 !important;
+}
+.SlectCLasLand {
+    margin-bottom: 45px;
+    margin-top: 30px;
+}
+.collandpage{
+	    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.headerbgOne {
+    background-color: rgb(12, 12, 12);
+}
+.updatebtn {
+    background-color: #bfb5b5;
+    color: #fff;
+    margin-top: 30px;
+    font-size: 14px !important;
+    margin-bottom: 10px;
+}
+.purposes {
+    width: 60%;
+    margin: 0 auto;
+}
+.informationis {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 15px;
+    color: gray;
+    text-align: center;
+}
+.PalyStripBtn {
+    margin: 10px 0;
+	width:200px;
+}
+.decripList dd {
+    padding-bottom: 20px;
+}
+.TitleCommancls {
+    padding: 10px 0;
+    font-weight: 600;
+}
+.PlanTwoHeadingNav .TitleCommancls {
+    padding: 275px 0 0 0;
+    font-weight: 600;
+    margin-top: 0;
+}
+.prcingRow .col-md-3 {
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+.Tableheadinput {
+    width: auto;
+    float: left;
+}
+.cvscols .table {
+    width: 84%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    margin: 0 auto;
+}
+.exort {
+    width: 92%;
+    float: left;
+}	
+.downloadcsv {
+    float: right;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 15px;
+    margin-right: 2px;
+    color:#455054;
+}
+.Export {
+    font-size: 15px;
+    float: right;
+    line-height: 45px;
+    margin-left: 8px;
+	font-weight: bold;
+    color:#455054;
+}
+.checkSymbollP{
+    font-size: 31px;
+    color: rgb(28,179,75);
+    font-weight: bold;
+    margin: 0;
+    bottom: 12px;
+    position: relative;
+	    right: 15px;
+}
+.CircleTwo {
+    background-color: red;
+}
+.inputPlanePage {
+    margin: 15px auto;
+    width: 90%;
+}
+.inputPlaneFirst {
+    width: auto;
+    margin: 0 auto;
+}
+.LoginSearchBtn,
+.LoginUploadBtn {
+    background-color: #f9f9f9;
+    border: 1px solid #b0b3ae;
+    font-weight: 400;
+    width: 200px;
+    color: #fff;
+}
+.NeedBtn button:hover {
+    background-color: #252B2D;
+    border: 1px solid #252B2D;
+    color: #fff;
+    font-weight: 400;
+}
+.Logininput {
+    width: 100%;
+    margin: 0 auto;
+}
+.loginborder {
+    width: 32%;
+    padding: 20px;
+    margin: 155px auto 5px auto;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    background-color: #fff;
+}
+.table_top {
+    margin-top: 20px;
+}
+.cvscols {
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-bottom: 10px;
+}
+.csfrom {
+    width: 93%;
+    margin: 0 auto;
+    padding-bottom: 5px;
+}
+.loginborder h2 {
+    margin-bottom: 30px;
+    margin-top: 5px;
+	 color: #565555;
+	     font-weight: 600;
+} 
+.Forgoth2{
+		 color: #565555;
+		  font-weight: 600;
+}
+.NeedBtn {
+    padding: 0 15px;
+       margin: 25px 0;
+}
+.PlaySteipBtn {
+    margin: 0px 0px 15px 0px;
+}
+thead tr {
+    background-color: #5778c1;
+    color: #fff;
+}
+.table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th,
+.table>thead>tr>td,
+.table>thead>tr>th {
+    border-bottom: 1px solid green;
+}
+.cvscols .table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th,
+.table>thead>tr>td,
+.table>thead>tr>th {
+    border-bottom: 1px solid #ddd;
+	    padding: 10px; 
+}
+.table>thead>tr>th {
+       font-size: 16px;
+}
+.cvsCheckbox {
+    text-align: center;
+}
+.customcsvRow {
+    margin: 15px 0;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+.searchreult td{
+	    border-bottom: 1px solid #5778c1 !important;
+    border-top: 1px solid #5778c1 !important;
+}
+.form-control {
+    height: 38px;
+}
+.btn {
+    height: 45px;
+    border-radius: 50px !important;
+    color: #fff !important;
+    background-color: #5778c1 !important;
+    border-color: #5778c1 !important;
+    font-size: 16px;
+    border-radius: 5px;
+}
+.PricingSub .updatebtn,
+.Searchresult {
+    width: 200px;
+}
+.btn-success.Searchresult {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    margin-left: 15px;
+}
+.searchreult {
+    margin-top: 20px;
+}
+.result_pan {
+    margin-left: 15px;
+}
+.xyz{
+	font-weight:bold;
+	    font-size: 18px;
+}
+.btn:hover {
+    background-color: #5778c1 !important;
+    border-color: #5778c1 !important;
+    color: #fff !important;
+    opacity: 0.85;
+}
+.btn.btn-success {
+    background-color: #37b2a8 !important;
+    border-color: #37b2a8 !important;
+    width: 250px;
+}
+.CSVPageBg .btn.btn-success {
+    background-color: #37b2a8 !important;
+    border-color: #37b2a8 !important;
+	 width: 200px;
+}
+.btn.btn-success:hover {
+    background-color:#1a8e84 !important;
+    border-color:#1a8e84 !important;
+}
+.PlanPriceBtn {
+    height: 47px;
+    margin-top: 15px;
+}
+.login_text {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 15px;
+    color: gray;
+}
+.login_text span{
+	cursor:pointer;
+}
+.login_text span a{
+	    color: #565555 !important;
+}
+.loginWidthForm {
+    width: 90%;
+    margin: 0 auto;
+}
+.emails_title {
+    margin-bottom: 30px;
+}
+.sign_up label {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+.sign_up {
+    width: 93%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+.CreateSignUpBtn {
+    width: 200px;
+    margin-top: 20px;
+}
+.right_btn {
+    color: #252B2D;
+    line-height: 45px;
+    font-size: 16px;
+}
+.FAQSection {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 18px;
+	    padding-top: 0px;
+}
+.FAQSection  p{
+	font-size:15px;
+}
+.FAQSection h4 {
+    padding: 5px 0px;
+    font-weight: 600;
+    color: #515151;
+}
+.FAQSection h2 {
+    color: #515151;
+    padding-top: 0px;
+    padding-bottom: 40px;
+	font-weight: 600;
+	margin:0 0;
+}
+.LastFAQ {
+    margin-bottom: 21px
+}
+.PalnePageT {
+    margin-bottom: 50px;
+}
+/* Footer CSS */
+
+.FooterMain h4 {
+    border-bottom: 1px solid #676161;
+    padding: 0px 0 20px 0;
+}
+.FooterCom li {
+    border-bottom: 1px solid #676161;
+    padding: 5px 0 15px 0;
+	list-style-type: none;
+	    font-size: 15px;
+}
+.FooterCom li a {
+    color: #d2d2d2;
+    text-decoration: none;
+}
+.FooterCom li a:hover {
+    color: #ffffff;
+}
+.FooterOne p {
+    padding: 10px 0;
+}
+.FooterOne h4 {
+    border-bottom: 1px solid #676161;
+}
+.SubmitFooterBtn {
+    width: 100%;
+}
+.tableBottomBtn {
+    margin: 23px auto 0 auto;
+    width: 150px !important;
+    height: 40px;
+}
+footer {
+    background: #292e31;
+    color: #d2d2d2;
+    padding: 70px 0 0;
+    margin-top: -1px;
+}
+.FooterOne a {
+    color: #464a4d !important;
+}
+.footer-btm-bar {
+    background: #23272a;
+    padding: 30px 0 20px;
+    width: 100%;
+    float: left;
+    text-align: center;
+    margin: 5% 0 0 0;
+}
+.footFrom .form-control {
+    background-color: transparent;
+    border-radius: 5px;
+}
+.FooterMain input {
+    color: #fff;
+}
+.social:hover {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+}
+.social {
+    -webkit-transform: scale(0.8);
+    /* Browser Variations: */
+    -moz-transform: scale(0.8);
+    -o-transform: scale(0.8);
+    -webkit-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+}
+#social-fb:hover {
+    color: #8e979d;
+}
+#social-tw:hover {
+    color: #8e979d;
+}
+#social-gp:hover {
+    color: #8e979d;
+}
+#message {
+    height: 120px;
+    color: #fff;
+}
+.NewCustomContainer {
+    padding-right: 0;
+    padding-left: 0;
+}
+header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+#header {
+    width: 100%;
+    z-index: 100;
+}
+.fixed {
+    position: fixed;
+    top: 0;
+    background-color:  #252B2D;
+ -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -ms-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+.fixed1 {
+ -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -ms-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+#header-wrap {
+    position: relative;
+}
+.needGetBtn{
+	width:200px;
+}
+.form-gap {
+    padding-top: 150px;
+}
+@media only screen and (max-width: 1024px) {
+    .prcingRow {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .loginborder {
+        width: 70%;
+    }
+    .inputPlaneFirst {
+        width: 60%;
+    }
+    .csfrom {
+        width: 80%;
+    }
+    .customrowfirst img {
+        margin-top: 20px;
+    }
+    .prcingRow .col-md-3 {
+        height: 515px;
+    }
+    .navbar-default {
+        margin-bottom: 0;
+		    margin: 1px 45px;
+    }
+    .CreateAcco {
+        width: 75%;
+        margin-bottom: 45px;
+    }
+    .LoginUploadBtn {
+        margin-top: 10px;
+    }
+    .CardF {
+        width: 75%;
+    }
+	.headerTextMain {
+		border-radius: 5px;
+		margin: 110px auto 0 auto;
+	}
+	.NeedBtn {
+		margin-top: 125px;
+	}
+	
+}
+@media only screen and (max-width: 1024px) and (min-width: 768px) and (orientation : portrait) {
+	.CSVPageF {
+		margin: 95px auto 5px auto;
+	}
+	.CardF {
+		margin: 100px auto 0 auto;
+	}
+}
+@media (min-width: 768px) {
+  ul.nav li:hover > ul.dropdown-menu {
+    display: block;
+  }
+  #navbar {
+    text-align: center;
+  }
+}  
+
+@media only screen and (max-width: 767px) {
+    .navbar-nav {
+        margin: 7.5px 0px;
+    }
+    .loginborder {
+        width: 100%;
+    }
+    .csfrom {
+        width: 90%;
+        margin: 0 auto;
+    }
+    .prcingRow .col-md-3 {
+        padding: 0 15px;
+    }
+    .tableREsponsive {
+        overflow-x: auto;
+    }
+    .navbar-default .navbar-nav>li>a {
+        text-align: center;
+    }
+    .cvscols {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .dropdown.open,.navbar-nav>li:hover {
+        margin: 0 auto;
+        width: 50%;
+    }
+    .sign_up {
+        width: 85%;
+        margin: 0 auto;
+        margin-bottom: 30px;
+    }
+    .customrowfirst img {
+        margin-top: 20px;
+    }
+    .purposes {
+        width: 100%;
+    }
+    .headerTextMain {
+        width: 85%;
+    margin: 118px auto 0 auto;
+    }
+    .loginborder {
+        width: 100%;
+    }
+    .CardF {
+        width: 100%;
+    }
+    .PricingSub {
+        border-right: 1px solid #e8e8e8;
+    }
+    .CreateAcco {
+        width: 100%;
+    }
+    .CSVPageF {
+        width: 80%;
+    }
+    .LoginUploadBtn {
+        margin-top: 10px;
+    }
+    .needGetBtn {
+        width: 65%;
+        font-size: 14px;
+        margin-top: 55px;
+    }
+    .CustRowOne {
+        margin-top: 0px;
+    }
+    .navbar-default {
+        background-color: #252B2D;
+		margin: 0 0px;
+		    padding: 0 15px;
+    }
+    .GetInTouchCls {
+        width: 50%;
+        margin: 0 auto !important;
+    }
+    .Pricingcls {
+        margin: 80px 0;
+    }
+	.navbar-nav  {
+     display: inline;
+  }
+  .navbar-default .navbar-brand {
+    display: inline;
+  }
+  .navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+  }
+  .navbar-default .navbar-nav .dropdown-menu > li > a {
+    background-color: transparent;
+    border-radius: 4px;
+    margin-top: 2px;   
+    text-align: center;
+
+  }
+   .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+   .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+     background-color: transparent;
+	color:#777;
+   }
+   .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+    background-color: transparent;
+}
+  .dropdown-menu {
+      padding-left: 10px;
+  }
+  .dropdown-menu .dropdown-menu {
+      padding-left: 20px;
+   }
+   .dropdown-menu .dropdown-menu .dropdown-menu {
+      padding-left: 30px;
+   }
+   .caret{
+		display:inline-block;
+	}
+	.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+		color: #fff;
+		background-color: #1c2022 !important;
+	}
+	.navbar-nav .open .dropdown-menu{
+		background-color: #1f2426 !important;
+		    margin-bottom: 15px;
+	}
+	.navbar-nav>li:hover {
+		border-bottom: none;
+	}
+	.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+		padding: 20px 0;
+	}
+	.navbar-default .navbar-nav>li>a {
+		margin:10px 0 10px 0px;
+	}
+	.NeedBtn {
+		margin-top: 15px;
+	}
+	.FooterCom li {
+		margin: 0 40px;
+	}
+	.FooterMain h4 {
+		margin: 15px 40px;
+		padding: 20px 0;
+	}
+	.FooterOne p {
+		margin: 0 10px;
+	}
+}
+
+@media screen and (max-device-width: 767px) and (orientation: landscape) {
+    .loginBg {
+        position: static;
+    }
+}
