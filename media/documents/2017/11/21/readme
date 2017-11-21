@@ -1,0 +1,21 @@
+steps to run project:
+
+
+1. unzip the project.
+2. install the 'requirements.txt' in your enviornment using command 'pip install -r requirements.txt'.
+3. go to project directory and apply db migration by
+4. python manage.py makemigrations music
+5. python manage.py migrate
+6. now run the project by 
+7. python manage.py runserver
+8. the app started at http://localhost:8000/
+9. the home page display collection of album.
+10.In the menu bar option user can add album/song.
+10.user can get list of album/song by selecting option from menu bar.
+
+ishan04mahajan@gmail.com
+ishanmahajan04
+ieeramahajan1
+
+git config user.email "ishan04mahajan@gmail.com"
+

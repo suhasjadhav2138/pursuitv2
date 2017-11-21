@@ -112,77 +112,117 @@ def logout_view(request):
 #     return render(request, 'login/profile.html', {})
 
 # upload csv and read in construction
-
+@login_required()
 def validate_view(request):
     if request.method == 'POST':
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        title = 'CEO'
-        # company_email = request.POST.get('company_email')
-        company_website = request.POST.get('company_website')
+        try:
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
+            title = 'CEO'
+            # company_email = request.POST.get('company_email')
+            company_website = request.POST.get('company_website')
 
-        print first_name, last_name, title, company_website
-        data_list = [first_name, last_name, title, company_website]
-        print data_list
-        person_details = validate_email.select_type(data_list)
-        # person_details = dict(person_details)
-        print person_details
-        # if request.user == None:
-        user = request.user
-        data_update = Search_details(user=user, run_id=002, date_pulled=datetime.now(),
-                                     first_name=person_details[0]['first_name'],
-                                     last_name=person_details[0]["last_name"],
-                                     name=person_details[0]["name"], company_url=person_details[0]["company_url"],
-                                     email_guess=person_details[0]["email_guess"],
-                                     email_score=person_details[0]["email_score"])
-        data_update.save()
-        # try:
-        #
-        #     person_details = person_details[0]['email_guess']
-        # except:
-        #     person_details = "domain not found"
-        # person_details = person_details[0]
-        person_data = Search_details.objects.filter(user=request.user)
-        print person_details, "oooooooooooooooooooooooooooooo"
+            print first_name, last_name, title, company_website
+            data_list = [first_name, last_name, title, company_website]
+            print data_list
+            person_details = validate_email.select_type(data_list)
+            # person_details = dict(person_details)
+            print person_details
+            # if request.user == None:
+            user = request.user
+            data_update = Search_details(user=user, run_id=002, date_pulled=datetime.now(),
+                                         first_name=person_details[0]['first_name'],
+                                         last_name=person_details[0]["last_name"],
+                                         name=person_details[0]["name"], company_url=person_details[0]["company_url"],
+                                         email_guess=person_details[0]["email_guess"],
+                                         email_score=person_details[0]["email_score"])
+            data_update.save()
+            try:
 
-        return render(request, 'login/profile.html', {'details': person_data})
+                person_details = person_details[0]['email_guess']
+            except:
+                person_details = "domain not found"
+            # person_details = person_details[0]
+            # person_data = Search_details.objects.filter(user=request.user)
+            print person_details, "oooooooooooooooooooooooooooooo"
+            form = DocumentForm()
+
+            return render(request, 'login/profile.html', {'details': person_details, 'form':form})
+        except:
+
+            form = DocumentForm(request.POST, request.FILES)
+
+            if form.is_valid():
+                newdoc = Document(docfile=request.FILES['docfile'], user=request.user)
+                print newdoc, "ooooooooooooooooooooooooooooooooooooooo"
+
+                newdoc.save()
+                # -----------------------------------
+                import os
+                path = 'media/documents'
+                os.path.join(path, newdoc)
+# ------------------------------------
+                print path
+
+                with open(path, mode='r', buffering=-1) as csvfile:
+                    readCSV = csv.reader(csvfile)
+                    for row in readCSV:
+                        print(row)
+                        print(row[0])
+                        print(row[0],row[1],row[2],)
+
+                print request.FILES['docfile']
+
+                documents = Document.objects.all()
+
+                form = DocumentForm()
+
+                return render(request, 'login/profile.html', {'documents': documents,'form':form})
+
+            else:
+                form = DocumentForm()
+
+
+                # Redirect to the document list after POST
+                return render(request, 'login/profile.html', {'form': form})
 
     if request.method == 'GET':
-        person_data = Search_details.objects.filter(user=request.user)
-        for i in person_data:
-            print i.first_name,"]]]]]]]]]]]]]]]]]]"
-
-        return render(request, "login/profile.html", {'details': person_data})
-
-
-@login_required
-def list_file(request):
-    # Handle file upload
-    if request.method == 'POST':
-        form = DocumentForm(request.POST, request.FILES)
-        if form.is_valid():
-            newdoc = Document(docfile=request.FILES['docfile'], user=request.user)
-            newdoc.save()
-            print request.FILES['docfile']
-
-            documents = Document.objects.all()
+        form = DocumentForm()
+        # person_data = Search_details.objects.filter(user=request.user)
+        # for i in person_data:
+        #     print i.first_name, "]]]]]]]]]]]]]]]]]]"
+            # 'details': person_data
+        return render(request, "login/profile.html", {'form':form})
 
 
-            # Redirect to the document list after POST
-            return render(request, 'login/profile.html', {'documents': documents})
-
-    else:
-        form = DocumentForm()  # A empty, unbound form
-
-    # Load documents for the list page
-    documents = Document.objects.all()
-
-    # Render list page with the documents and the form
-    return render(
-        request,
-        'login/profile.html',
-        {'documents': documents, 'form': form}
-    )
+# @login_required
+# def list_file(request):
+#     # Handle file upload
+#     if request.method == 'POST':
+#         form = DocumentForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             newdoc = Document(docfile=request.FILES['docfile'], user=request.user)
+#             newdoc.save()
+#             print request.FILES['docfile']
+#
+#             documents = Document.objects.all()
+#
+#
+#             # Redirect to the document list after POST
+#             return render(request, 'login/profile.html', {'documents': documents})
+#
+#     else:
+#         form = DocumentForm()  # A empty, unbound form
+#
+#     # Load documents for the list page
+#     documents = Document.objects.all()
+#
+#     # Render list page with the documents and the form
+#     return render(
+#         request,
+#         'login/profile.html',
+#         {'documents': documents, 'form': form}
+#     )
 
 # def email_validate(request):
 #     print("jsdhgfsjhdfgsjhfgsdjhfgjhfgsdjhfgsdjfgsdjhfgsdjhfg")

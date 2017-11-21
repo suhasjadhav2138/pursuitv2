@@ -11,6 +11,7 @@ import json
 from urllib2 import urlopen
 from django.contrib import admin
 
+
 class UserProfilename(models.Model):
     name = models.OneToOneField(User, primary_key=True)
     email = models.EmailField(max_length=50)
@@ -20,15 +21,17 @@ class UserProfilename(models.Model):
     def __unicode__(self):
         return self.name
 
+
 class Document(models.Model):
     user = models.ForeignKey(User, null=True, blank=True)
-    docfile = models.FileField(upload_to='documents/%Y/%m/%d')
+    docfile = models.FileField(upload_to='documents/')
+
     def __unicode__(self):
-        return unicode(self.docfile)
+        return '%s' % (self.docfile)
 
 
 class Search_details(models.Model):
-    user = models.CharField( max_length=100, null=True, blank=True)
+    user = models.CharField(max_length=100, null=True, blank=True)
     run_id = models.CharField(max_length=100)
     date_pulled = models.DateTimeField(default=datetime.now(), blank=True)
     first_name = models.CharField(max_length=100)
@@ -39,29 +42,31 @@ class Search_details(models.Model):
     email_guess = models.CharField(max_length=100)
     email_score = models.CharField(max_length=100)
 
+
 # class UserSession(models.Model):
 #     user = models.ForeignKey(settings.AUTH_USER_MODEL)
 #     session = models.ForeignKey(Session)
 #     ip = models.CharField(max_length=25) 
 #     location = models.CharField(max_length=100) 
-    
-    # def __unicode__(self):
-    #     return unicode(self.sessio)
-    
 
-        # def user_logged_in_handler(sender, request, user, **kwargs):
-        #     print("ooooooooooooooooooooooooooooooooooooooooooooooooo")
-        #     data= get_ip_location()
-        #     ip = data['ip']
-        #     location = data['city']+', '+data['region'] + ', '+ data['country']
-        #     UserSession.objects.get_or_create(
-        #         user = user,
-        #         session_id = request.session.session_key,
-        #         ip=ip,
-        #         location=location
-        #     )
+# def __unicode__(self):
+#     return unicode(self.sessio)
 
-        # user_logged_in.connect(user_logged_in_handler)
+
+# def user_logged_in_handler(sender, request, user, **kwargs):
+#     print("ooooooooooooooooooooooooooooooooooooooooooooooooo")
+#     data= get_ip_location()
+#     ip = data['ip']
+#     location = data['city']+', '+data['region'] + ', '+ data['country']
+#     UserSession.objects.get_or_create(
+#         user = user,
+#         session_id = request.session.session_key,
+#         ip=ip,
+#         location=location
+#     )
+
+# user_logged_in.connect(user_logged_in_handler)
+
 
 def get_ip_location():
     url = 'http://ipinfo.io/json'
@@ -73,5 +78,3 @@ def get_ip_location():
     # city = data['city']
     # country=data['country']
     # region=data['region']
-
-

@@ -1,0 +1,28 @@
+%include '/sas/data/Comm_Bank/shared/71-Community_Bank/00_Macros/Empower_WRK.sas';
+%let db=RMO_WK.;
+
+create table prequals as
+	(select a.lnkey as LoanNo,
+	       b.borr_name as BorrName,
+	       c.loan_officer as LoanOfficer,
+	       case when d.fulfillment_center eq 430 then 'Buffalo'
+		    when d.fulfillment_center eq 431 then 'Salt Lake'
+		    when d.fulfillment_center eq 457 then 'New Haven'
+		    else 'N/A'
+	       end as FulfillmentCenter,
+	       e.codedesc as Destination,
+	       datepart(f.eventdate) as CreditReportDate format=mmddyy10.,
+	       datediff(day, f.eventdate, today()) as NoOfDaysSinceCR
+	
+	from &db.ln_mtgterms a left join &db.ln_borrinfo b
+	on (a.lnkey = b.lnkey) left join &db.ln_contacts c
+	on (a.lnkey = c.lnkey) left join &db.u_ln_keydates d
+	on (a.lnkey = d.lnkey) left join &db.ln_codes e
+	on (a.lnkey = e.lnkey and e.idx=30) left join &db.ln_evntdate f
+	on (a.lnkey = f.lnkey and f.idx=) left join &db.ln_evntdate g
+
+	where (a.app_date eq Null) and (datepart(g.eventdate) ge '22Oct2016') and (e.codedesc = 'Origination') );
+
+run;
+
+quit;
