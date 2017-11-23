@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from .models import UserProfilename, Document, Search_details
+from .models import UserProfilename, Document, Search_details, OutputDocument
 from django.contrib import admin
 
 
@@ -13,4 +13,6 @@ class Search_detailsAdmin(admin.ModelAdmin):
 admin.site.register(UserProfilename)
 admin.site.register(Document)
 admin.site.register(Search_details, Search_detailsAdmin)
+admin.site.register(OutputDocument)
+
 # admin.site.register(UserSession, UserSessionAdmin)

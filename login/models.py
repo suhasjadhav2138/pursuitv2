@@ -29,6 +29,12 @@ class Document(models.Model):
     def __unicode__(self):
         return '%s' % (self.docfile)
 
+class OutputDocument(models.Model):
+    user = models.ForeignKey(User, null=True, blank=True)
+    output_file = models.FileField(upload_to='outputFile/')
+
+    def __unicode__(self):
+        return '%s' % (self.output_file)
 
 class Search_details(models.Model):
     user = models.CharField(max_length=100, null=True, blank=True)

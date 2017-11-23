@@ -60,3 +60,8 @@ class DocumentForm(forms.Form):
     docfile = forms.FileField(
         label='Select a file'
     )
+
+# class OutputDocumentForm(forms.Form):
+#     output_file = forms.FileField(
+#         label='Select a file'
+#     )

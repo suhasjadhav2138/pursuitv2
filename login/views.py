@@ -8,7 +8,7 @@ from django.core.mail import send_mail
 from django.template import RequestContext, loader
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect
-from .models import UserProfilename, Document
+from .models import UserProfilename, Document, OutputDocument
 from datetime import datetime
 import csv
 from django.core.urlresolvers import reverse
@@ -147,7 +147,7 @@ def validate_view(request):
             print person_details, "oooooooooooooooooooooooooooooo"
             form = DocumentForm()
 
-            return render(request, 'login/profile.html', {'details': person_details, 'form':form})
+            return render(request, 'login/profile.html', {'details': person_details, 'form': form})
         except:
 
             form = DocumentForm(request.POST, request.FILES)
@@ -158,26 +158,31 @@ def validate_view(request):
 
                 newdoc.save()
                 # -----------------------------------
-                import os
-                path = 'media/documents'
-                os.path.join(path, newdoc)
-# ------------------------------------
+                path = 'media/' + str(newdoc)
                 print path
+                processed_data = validate_email.run(path, process_count=1)
+                print processed_data
+                # ------------------------------------
+                keys = processed_data[0].keys()
+                with open('test.csv', 'wb') as output_file:
+                    dict_writer = csv.DictWriter(output_file, keys)
+                    dict_writer.writeheader()
+                    dict_writer.writerows(processed_data)
 
-                with open(path, mode='r', buffering=-1) as csvfile:
-                    readCSV = csv.reader(csvfile)
-                    for row in readCSV:
-                        print(row)
-                        print(row[0])
-                        print(row[0],row[1],row[2],)
-
-                print request.FILES['docfile']
+                # with open(path, mode='r', buffering=-1) as csvfile:
+                #     readCSV = csv.reader(csvfile)
+                #     for row in readCSV:
+                #         print(row, "oooooooooooooooooooooooooooo")
+                #         print(row[0], "ppppppppppppppppppppppppp")
+                #         print(row[0], row[1], row[2],)
+                #
+                # print request.FILES['docfile']
 
                 documents = Document.objects.all()
 
                 form = DocumentForm()
 
-                return render(request, 'login/profile.html', {'documents': documents,'form':form})
+                return render(request, 'login/profile.html', {'data':processed_data,'documents': documents, 'form': form})
 
             else:
                 form = DocumentForm()
@@ -191,9 +196,8 @@ def validate_view(request):
         # person_data = Search_details.objects.filter(user=request.user)
         # for i in person_data:
         #     print i.first_name, "]]]]]]]]]]]]]]]]]]"
-            # 'details': person_data
-        return render(request, "login/profile.html", {'form':form})
-
+        # 'details': person_data
+        return render(request, "login/profile.html", {'form': form})
 
 # @login_required
 # def list_file(request):

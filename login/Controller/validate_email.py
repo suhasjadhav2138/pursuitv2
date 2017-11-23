@@ -109,17 +109,18 @@ def worker(person):
 
         # push to database
         # save_rows(person_dict, RUN_ID, DATE_PULLED)
-        print(person_dict, RUN_ID, DATE_PULLED)
-
+        print(person_dict, RUN_ID, DATE_PULLED,"********************************************************")
+        time.sleep(2)
         return [person_dict]
     except Exception, e:
         print e
         return [['Failed'] + person]
 
 
-def run(process_count=1):
+def run(file_name, process_count=1):
     # read in csv
-    file_name = "/input.csv"
+    # file_name = "/input.csv"
+    print file_name, "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
     queued_rows = read_csv(file_name)[0:5]
     print(queued_rows), "88888888888888888888888888888888888888888888888"
 
@@ -127,18 +128,18 @@ def run(process_count=1):
     current_rows = queued_rows
     queued_rows = []
     pool = Pool(processes=process_count)
-    print queued_rows
+    # print queued_rows
     processed_rows = pool.map(worker, current_rows)
     pool.close()
     pool.join()
     processed_rows = list(itertools.chain.from_iterable(filter(None, processed_rows)))
-    print(processed_rows)
+    print(processed_rows),"////////////////////////////////////////////////////////////////////"
     print(len(processed_rows))
-
+    return processed_rows
     # write out csv with sorted order
-    file_name = "project/results.csv"
-    download_final_results(RUN_ID, file_name, WRITEOUT_ORDER)
-    print("Downloaded file")
+    file_name = "results.csv"
+    # download_final_results(RUN_ID, file_name, WRITEOUT_ORDER)
+    # print("Downloaded file")
 
 
 def max_elements(seq):
@@ -149,7 +150,8 @@ def max_elements(seq):
 
 
 def read_csv(local_path):
-    with open(dir_path + local_path, 'rb') as f:
+
+    with open(local_path, 'rb') as f:
         reader = csv.reader(f)
         read_list = list(reader)
         return read_list[1:len(read_list)]
@@ -170,17 +172,17 @@ def dedupe_list_of_lists(list_of_lists):
 
 
 def download_final_results(run_id, file_name, order):
-    finished_rows = Emailvalidation.select().where(Emailvalidation.run == run_id)
-    finished_rows = [[person.run,
-                      person.date_pulled,
-                      person.first_name,
-                      person.last_name,
-                      person.name,
-                      person.company,
-                      person.company_url,
-                      person.email_guess,
-                      person.email_score] for person in finished_rows]
-    finished_rows = dedupe_list_of_lists(finished_rows)
+    # finished_rows = Emailvalidation.select().where(Emailvalidation.run == run_id)
+    # finished_rows = [[person.run,
+    #                   person.date_pulled,
+    #                   person.first_name,
+    #                   person.last_name,
+    #                   person.name,
+    #                   person.company,
+    #                   person.company_url,
+    #                   person.email_guess,
+    #                   person.email_score] for person in finished_rows]
+    finished_rows = dedupe_list_of_lists(order)
 
     with open(file_name, 'w') as fp:
         a = csv.writer(fp, delimiter=',')
@@ -189,16 +191,17 @@ def download_final_results(run_id, file_name, order):
         a.writerows(finished_rows)
 
 
-def select_type(data_dict):
-    if len(data_dict) > 5:
-        run()
-    else:
-        processed_rows = (worker(data_dict))
-        print(processed_rows), "ppppppppppppppppppppppppppppppppppppppppppp"
-
-        # processed_rows = list(itertools.chain.from_iterable(filter(None, processed_rows)))
-        # print(processed_rows)
-        return processed_rows
+# def select_type(data_dict):
+#     if len(data_dict) > 5:
+#         # run()
+#         print('csv')
+#     else:
+#         processed_rows = (worker(data_dict))
+#         print(processed_rows), "ppppppppppppppppppppppppppppppppppppppppppp"
+#
+#         # processed_rows = list(itertools.chain.from_iterable(filter(None, processed_rows)))
+#         # print(processed_rows)
+#         return processed_rows
 
         # worker(data_dict)
         # if __name__ == "__main__":
