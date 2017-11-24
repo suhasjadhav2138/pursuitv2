@@ -128,7 +128,7 @@ def validate_view(request):
             print first_name, last_name, title, company_website
             data_list = [first_name, last_name, title, company_website]
             print data_list
-            # search_in_db = Search_details.objects.filter()
+            # search_in_db = Search_details.objects.file
             person_details = validate_email.select_type(data_list)
             # person_details = dict(person_details)
             print person_details
