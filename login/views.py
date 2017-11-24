@@ -15,6 +15,9 @@ from django.core.urlresolvers import reverse
 from models import Search_details
 from Controller import validate_email
 from django.contrib.auth.decorators import login_required
+from django.core.files import File
+from os.path import join
+from django.conf import settings
 
 
 # home page of the website
@@ -125,6 +128,7 @@ def validate_view(request):
             print first_name, last_name, title, company_website
             data_list = [first_name, last_name, title, company_website]
             print data_list
+            # search_in_db = Search_details.objects.filter()
             person_details = validate_email.select_type(data_list)
             # person_details = dict(person_details)
             print person_details
@@ -162,14 +166,32 @@ def validate_view(request):
                 print path
                 processed_data = validate_email.run(path, process_count=1)
                 print processed_data
-                # ------------------------------------
-                keys = processed_data[0].keys()
-                with open('test.csv', 'wb') as output_file:
-                    dict_writer = csv.DictWriter(output_file, keys)
-                    dict_writer.writeheader()
-                    dict_writer.writerows(processed_data)
 
-                # with open(path, mode='r', buffering=-1) as csvfile:
+                for i in processed_data:
+                    data_updates = Search_details(user=request.user, run_id=002, date_pulled=datetime.now(),
+                                                  first_name=i['first_name'],
+                                                  last_name=i['last_name'],
+                                                  name=i['name'], company_url=i['company_url'],
+                                                  email_guess=i['email_guess'],
+                                                  email_score=i['email_score'])
+                    data_updates.save()
+                    # ------------------------------------
+                # path = join(settings.MEDIA_ROOT, 'outputFile', 'output.csv')
+                path = "media/outputFile/"
+                print path
+                # keys = processed_data[0].keys()
+                # with open(path + str(request.user) + "_output.csv", 'wb') as output_file:
+                #     dict_writer = csv.DictWriter(output_file, keys)
+                #     dict_writer.writeheader()
+                #     dict_writer.writerows(processed_data)
+                #     outfile = OutputDocument(user=request.user,
+                #                              output_file="outputFile/" + str(request.user) + "_output.csv")
+                #     outfile.save()
+
+                    # ------------------------------------------------------------------
+
+
+                    # with open(path, mode='r', buffering=-1) as csvfile:
                 #     readCSV = csv.reader(csvfile)
                 #     for row in readCSV:
                 #         print(row, "oooooooooooooooooooooooooooo")
@@ -178,11 +200,12 @@ def validate_view(request):
                 #
                 # print request.FILES['docfile']
 
-                documents = Document.objects.all()
+                documents = OutputDocument.objects.filter(user=request.user).order_by('-id')[0]
 
                 form = DocumentForm()
 
-                return render(request, 'login/profile.html', {'data':processed_data,'documents': documents, 'form': form})
+                return render(request, 'login/profile.html',
+                              {'data': processed_data, 'documents': documents, 'form': form})
 
             else:
                 form = DocumentForm()

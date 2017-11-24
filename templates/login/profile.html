@@ -117,7 +117,6 @@
                         <button type="submit" class="btn btn-default Searchresult">
                             Submit
                         </button>
-                        -------------------------------------------------------------------------------------
 
 
 
@@ -143,19 +142,27 @@
     </div>
 
 
-        <form action="" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <p>{{ form.non_field_errors }}</p>
+{#        <form action="" method="post" enctype="multipart/form-data">#}
+{#            {% csrf_token %}#}
+{#            <p>{{ form.non_field_errors }}</p>#}
+{##}
+{#            <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>#}
+{##}
+{#            <p>#}
+{#                {{ form.docfile.errors }}#}
+{#                {{ form.docfile }}#}
+{#            </p>#}
+{##}
+{#            <p><input type="submit" value="Upload"/></p>#}
+{#        </form>#}
+{#    {%  for i in documents %}#}
+         <ul>
+{#            {% for document in documents %}#}
+                <li><a href="{{ documents.output_file.url }}">{{ documents.output_file.name }}</a>Download file from here</li>
+{#            {% endfor %}#}
+        </ul>
 
-            <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
-
-            <p>
-                {{ form.docfile.errors }}
-                {{ form.docfile }}
-            </p>
-
-            <p><input type="submit" value="Upload"/></p>
-        </form>
+{#    {% endfor %}#}
     <div class="container">
         <div class="row customcsvRow">
             <div class="exort"><span class="Export">Export</span><span
@@ -211,9 +218,21 @@
                     </tbody>
                 </table>
                 <div class="col-md-12 text-center">
-                    <button type="submit" class="btn btn-success  tableBottomBtn LoginUploadBtn">
-                        Upload CSV
-                    </button>
+                      <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+            <p>{{ form.non_field_errors }}</p>
+
+{#            <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}click here to select file</p>#}
+{##}
+{#            <p>#}
+{#                {{ form.docfile.errors }}#}
+{#                <p class="btn btn-success  tableBo<p><inn LoginUploadBtn" >{{ form.docfile }}</p><br>#}
+
+
+            {{ form.docfile }}<input type="submit" class="btn btn-success  tableBo<p><inn LoginUploadBtn" value="Upload"/>
+        </form>
+{#                    <button type="submit" class="btn btn-success  tableBo<p><inn LoginUploadBtn">#}
+{#                        Upload CSV#}
+{#                    </button>#}
                 </div>
             </div>
         </div>
