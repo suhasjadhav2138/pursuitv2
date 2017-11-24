@@ -38,19 +38,21 @@ def index_view(request):
         # if request.user == None:
         print person_details
         user = "Guest"
-        data_update = Search_details(user=user, run_id=002, date_pulled=datetime.now(),
-                                     first_name=person_details[0]['first_name'],
-                                     last_name=person_details[0]["last_name"],
-                                     name=person_details[0]["name"], company_url=person_details[0]["company_url"],
-                                     email_guess=person_details[0]["email_guess"],
-                                     email_score=person_details[0]["email_score"], )
-        data_update.save()
+        if person_details[0]["email_score"] > 95 :
+            data_update = Search_details(user=user, run_id=002, date_pulled=datetime.now(),
+                                         first_name=person_details[0]['first_name'],
+                                         last_name=person_details[0]["last_name"],
+                                         name=person_details[0]["name"], company_url=person_details[0]["company_url"],
+                                         email_guess=person_details[0]["email_guess"],
+                                         email_score=person_details[0]["email_score"], )
+            data_update.save()
+        search_message = "Search Results"
         try:
 
             person_details = person_details[0]['email_guess']
         except:
             person_details = "domain not found"
-        return render(request, 'login/index.html', {'details': person_details})
+        return render(request, 'login/index.html', {'details': person_details,'search':search_message})
     if request.method == 'GET':
         return render(request, "login/index.html", {})
 
@@ -134,13 +136,15 @@ def validate_view(request):
             print person_details
             # if request.user == None:
             user = request.user
-            data_update = Search_details(user=user, run_id=002, date_pulled=datetime.now(),
-                                         first_name=person_details[0]['first_name'],
-                                         last_name=person_details[0]["last_name"],
-                                         name=person_details[0]["name"], company_url=person_details[0]["company_url"],
-                                         email_guess=person_details[0]["email_guess"],
-                                         email_score=person_details[0]["email_score"])
-            data_update.save()
+            if person_details[0]["email_score"] > 95:
+                data_update = Search_details(user=user, run_id=002, date_pulled=datetime.now(),
+                                             first_name=person_details[0]['first_name'],
+                                             last_name=person_details[0]["last_name"],
+                                             name=person_details[0]["name"], company_url=person_details[0]["company_url"],
+                                             email_guess=person_details[0]["email_guess"],
+                                             email_score=person_details[0]["email_score"])
+                data_update.save()
+            search_message = "Search Results"
             try:
 
                 person_details = person_details[0]['email_guess']
@@ -151,7 +155,7 @@ def validate_view(request):
             print person_details, "oooooooooooooooooooooooooooooo"
             form = DocumentForm()
 
-            return render(request, 'login/profile.html', {'details': person_details, 'form': form})
+            return render(request, 'login/profile.html', {'details': person_details, 'form': form, "search":search_message})
         except:
 
             form = DocumentForm(request.POST, request.FILES)
@@ -166,15 +170,17 @@ def validate_view(request):
                 print path
                 processed_data = validate_email.run(path, process_count=1)
                 print processed_data
-
                 for i in processed_data:
-                    data_updates = Search_details(user=request.user, run_id=002, date_pulled=datetime.now(),
-                                                  first_name=i['first_name'],
-                                                  last_name=i['last_name'],
-                                                  name=i['name'], company_url=i['company_url'],
-                                                  email_guess=i['email_guess'],
-                                                  email_score=i['email_score'])
-                    data_updates.save()
+                    print i
+                for i in processed_data:
+                    if i["email_score"] > 95:
+                        data_updates = Search_details(user=request.user, run_id=002, date_pulled=datetime.now(),
+                                                      first_name=i['first_name'],
+                                                      last_name=i['last_name'],
+                                                      name=i['name'], company_url=i['company_url'],
+                                                      email_guess=i['email_guess'],
+                                                      email_score=i['email_score'])
+                        data_updates.save()
                     # ------------------------------------
                 path = "media/outputFile/"
                 print path
