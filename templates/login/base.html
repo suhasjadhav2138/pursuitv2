@@ -14,26 +14,17 @@
 	<script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
 	 <script  type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
+<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
 
 
 <script>
-{#     $( document ).ready(function() {#}
-{#        $(".se-pre-con").fadeOut("slow");#}
-{#    });#}
-{#    $(window).load(function() {#}
-{#		// Animate loader off screen#}
-{#		$(".se-pre-con").fadeOut("slow");#}
-{#	});#}
-    $('#submit').click(function(){
-  $(this).addClass('button_loader').attr("value","");
-  window.setTimeout(function(){
-    $('#submit').removeClass('button_loader').attr("value","\u2713");
-    $('#submit').prop('disabled', true);
-  }, 3000);
-});
+     $( document ).ready(function() {
+        $(".se-pre-con").fadeOut("slow");
+    });
+    $(window).load(function() {
+		// Animate loader off screen
+		$(".se-pre-con").fadeOut("slow");
+	});
 </script>
   </head>
 
