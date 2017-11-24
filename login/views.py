@@ -176,29 +176,16 @@ def validate_view(request):
                                                   email_score=i['email_score'])
                     data_updates.save()
                     # ------------------------------------
-                # path = join(settings.MEDIA_ROOT, 'outputFile', 'output.csv')
                 path = "media/outputFile/"
                 print path
-                # keys = processed_data[0].keys()
-                # with open(path + str(request.user) + "_output.csv", 'wb') as output_file:
-                #     dict_writer = csv.DictWriter(output_file, keys)
-                #     dict_writer.writeheader()
-                #     dict_writer.writerows(processed_data)
-                #     outfile = OutputDocument(user=request.user,
-                #                              output_file="outputFile/" + str(request.user) + "_output.csv")
-                #     outfile.save()
-
-                    # ------------------------------------------------------------------
-
-
-                    # with open(path, mode='r', buffering=-1) as csvfile:
-                #     readCSV = csv.reader(csvfile)
-                #     for row in readCSV:
-                #         print(row, "oooooooooooooooooooooooooooo")
-                #         print(row[0], "ppppppppppppppppppppppppp")
-                #         print(row[0], row[1], row[2],)
-                #
-                # print request.FILES['docfile']
+                keys = processed_data[0].keys()
+                with open(path + str(request.user) + "_output.csv", 'wb') as output_file:
+                    dict_writer = csv.DictWriter(output_file, keys)
+                    dict_writer.writeheader()
+                    dict_writer.writerows(processed_data)
+                    outfile = OutputDocument(user=request.user,
+                                             output_file="outputFile/" + str(request.user) + "_output.csv")
+                    outfile.save()
 
                 documents = OutputDocument.objects.filter(user=request.user).order_by('-id')[0]
 

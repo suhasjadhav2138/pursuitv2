@@ -2,35 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6b942fd-e71f-4c14-b7cf-df67676f79bd" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/2017/09/18/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/2017/09/18/SimMAC.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/2017/09/18/SimMAC_1.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/2017/09/18/SimMAC_1_e8z8GqB.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/2017/09/18/SimMAC_1_naC2exG.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/2017/09/18/SimMAC_1_oXuOILw.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/2017/09/18/SimMAC_2.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/2017/09/18/SimMAC_2_1zVG1qJ.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/2017/09/18/SimMAC_2_GETrstm.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/2017/09/18/SimMAC_2_WuRKAFm.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/2017/09/18/enrollments_1.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/2017/09/18/enrollments_1_5kTTSUv.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/2017/09/18/enrollments_1_L1xjVfo.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/2017/09/18/enrollments_1_N7lm418.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/2017/09/18/epfo.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/2017/09/18/untitled_text.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/2017/11/07/FL_insurance_sample_1.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/2017/11/21/SAS_Report" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/2017/11/21/SAS_Report_W8ONsJz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/2017/11/21/readme" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/2017/11/21/sumsliceiszero.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/2017/11/21/views.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/documents/input.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test.csv" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/login/profile.html" afterPath="$PROJECT_DIR$/templates/login/profile.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/login/Controller/validate_email.py" afterPath="$PROJECT_DIR$/login/Controller/validate_email.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/login/views.py" afterPath="$PROJECT_DIR$/login/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="website.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -78,8 +50,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/login/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.68328446">
-              <caret line="131" column="59" selection-start-line="131" selection-start-column="59" selection-end-line="131" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.89442813">
+              <caret line="150" column="0" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -306,6 +278,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="media" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="outputFile" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="website" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="website" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="media" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="documents" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -617,14 +611,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/login/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="122" column="63" selection-start-line="122" selection-start-column="63" selection-end-line="122" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/manage.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1060,6 +1046,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/login/profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.0">
+          <caret line="160" column="74" selection-start-line="160" selection-start-column="74" selection-end-line="160" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/login/Controller/validate_email.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1070,18 +1064,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/login/profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.0">
-          <caret line="160" column="74" selection-start-line="160" selection-start-column="74" selection-end-line="160" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/login/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.68328446">
-          <caret line="131" column="59" selection-start-line="131" selection-start-column="59" selection-end-line="131" selection-end-column="59" />
+        <state vertical-scroll-proportion="0.89442813">
+          <caret line="150" column="0" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
