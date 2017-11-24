@@ -156,19 +156,21 @@
 {#            <p><input type="submit" value="Upload"/></p>#}
 {#        </form>#}
 {#    {%  for i in documents %}#}
-         <ul>
+{#         <ul>#}
 {#            {% for document in documents %}#}
-                <li><a href="{{ documents.output_file.url }}">{{ documents.output_file.name }}</a>Download file from here</li>
+{#                <li><a href="{{ documents.output_file.url }}">{{ documents.output_file.name }}</a>Download file from here</li>#}
 {#            {% endfor %}#}
-        </ul>
+{#        </ul>#}
 
 {#    {% endfor %}#}
     <div class="container">
         <div class="row customcsvRow">
-            <div class="exort"><span class="Export">Export</span><span
-                    class="glyphicon glyphicon-download-alt downloadcsv"></span></div>
+            <div class="exort">
+                <a href="{{ documents.output_file.url }}"> <span class="Export">Export</span><span
+                    class="glyphicon glyphicon-download-alt downloadcsv"></span> </a>
+               </div>
             <div class="col-md-12 cvscols">
-
+                {% if data %}
                 <table class="table">
                     <thead>
 
@@ -217,6 +219,7 @@
 
                     </tbody>
                 </table>
+            {% endif %}
                 <div class="col-md-12 text-center">
                       <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
             <p>{{ form.non_field_errors }}</p>
