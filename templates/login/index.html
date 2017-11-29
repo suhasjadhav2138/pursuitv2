@@ -86,8 +86,7 @@
 					<div class="headerTextMain">
 						<p class="headtextN">Enter Details</p>
 						<p class="text-center headtext">
-{#							You Have 19 credits remaning#}
-						</p>
+{{ msg|safe }}						</p>
 						<form method= "POST" action="/app/" class="text-center csfrom">{% csrf_token %}
 							<div class="row">
 								<div class="col-md-6 text-left">

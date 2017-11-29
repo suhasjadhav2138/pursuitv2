@@ -48,7 +48,10 @@ class Search_details(models.Model):
     email_guess = models.CharField(max_length=100)
     email_score = models.CharField(max_length=100)
 
-
+class Search_credits(models.Model):
+    user = models.CharField(max_length=100, null=True, blank=True)
+    free_credits_used = models.CharField(max_length=2,null=True, default=0)
+    paid_credits_used = models.CharField(max_length=2,null=True, default=0)
 # class UserSession(models.Model):
 #     user = models.ForeignKey(settings.AUTH_USER_MODEL)
 #     session = models.ForeignKey(Session)

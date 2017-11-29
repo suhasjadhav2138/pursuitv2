@@ -12,7 +12,7 @@ from .models import UserProfilename, Document, OutputDocument
 from datetime import datetime
 import csv
 from django.core.urlresolvers import reverse
-from models import Search_details
+from models import Search_details, Search_credits
 from Controller import validate_email
 from django.contrib.auth.decorators import login_required
 from django.core.files import File
@@ -38,7 +38,7 @@ def index_view(request):
         # if request.user == None:
         print person_details
         user = "Guest"
-        if person_details[0]["email_score"] > 95 :
+        if person_details[0]["email_score"] > 95:
             data_update = Search_details(user=user, run_id=002, date_pulled=datetime.now(),
                                          first_name=person_details[0]['first_name'],
                                          last_name=person_details[0]["last_name"],
@@ -47,12 +47,15 @@ def index_view(request):
                                          email_score=person_details[0]["email_score"], )
             data_update.save()
         search_message = "Search Results"
+        message = ""
         try:
-
+            message = """<a href="/accounts/register"/>Sign Up</a> to get more 19 free credits"""
             person_details = person_details[0]['email_guess']
         except:
             person_details = "domain not found"
-        return render(request, 'login/index.html', {'details': person_details,'search':search_message})
+
+        return render(request, 'login/index.html',
+                      {'details': person_details, 'search': search_message, 'msg': message})
     if request.method == 'GET':
         return render(request, "login/index.html", {})
 
@@ -131,16 +134,41 @@ def validate_view(request):
             data_list = [first_name, last_name, title, company_website]
             print data_list
             # search_in_db = Search_details.objects.file
-            person_details = validate_email.select_type(data_list)
             # person_details = dict(person_details)
-            print person_details
             # if request.user == None:
             user = request.user
+            # if user in
+            read_credits = Search_credits.objects.filter(user=user).count()
+            print read_credits
+            if read_credits == 0:
+                print "insideeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+
+                credits_add = Search_credits(user=user, free_credits_used=1, paid_credits_used=0)
+                credits_add.save()
+
+            else:
+                if int(Search_credits.objects.get(user=user).free_credits_used) <= 5:
+                    print read_credits, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
+                    credits_update = Search_credits.objects.get(user=user)
+                    credits_update.free_credits_used = (int(credits_update.free_credits_used) + 1)
+                    credits_update.save()
+                    print (credits_update.free_credits_used)
+
+                else:
+                    notify = "Kindly Buy membership to increase credits and enable Upload csv option"
+                    return render(request, 'login/profile.html',
+                                  {'search': notify})
+
+
+            # credits_update = Search_credits(user=user, free_credits_used = )
+            person_details = validate_email.select_type(data_list)
+
             if person_details[0]["email_score"] > 95:
                 data_update = Search_details(user=user, run_id=002, date_pulled=datetime.now(),
                                              first_name=person_details[0]['first_name'],
                                              last_name=person_details[0]["last_name"],
-                                             name=person_details[0]["name"], company_url=person_details[0]["company_url"],
+                                             name=person_details[0]["name"],
+                                             company_url=person_details[0]["company_url"],
                                              email_guess=person_details[0]["email_guess"],
                                              email_score=person_details[0]["email_score"])
                 data_update.save()
@@ -155,7 +183,8 @@ def validate_view(request):
             print person_details, "oooooooooooooooooooooooooooooo"
             form = DocumentForm()
 
-            return render(request, 'login/profile.html', {'details': person_details, 'form': form, "search":search_message})
+            return render(request, 'login/profile.html',
+                          {'details': person_details, 'form': form, "search": search_message})
         except:
 
             form = DocumentForm(request.POST, request.FILES)
@@ -181,7 +210,7 @@ def validate_view(request):
                                                       email_guess=i['email_guess'],
                                                       email_score=i['email_score'])
                         data_updates.save()
-                    # ------------------------------------
+                        # ------------------------------------
                 path = "media/outputFile/"
                 print path
                 keys = processed_data[0].keys()
