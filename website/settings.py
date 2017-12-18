@@ -36,7 +36,7 @@ STATICFILES_DIRS = [
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
+    'user_sessions',
     # 'user_sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -50,8 +50,9 @@ AUTH_PROFILE_MODULE = 'login.UserProfile'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    'user_sessions.middleware.SessionMiddleware',
     # 'user_sessions.middleware.SessionMiddleware',
+    'x_forwarded_for.middleware.XForwardedForMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -60,8 +61,9 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 
 ]
-# SESSION_ENGINE = 'user_sessions.backends.db'
+SESSION_ENGINE = 'user_sessions.backends.db'
 ROOT_URLCONF = 'website.urls'
+
 
 TEMPLATES = [
     {
@@ -133,7 +135,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+# GEOIP_PATH = os.path.join(BASE_DIR, "geoip")
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
@@ -154,10 +156,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'jagtap.akshay5555@gmail.com'
-SERVER_EMAIL = 'jagtap.akshay5555@gmail.com'
+DEFAULT_FROM_EMAIL = 'pursuitupdates@gmail.com'
+SERVER_EMAIL = 'pursuitupdates@gmail.com'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'jagtap.akshay5555@gmail.com'
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = 'pursuitupdates@gmail.com'
+EMAIL_HOST_PASSWORD = 'Gr@dy123'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

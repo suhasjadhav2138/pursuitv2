@@ -8,7 +8,7 @@ from django.core.mail import send_mail
 from django.template import RequestContext, loader
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect
-from .models import UserProfilename, Document, OutputDocument
+from .models import UserProfilename, Document, OutputDocument, get_ip_location, Track_guest_details
 from datetime import datetime
 import csv
 from django.core.urlresolvers import reverse
@@ -32,30 +32,62 @@ def index_view(request):
         print first_name, last_name, title, company_website
         data_list = [first_name, last_name, title, company_website]
         print data_list
-        person_details = validate_email.select_type(data_list)
-        # person_details = dict(person_details)
-        print person_details
-        # if request.user == None:
-        print person_details
-        user = "Guest"
-        if person_details[0]["email_score"] > 95:
-            data_update = Search_details(user=user, run_id=002, date_pulled=datetime.now(),
-                                         first_name=person_details[0]['first_name'],
-                                         last_name=person_details[0]["last_name"],
-                                         name=person_details[0]["name"], company_url=person_details[0]["company_url"],
-                                         email_guess=person_details[0]["email_guess"],
-                                         email_score=person_details[0]["email_score"], )
-            data_update.save()
-        search_message = "Search Results"
-        message = ""
-        try:
-            message = """<a href="/accounts/register"/>Sign Up</a> to get more 19 free credits"""
-            person_details = person_details[0]['email_guess']
-        except:
-            person_details = "domain not found"
+        full_name = first_name + " " + last_name
+        ip_data = get_ip_location()
+        track_user = Track_guest_details.objects.all()
+        data_tracked = []
+        for i in track_user:
+            if (ip_data["mac"] == i.mac_address):
+                data_tracked.append(i.mac_address)
+            else:
+                data_tracked = []
 
-        return render(request, 'login/index.html',
-                      {'details': person_details, 'search': search_message, 'msg': message})
+        print track_user, "MMMMMMMMMMMMMMMMMMMMMMM"
+
+        if data_tracked == []:
+            track_update = Track_guest_details(user="guest", ip_address=ip_data["ip"], mac_address=ip_data["mac"])
+            track_update.save()
+
+            print track_user, "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"
+            # fetch = Search_details.objects.filter(name = full_name)
+            # for i in fetch:
+            #     if i.name == full_name:
+            #         print "ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo"
+            print full_name, "pppppppppppppp"
+            # print fetch,"iiiiiiiiiiiiiiiiii"
+
+            print ip_data
+            pass
+            person_details = validate_email.select_type(data_list)
+            # person_details = dict(person_details)
+            print person_details
+            # if request.user == None:
+            print person_details
+            user = "Guest"
+            if person_details[0]["email_score"] > 95:
+                data_update = Search_details(user=user, run_id=002, date_pulled=datetime.now(),
+                                             first_name=person_details[0]['first_name'],
+                                             last_name=person_details[0]["last_name"],
+                                             name=person_details[0]["name"],
+                                             company_url=person_details[0]["company_url"],
+                                             email_guess=person_details[0]["email_guess"],
+                                             email_score=person_details[0]["email_score"], )
+                data_update.save()
+            search_message = "Search Results"
+            message = ""
+            try:
+                message = """<a href="/accounts/register"/>Sign Up</a> to get more 19 free credits"""
+                person_details = person_details[0]['email_guess']
+            except:
+                person_details = "domain not found"
+
+            return render(request, 'login/index.html',
+                          {'details': person_details, 'search': search_message, 'msg': message})
+        else:
+            message = """You have used your Only free search, Kindly <a href="/accounts/register"/>Sign Up</a> to get more 19 free credits"""
+
+            return render(request, "login/index.html", {'msg': message})
+
     if request.method == 'GET':
         return render(request, "login/index.html", {})
 
@@ -75,6 +107,8 @@ def login_view(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
+                request.session['userid'] = user.id
+
                 return HttpResponseRedirect('/profile/')
             else:
                 return render(request, 'login/login.html', {'error_message': 'Your account has been disabled'})
@@ -110,6 +144,8 @@ def register_view(request):
 # logout user from his profile to the homePage
 def logout_view(request):
     logout(request)
+    # del request.session['userid']
+
     return render(request, "login/index.html", {})
 
 
