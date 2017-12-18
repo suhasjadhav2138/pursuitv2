@@ -26,7 +26,9 @@ SECRET_KEY = '9jdw7_*cwcv4k=j()r*vuuni6tg+8b+hu5rew4ma57=*o5s%!b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['testapp08.herokuapp.com','0.0.0.0:5000','127.0.0.1','192.168.2.131','pursuitdemo08.herokuapp.com']
+ALLOWED_HOSTS = ['testapp08.herokuapp.com', '0.0.0.0:5000', '127.0.0.1', '192.168.2.131', 'pursuitdemo08.herokuapp.com',
+                 "13.59.50.104"
+                 ]
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
@@ -64,7 +66,6 @@ MIDDLEWARE = [
 SESSION_ENGINE = 'user_sessions.backends.db'
 ROOT_URLCONF = 'website.urls'
 
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -97,7 +98,7 @@ DATABASES = {
         'PASSWORD': '',
         'HOST': '',
         'PORT': '',
-}
+    }
 }
 DATABASES['default'].update(db_from_env)
 
@@ -149,11 +150,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
 
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'pursuitupdates@gmail.com'
