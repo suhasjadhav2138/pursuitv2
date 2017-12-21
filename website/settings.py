@@ -161,3 +161,16 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'pursuitupdates@gmail.com'
 EMAIL_HOST_PASSWORD = 'Gr@dy123'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'pursuit',
+#         'USER': 'root',
+#         'PASSWORD': 'Pursuit@tyler',
+#         'HOST': '',
+#         'PORT': '',
+#     }
+# }
