@@ -61,7 +61,7 @@ def emailVerifyMailbox(email):
     return email_dict
 
 
-def worker(person):
+def worker(user, person):
     print "inside workerrr"
     try:
         person_dict = {}
@@ -71,6 +71,16 @@ def worker(person):
         # person_dict["email_original"] = person[3]
         person_dict["company_url"] = person[3]
         print(person_dict["company_url"])
+        filter_records = Search_details.objects.filter(user=user).values()
+        print filter_records
+        for i in filter_records:
+            print user,"------------------------------------------------------------------"
+            print "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
+            print (i["name"], person_dict["name"]), (i["company_url"],person_dict["company_url"])
+            if (person[3] == i["company_url"]):
+
+                print i, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+                return True
 
         # get ordered priority list of email permutations
         email_guess_list = emailGenerator(person_dict["name"], person_dict["company_url"])
@@ -117,7 +127,7 @@ def worker(person):
         return [['Failed'] + person]
 
 
-def run(file_name, process_count=1):
+def run(file_name,user, process_count=1):
     # read in csv
     # file_name = "/input.csv"
     print file_name, "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
@@ -128,8 +138,12 @@ def run(file_name, process_count=1):
     current_rows = queued_rows
     queued_rows = []
     pool = Pool(processes=process_count)
+    from functools import partial
+
+    print user,"uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"
     # print queued_rows
-    processed_rows = pool.map(worker, current_rows)
+    data = partial(worker,user)
+    processed_rows = pool.map(data,current_rows)
     pool.close()
     pool.join()
     processed_rows = list(itertools.chain.from_iterable(filter(None, processed_rows)))

@@ -169,6 +169,25 @@ def validate_view(request):
             print first_name, last_name, title, company_website
             data_list = [first_name, last_name, title, company_website]
             print data_list
+            name_search = first_name + " " + last_name
+            filter_records = Search_details.objects.filter(user=request.user).values()
+            print filter_records, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+            for i in filter_records:
+                if (i["name"] == name_search) and (i["company_url"] == company_website):
+                    print i
+                    search_message = "Search Results"
+                    try:
+
+                        person_details = i['email_guess']
+                    except:
+                        person_details = "domain not found"
+                    # person_details = person_details[0]
+                    # person_data = Search_details.objects.filter(user=request.user)
+                    print person_details, "oooooooooooooooooooooooooooooo"
+                    form = DocumentForm()
+
+                    return render(request, 'login/profile.html',
+                                  {'details': person_details, 'form': form, "search": search_message})
             # search_in_db = Search_details.objects.file
             # person_details = dict(person_details)
             # if request.user == None:
@@ -197,6 +216,7 @@ def validate_view(request):
 
 
             # credits_update = Search_credits(user=user, free_credits_used = )
+# ------------------------------------------------test---------------------------------------
             person_details = validate_email.select_type(data_list)
 
             if person_details[0]["email_score"] > 95:
@@ -233,7 +253,7 @@ def validate_view(request):
                 # -----------------------------------
                 path = 'media/' + str(newdoc)
                 print path
-                processed_data = validate_email.run(path, process_count=1)
+                processed_data = validate_email.run(path,request.user, process_count=1)
                 print processed_data
                 for i in processed_data:
                     print i
