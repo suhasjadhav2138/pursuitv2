@@ -254,18 +254,18 @@ def validate_view(request):
                 path = 'media/' + str(newdoc)
                 print path
                 processed_data = validate_email.run(path,request.user, process_count=1)
-                print processed_data
-                for i in processed_data:
-                    print i
-                for i in processed_data:
-                    if i["email_score"] > 95:
-                        data_updates = Search_details(user=request.user, run_id=002, date_pulled=datetime.now(),
-                                                      first_name=i['first_name'],
-                                                      last_name=i['last_name'],
-                                                      name=i['name'], company_url=i['company_url'],
-                                                      email_guess=i['email_guess'],
-                                                      email_score=i['email_score'])
-                        data_updates.save()
+                # print processed_data
+                # for i in processed_data:
+                #     print i
+                # for i in processed_data:
+                #     if i["email_score"] > 95:
+                #         data_updates = Search_details(user=request.user, run_id=002, date_pulled=datetime.now(),
+                #                                       first_name=i['first_name'],
+                #                                       last_name=i['last_name'],
+                #                                       name=i['name'], company_url=i['company_url'],
+                #                                       email_guess=i['email_guess'],
+                #                                       email_score=i['email_score'])
+                #         data_updates.save()
                         # ------------------------------------
                 path = "media/outputFile/"
                 print path

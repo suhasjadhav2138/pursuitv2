@@ -1,13 +1,13 @@
 import unirest
 import tldextract
-import datetime
+from datetime import datetime
 import time, os, csv
 import itertools
 from login.models import Search_details
 from multiprocessing import Lock, Process, Queue, current_process, Manager, Pool
 # from helper import *
 RUN_ID = "002"
-DATE_PULLED = datetime.datetime.now()
+DATE_PULLED = datetime.now()
 
 WRITEOUT_ORDER = ['first_name', 'last_name', 'name', 'company', 'company_url', 'email_guess', 'email_score']
 MAILBOX_API = "333e2a9a897eeba9ad3204f3c007ca10"
@@ -71,16 +71,12 @@ def worker(user, person):
         # person_dict["email_original"] = person[3]
         person_dict["company_url"] = person[3]
         print(person_dict["company_url"])
-        filter_records = Search_details.objects.filter(user=user).values()
+        filter_records = Search_details.objects.filter(user=user).filter(name=person_dict["name"]).values()
         print filter_records
         for i in filter_records:
-            print user,"------------------------------------------------------------------"
-            print "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
-            print (i["name"], person_dict["name"]), (i["company_url"],person_dict["company_url"])
-            if (person[3] == i["company_url"]):
-
-                print i, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
-                return True
+             if (person[3] == i["company_url"]):
+                i["company"] = "N/A"
+                return [i]
 
         # get ordered priority list of email permutations
         email_guess_list = emailGenerator(person_dict["name"], person_dict["company_url"])
@@ -119,19 +115,26 @@ def worker(user, person):
 
         # push to database
         # save_rows(person_dict, RUN_ID, DATE_PULLED)
-        print(person_dict, RUN_ID, DATE_PULLED,"********************************************************")
         time.sleep(2)
+        if person_dict["email_score"] > 95:
+            data_updates = Search_details(user=user, run_id=002, date_pulled=datetime.now(),
+                                          first_name=person_dict['first_name'],
+                                          last_name=person_dict['last_name'],
+                                          name=person_dict['name'], company_url=person_dict['company_url'],
+                                          email_guess=person_dict['email_guess'],
+                                          email_score=person_dict['email_score'])
+            data_updates.save()
         return [person_dict]
     except Exception, e:
         print e
         return [['Failed'] + person]
 
 
-def run(file_name,user, process_count=1):
+def run(file_name, user, process_count=1):
     # read in csv
     # file_name = "/input.csv"
     print file_name, "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
-    queued_rows = read_csv(file_name)[0:5]
+    queued_rows = read_csv(file_name)[0:8]
     print(queued_rows), "88888888888888888888888888888888888888888888888"
 
     # multithreading
@@ -140,14 +143,14 @@ def run(file_name,user, process_count=1):
     pool = Pool(processes=process_count)
     from functools import partial
 
-    print user,"uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"
+    print user, "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"
     # print queued_rows
-    data = partial(worker,user)
-    processed_rows = pool.map(data,current_rows)
+    data = partial(worker, user)
+    processed_rows = pool.map(data, current_rows)
     pool.close()
     pool.join()
     processed_rows = list(itertools.chain.from_iterable(filter(None, processed_rows)))
-    print(processed_rows),"////////////////////////////////////////////////////////////////////"
+    print(processed_rows), "////////////////////////////////////////////////////////////////////"
     print(len(processed_rows))
     return processed_rows
     # write out csv with sorted order
@@ -164,7 +167,6 @@ def max_elements(seq):
 
 
 def read_csv(local_path):
-
     with open(local_path, 'rb') as f:
         reader = csv.reader(f)
         read_list = list(reader)

@@ -1,6 +1,9 @@
-first_name,last_name,name,company_url,company,email_score,email_guess
-Ben,Bidner,Ben Bidner,ben.bidner@automattic.com,N/A,96.0,ben.bidner@automattic.com
-Paul,Maiorana,Paul Maiorana,paul@automattic.com,N/A,96.0,pmaiorana@automattic.com
-Azat,Aslanyan,Azat Aslanyan,aaslanyan@axs.com,N/A,48.0,a@axs.com
-Mike,Rojas,Mike Rojas,N/A,N/A,64.0,mike.rojas@
-Tom,Harbert,Tom Harbert,tom@campaignmonitor.com,N/A,96.0,tom.harbert@campaignmonitor.com
+first_name,last_name,name,run_id,company_url,company,email_score,email_guess,user,date_pulled,id
+Ben,Bidner,Ben Bidner,2,ben.bidner@automattic.com,N/A,96.0,ben.bidner@automattic.com,anjali123,2017-12-22 04:49:07.171094+00:00,91
+Paul,Maiorana,Paul Maiorana,2,paul@automattic.com,N/A,96.0,pmaiorana@automattic.com,anjali123,2017-12-22 04:49:07.953102+00:00,92
+Azat,Aslanyan,Azat Aslanyan,,aaslanyan@axs.com,N/A,48.0,a@axs.com,,,
+Mike,Rojas,Mike Rojas,,N/A,N/A,64.0,mike.rojas@,,,
+Tom,Harbert,Tom Harbert,2,tom@campaignmonitor.com,N/A,96.0,tom.harbert@campaignmonitor.com,anjali123,2017-12-22 04:49:08.041398+00:00,93
+Herry,Wiputra,Herry Wiputra,2,herry@campaignmonitor.com,N/A,96.0,herry.wiputra@campaignmonitor.com,anjali123,2017-12-22 05:06:26.928535+00:00,96
+David,Stamm,David Stamm,,stamm@generalassemb.ly,N/A,80.0,david.stamm@generalassemb.ly,,,
+david,thompson,david thompson,,david.thompson@insidesales.com,N/A,80.0,david.thompson@insidesales.com,,,
