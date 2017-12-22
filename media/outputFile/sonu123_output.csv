@@ -1,0 +1,5 @@
+first_name,last_name,name,run_id,company_url,company,email_score,email_guess,user,date_pulled,id
+Ben,Bidner,Ben Bidner,2,ben.bidner@automattic.com,N/A,96.0,ben.bidner@automattic.com,sonu123,2017-12-22 07:27:08.617133+00:00,103
+Paul,Maiorana,Paul Maiorana,2,paul@automattic.com,N/A,96.0,pmaiorana@automattic.com,sonu123,2017-12-22 07:27:17.124867+00:00,104
+Azat,Aslanyan,Azat Aslanyan,,aaslanyan@axs.com,N/A,48.0,a@axs.com,,,
+Mike,Rojas,Mike Rojas,,N/A,N/A,64.0,mike.rojas@,,,

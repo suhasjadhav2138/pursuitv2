@@ -134,11 +134,12 @@ def run(file_name, user, process_count=1):
     # read in csv
     # file_name = "/input.csv"
     print file_name, "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
-    queued_rows = read_csv(file_name)[0:8]
+    queued_rows = read_csv(file_name)[0:4]
     print(queued_rows), "88888888888888888888888888888888888888888888888"
 
     # multithreading
     current_rows = queued_rows
+
     queued_rows = []
     pool = Pool(processes=process_count)
     from functools import partial
@@ -207,12 +208,13 @@ def download_final_results(run_id, file_name, order):
         a.writerows(finished_rows)
 
 
-def select_type(data_dict):
+def select_type(user, data_dict):
     if len(data_dict) > 5:
         # run()
         print('csv')
     else:
-        processed_rows = (worker(data_dict))
+
+        processed_rows = (worker(user,data_dict))
         print(processed_rows), "ppppppppppppppppppppppppppppppppppppppppppp"
 
         # processed_rows = list(itertools.chain.from_iterable(filter(None, processed_rows)))

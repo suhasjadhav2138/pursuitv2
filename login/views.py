@@ -57,8 +57,10 @@ def index_view(request):
             # print fetch,"iiiiiiiiiiiiiiiiii"
 
             print ip_data
-            pass
-            person_details = validate_email.select_type(data_list)
+            user = "Guest"
+
+            person_details = validate_email.select_type(user, data_list)
+
             # person_details = dict(person_details)
             print person_details
             # if request.user == None:
@@ -81,6 +83,8 @@ def index_view(request):
             except:
                 person_details = "domain not found"
 
+            print message
+            print person_details
             return render(request, 'login/index.html',
                           {'details': person_details, 'search': search_message, 'msg': message})
         else:
@@ -217,7 +221,7 @@ def validate_view(request):
 
             # credits_update = Search_credits(user=user, free_credits_used = )
 # ------------------------------------------------test---------------------------------------
-            person_details = validate_email.select_type(data_list)
+            person_details = validate_email.select_type(request.user, data_list)
 
             if person_details[0]["email_score"] > 95:
                 data_update = Search_details(user=user, run_id=002, date_pulled=datetime.now(),
@@ -253,8 +257,29 @@ def validate_view(request):
                 # -----------------------------------
                 path = 'media/' + str(newdoc)
                 print path
-                processed_data = validate_email.run(path,request.user, process_count=1)
-                # print processed_data
+                processed_data = validate_email.run(path, request.user, process_count=1)
+                read_credits = Search_credits.objects.filter(user=request.user).count()
+                print read_credits
+                if read_credits == 0:
+                    print "insideeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+
+                    credits_add = Search_credits(user=request.user, free_credits_used=len(processed_data), paid_credits_used=0)
+                    credits_add.save()
+
+                else:
+                    if int(Search_credits.objects.get(user=request.user).free_credits_used) <= 5:
+                        print read_credits, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
+                        credits_update = Search_credits.objects.get(user=request.user)
+                        credits_update.free_credits_used = (int(credits_update.free_credits_used) + len(processed_data))
+                        credits_update.save()
+                        print (credits_update.free_credits_used)
+
+                    else:
+                        notify = "You don't have enough credits kindly buy new plan and try again"
+                        return render(request, 'login/profile.html',
+                                      {'search': notify})
+
+                    # print processed_data
                 # for i in processed_data:
                 #     print i
                 # for i in processed_data:
