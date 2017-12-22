@@ -33,7 +33,7 @@
                                             <a href="http://pursuit.ai/email-finder" class="dropdown-toggle"
                                                data-toggle="dropdown">Email Hunter <b class="caret"></b></a>
                                             <ul class="dropdown-menu">
-													<li><a href="/app/">Free Email Finder</a></li>
+                                                <li><a href="/app/">Free Email Finder</a></li>
                                                 <li><a href="http://pursuit.ai/pricing/">Plans & Pricing</a></li>
                                             </ul>
                                         </li>
@@ -119,17 +119,18 @@
                         </button>
 
 
-
                         <div class="row customcsvRow">
                             <div class="col-md-12 cvscols">
                                 <table class="table searchreult">
                                     <tr>
                                         <h3>{{ search }}</h3>
+                                        {% if details %}
+                                            <td>
+                                                <span class="xyz">{{ details }}</span>
+                                                <!-- {{ details }} -->
+                                            </td>
+                                        {% endif %}
 
-                                        <td>
-                                            <span class="xyz">{{ details }}</span>
-                                            <!-- {{ details }} -->
-                                        </td>
                                     </tr>
                                 </table>
                             </div>
@@ -142,100 +143,101 @@
     </div>
 
 
-{#        <form action="" method="post" enctype="multipart/form-data">#}
-{#            {% csrf_token %}#}
-{#            <p>{{ form.non_field_errors }}</p>#}
-{##}
-{#            <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>#}
-{##}
-{#            <p>#}
-{#                {{ form.docfile.errors }}#}
-{#                {{ form.docfile }}#}
-{#            </p>#}
-{##}
-{#            <p><input type="submit" value="Upload"/></p>#}
-{#        </form>#}
-{#    {%  for i in documents %}#}
-{#         <ul>#}
-{#            {% for document in documents %}#}
-{#                <li><a href="{{ documents.output_file.url }}">{{ documents.output_file.name }}</a>Download file from here</li>#}
-{#            {% endfor %}#}
-{#        </ul>#}
+    {#        <form action="" method="post" enctype="multipart/form-data">#}
+    {#            {% csrf_token %}#}
+    {#            <p>{{ form.non_field_errors }}</p>#}
+    {##}
+    {#            <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>#}
+    {##}
+    {#            <p>#}
+    {#                {{ form.docfile.errors }}#}
+    {#                {{ form.docfile }}#}
+    {#            </p>#}
+    {##}
+    {#            <p><input type="submit" value="Upload"/></p>#}
+    {#        </form>#}
+    {#    {%  for i in documents %}#}
+    {#         <ul>#}
+    {#            {% for document in documents %}#}
+    {#                <li><a href="{{ documents.output_file.url }}">{{ documents.output_file.name }}</a>Download file from here</li>#}
+    {#            {% endfor %}#}
+    {#        </ul>#}
 
-{#    {% endfor %}#}
+    {#    {% endfor %}#}
     <div class="container">
         <div class="row customcsvRow">
             <div class="exort">
                 <a href="{{ documents.output_file.url }}"> <span class="Export">Export</span><span
-                    class="glyphicon glyphicon-download-alt downloadcsv"></span> </a>
-               </div>
+                        class="glyphicon glyphicon-download-alt downloadcsv"></span> </a>
+            </div>
             <div class="col-md-12 cvscols">
                 {% if data %}
-                <table class="table">
-                    <thead>
-
-                    <tr>
-                        <th class="cvsCheckbox">
-                            <input class="" type="checkbox"/>
-                        </th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Company Url</th>
-                        <th>Email Score</th>
-                        <th>Email guess</th>
-                        <th>
-
-                        </th>
-                    </tr>
-
-                    </thead>
-                    <tbody>
-                    {% for i in data %}
+                    <table class="table">
+                        <thead>
 
                         <tr>
-                            <td class="cvsCheckbox">
+                            <th class="cvsCheckbox">
                                 <input class="" type="checkbox"/>
-                            </td>
-                            <td>
-                                {{ i.first_name }}
-                            </td>
-                            <td>
-                                {{ i.last_name }}
-                            </td>
-                            <td>
-                                {{ i.company_url }}
-                            </td>
-                            <td>
-                                {{ i.email_score }}
-                            </td>
-                            <td>
-                                {{ i.email_guess }}
-                            </td>
-                            <td style="padding: 15px 0px;">
-                                <div class="Tablecircle CircleTwo"></div>
-                            </td>
+                            </th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Company Url</th>
+                            <th>Email Score</th>
+                            <th>Email guess</th>
+                            <th>
+
+                            </th>
                         </tr>
-                    {% endfor %}
 
-                    </tbody>
-                </table>
-            {% endif %}
+                        </thead>
+                        <tbody>
+                        {% for i in data %}
+
+                            <tr>
+                                <td class="cvsCheckbox">
+                                    <input class="" type="checkbox"/>
+                                </td>
+                                <td>
+                                    {{ i.first_name }}
+                                </td>
+                                <td>
+                                    {{ i.last_name }}
+                                </td>
+                                <td>
+                                    {{ i.company_url }}
+                                </td>
+                                <td>
+                                    {{ i.email_score }}
+                                </td>
+                                <td>
+                                    {{ i.email_guess }}
+                                </td>
+                                <td style="padding: 15px 0px;">
+                                    <div class="Tablecircle CircleTwo"></div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                {% endif %}
                 <div class="col-md-12 text-center">
-                      <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
-            <p>{{ form.non_field_errors }}</p>
+                    <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+                        <p>{{ form.non_field_errors }}</p>
 
-{#            <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}click here to select file</p>#}
-{##}
-{#            <p>#}
-{#                {{ form.docfile.errors }}#}
-{#                <p class="btn btn-success  tableBo<p><inn LoginUploadBtn" >{{ form.docfile }}</p><br>#}
+                        {#            <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}click here to select file</p>#}
+                        {##}
+                        {#            <p>#}
+                        {#                {{ form.docfile.errors }}#}
+                        {#                <p class="btn btn-success  tableBo<p><inn LoginUploadBtn" >{{ form.docfile }}</p><br>#}
 
 
-            {{ form.docfile }}<input type="submit" class="btn btn-success  tableBo<p><inn LoginUploadBtn" value="Upload"/>
-        </form>
-{#                    <button type="submit" class="btn btn-success  tableBo<p><inn LoginUploadBtn">#}
-{#                        Upload CSV#}
-{#                    </button>#}
+                        {{ form.docfile }}<input type="submit" class="btn btn-success  tableBo<p><inn LoginUploadBtn"
+                                                 value="Upload"/>
+                    </form>
+                    {#                    <button type="submit" class="btn btn-success  tableBo<p><inn LoginUploadBtn">#}
+                    {#                        Upload CSV#}
+                    {#                    </button>#}
                 </div>
             </div>
         </div>

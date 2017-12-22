@@ -124,10 +124,12 @@
 										<tr>
 												<h3>{{ search }}</h3>
 
-											<td>
-												<span class="xyz">{{ details }}</span>
-												<!-- {{ details }} -->
-											</td>
+											  {% if details %}
+                                            <td>
+                                                <span class="xyz">{{ details }}</span>
+                                                <!-- {{ details }} -->
+                                            </td>
+                                        {% endif %}
 										</tr>
 									</table>
 								</div>
