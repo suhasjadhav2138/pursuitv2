@@ -261,10 +261,11 @@ def validate_view(request):
             # -----------------------------------
             path = 'media/' + str(newdoc)
             print path
-            processed_data = validate_email.run(path, request.user, process_count=1)
             read_credits = Search_credits.objects.filter(user=request.user).count()
             print read_credits
             if read_credits == 0:
+                processed_data = validate_email.run(path, request.user, process_count=1)
+
                 print "insideeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
 
                 credits_add = Search_credits(user=request.user, free_credits_used=len(processed_data),
@@ -272,8 +273,11 @@ def validate_view(request):
                 credits_add.save()
 
             else:
+
                 if int(Search_credits.objects.get(user=request.user).free_credits_used) <= 5:
-                    print read_credits, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
+                    processed_data = validate_email.run(path, request.user, process_count=1)
+
+                    print read_credits, "8888888888888889999999999999999999999999999999777777777"
                     credits_update = Search_credits.objects.get(user=request.user)
                     credits_update.free_credits_used = (int(credits_update.free_credits_used) + len(processed_data))
                     credits_update.save()
