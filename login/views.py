@@ -277,7 +277,7 @@ def validate_view(request):
                     else:
                         notify = "You don't have enough credits kindly buy new plan and try again"
                         return render(request, 'login/profile.html',
-                                      {'search': notify})
+                                      {'details': notify})
 
                     # print processed_data
                 # for i in processed_data:
