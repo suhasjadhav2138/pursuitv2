@@ -62,19 +62,19 @@ def index_view(request):
             person_details = validate_email.select_type(user, data_list)
 
             # person_details = dict(person_details)
-            print person_details
-            # if request.user == None:
-            print person_details
-            user = "Guest"
-            if person_details[0]["email_score"] > 95:
-                data_update = Search_details(user=user, run_id=002, date_pulled=datetime.now(),
-                                             first_name=person_details[0]['first_name'],
-                                             last_name=person_details[0]["last_name"],
-                                             name=person_details[0]["name"],
-                                             company_url=person_details[0]["company_url"],
-                                             email_guess=person_details[0]["email_guess"],
-                                             email_score=person_details[0]["email_score"], )
-                data_update.save()
+            # print person_details
+            # # if request.user == None:
+            # print person_details
+            # user = "Guest"
+            # if person_details[0]["email_score"] > 95:
+            #     data_update = Search_details(user=user, run_id=002, date_pulled=datetime.now(),
+            #                                  first_name=person_details[0]['first_name'],
+            #                                  last_name=person_details[0]["last_name"],
+            #                                  name=person_details[0]["name"],
+            #                                  company_url=person_details[0]["company_url"],
+            #                                  email_guess=person_details[0]["email_guess"],
+            #                                  email_score=person_details[0]["email_score"], )
+            #     data_update.save()
             search_message = "Search Results"
             message = ""
             try:
@@ -178,6 +178,7 @@ def validate_view(request):
         for i in filter_records:
             if (i["name"] == name_search) and (i["company_url"] == company_website):
                 print i
+
                 search_message = "Search Results"
                 try:
 
@@ -191,11 +192,16 @@ def validate_view(request):
 
                 return render(request, 'login/profile.html',
                               {'details': person_details, 'form': form, "search": search_message})
+
+
+
+
         # search_in_db = Search_details.objects.file
         # person_details = dict(person_details)
         # if request.user == None:
         user = request.user
         # if user in
+
         read_credits = Search_credits.objects.filter(user=user).count()
         print read_credits
         if read_credits == 0:
@@ -219,18 +225,18 @@ def validate_view(request):
 
 
                 # credits_update = Search_credits(user=user, free_credits_used = )
-            # ------------------------------------------------test---------------------------------------
+                # ------------------------------------------------test---------------------------------------
         person_details = validate_email.select_type(request.user, data_list)
 
-        if person_details[0]["email_score"] > 95:
-            data_update = Search_details(user=user, run_id=002, date_pulled=datetime.now(),
-                                         first_name=person_details[0]['first_name'],
-                                         last_name=person_details[0]["last_name"],
-                                         name=person_details[0]["name"],
-                                         company_url=person_details[0]["company_url"],
-                                         email_guess=person_details[0]["email_guess"],
-                                         email_score=person_details[0]["email_score"])
-            data_update.save()
+        # if person_details[0]["email_score"] > 95:
+        #     data_update = Search_details(user=user, run_id=002, date_pulled=datetime.now(),
+        #                                  first_name=person_details[0]['first_name'],
+        #                                  last_name=person_details[0]["last_name"],
+        #                                  name=person_details[0]["name"],
+        #                                  company_url=person_details[0]["company_url"],
+        #                                  email_guess=person_details[0]["email_guess"],
+        #                                  email_score=person_details[0]["email_score"])
+        #     data_update.save()
         search_message = "Search Results"
         try:
 
