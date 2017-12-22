@@ -162,160 +162,159 @@ def logout_view(request):
 # upload csv and read in construction
 @login_required()
 def validate_view(request):
-    if request.method == 'POST':
+    if request.method == 'POST' and not request.FILES:
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        title = 'CEO'
+        # company_email = request.POST.get('company_email')
+        company_website = request.POST.get('company_website')
+
+        print first_name, last_name, title, company_website
+        data_list = [first_name, last_name, title, company_website]
+        print data_list
+        name_search = first_name + " " + last_name
+        filter_records = Search_details.objects.filter(user=request.user).values()
+        print filter_records, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+        for i in filter_records:
+            if (i["name"] == name_search) and (i["company_url"] == company_website):
+                print i
+                search_message = "Search Results"
+                try:
+
+                    person_details = i['email_guess']
+                except:
+                    person_details = "domain not found"
+                # person_details = person_details[0]
+                # person_data = Search_details.objects.filter(user=request.user)
+                print person_details, "oooooooooooooooooooooooooooooo"
+                form = DocumentForm()
+
+                return render(request, 'login/profile.html',
+                              {'details': person_details, 'form': form, "search": search_message})
+        # search_in_db = Search_details.objects.file
+        # person_details = dict(person_details)
+        # if request.user == None:
+        user = request.user
+        # if user in
+        read_credits = Search_credits.objects.filter(user=user).count()
+        print read_credits
+        if read_credits == 0:
+            print "insideeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+
+            credits_add = Search_credits(user=user, free_credits_used=1, paid_credits_used=0)
+            credits_add.save()
+
+        else:
+            if int(Search_credits.objects.get(user=user).free_credits_used) <= 5:
+                print read_credits, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
+                credits_update = Search_credits.objects.get(user=user)
+                credits_update.free_credits_used = (int(credits_update.free_credits_used) + 1)
+                credits_update.save()
+                print (credits_update.free_credits_used)
+
+            else:
+                notify = "Kindly Buy membership to increase credits and enable Upload csv option"
+                return render(request, 'login/profile.html',
+                              {'search': notify})
+
+
+                # credits_update = Search_credits(user=user, free_credits_used = )
+            # ------------------------------------------------test---------------------------------------
+        person_details = validate_email.select_type(request.user, data_list)
+
+        if person_details[0]["email_score"] > 95:
+            data_update = Search_details(user=user, run_id=002, date_pulled=datetime.now(),
+                                         first_name=person_details[0]['first_name'],
+                                         last_name=person_details[0]["last_name"],
+                                         name=person_details[0]["name"],
+                                         company_url=person_details[0]["company_url"],
+                                         email_guess=person_details[0]["email_guess"],
+                                         email_score=person_details[0]["email_score"])
+            data_update.save()
+        search_message = "Search Results"
         try:
-            first_name = request.POST.get('first_name')
-            last_name = request.POST.get('last_name')
-            title = 'CEO'
-            # company_email = request.POST.get('company_email')
-            company_website = request.POST.get('company_website')
 
-            print first_name, last_name, title, company_website
-            data_list = [first_name, last_name, title, company_website]
-            print data_list
-            name_search = first_name + " " + last_name
-            filter_records = Search_details.objects.filter(user=request.user).values()
-            print filter_records, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-            for i in filter_records:
-                if (i["name"] == name_search) and (i["company_url"] == company_website):
-                    print i
-                    search_message = "Search Results"
-                    try:
+            person_details = person_details[0]['email_guess']
+        except:
+            person_details = "domain not found"
+        # person_details = person_details[0]
+        # person_data = Search_details.objects.filter(user=request.user)
+        print person_details, "oooooooooooooooooooooooooooooo"
+        form = DocumentForm()
 
-                        person_details = i['email_guess']
-                    except:
-                        person_details = "domain not found"
-                    # person_details = person_details[0]
-                    # person_data = Search_details.objects.filter(user=request.user)
-                    print person_details, "oooooooooooooooooooooooooooooo"
-                    form = DocumentForm()
+        return render(request, 'login/profile.html',
+                      {'details': person_details, 'form': form, "search": search_message})
+    else:
+        form = DocumentForm(request.POST, request.FILES)
 
-                    return render(request, 'login/profile.html',
-                                  {'details': person_details, 'form': form, "search": search_message})
-            # search_in_db = Search_details.objects.file
-            # person_details = dict(person_details)
-            # if request.user == None:
-            user = request.user
-            # if user in
-            read_credits = Search_credits.objects.filter(user=user).count()
+        if form.is_valid():
+            newdoc = Document(docfile=request.FILES['docfile'], user=request.user)
+            print newdoc, "ooooooooooooooooooooooooooooooooooooooo"
+
+            newdoc.save()
+            # -----------------------------------
+            path = 'media/' + str(newdoc)
+            print path
+            processed_data = validate_email.run(path, request.user, process_count=1)
+            read_credits = Search_credits.objects.filter(user=request.user).count()
             print read_credits
             if read_credits == 0:
                 print "insideeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
 
-                credits_add = Search_credits(user=user, free_credits_used=1, paid_credits_used=0)
+                credits_add = Search_credits(user=request.user, free_credits_used=len(processed_data),
+                                             paid_credits_used=0)
                 credits_add.save()
 
             else:
-                if int(Search_credits.objects.get(user=user).free_credits_used) <= 5:
+                if int(Search_credits.objects.get(user=request.user).free_credits_used) <= 5:
                     print read_credits, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
-                    credits_update = Search_credits.objects.get(user=user)
-                    credits_update.free_credits_used = (int(credits_update.free_credits_used) + 1)
+                    credits_update = Search_credits.objects.get(user=request.user)
+                    credits_update.free_credits_used = (int(credits_update.free_credits_used) + len(processed_data))
                     credits_update.save()
                     print (credits_update.free_credits_used)
 
                 else:
-                    notify = "Kindly Buy membership to increase credits and enable Upload csv option"
+                    notify = "You don't have enough credits kindly buy new plan and try again"
                     return render(request, 'login/profile.html',
-                                  {'search': notify})
+                                  {'details': notify})
 
+                    # print processed_data
+                    # for i in processed_data:
+                    #     print i
+                    # for i in processed_data:
+                    #     if i["email_score"] > 95:
+                    #         data_updates = Search_details(user=request.user, run_id=002, date_pulled=datetime.now(),
+                    #                                       first_name=i['first_name'],
+                    #                                       last_name=i['last_name'],
+                    #                                       name=i['name'], company_url=i['company_url'],
+                    #                                       email_guess=i['email_guess'],
+                    #                                       email_score=i['email_score'])
+                    #         data_updates.save()
+                    # ------------------------------------
+            path = "media/outputFile/"
+            print path
+            keys = processed_data[0].keys()
+            with open(path + str(request.user) + "_output.csv", 'wb') as output_file:
+                dict_writer = csv.DictWriter(output_file, keys)
+                dict_writer.writeheader()
+                dict_writer.writerows(processed_data)
+                outfile = OutputDocument(user=request.user,
+                                         output_file="outputFile/" + str(request.user) + "_output.csv")
+                outfile.save()
 
-            # credits_update = Search_credits(user=user, free_credits_used = )
-# ------------------------------------------------test---------------------------------------
-            person_details = validate_email.select_type(request.user, data_list)
+            documents = OutputDocument.objects.filter(user=request.user).order_by('-id')[0]
 
-            if person_details[0]["email_score"] > 95:
-                data_update = Search_details(user=user, run_id=002, date_pulled=datetime.now(),
-                                             first_name=person_details[0]['first_name'],
-                                             last_name=person_details[0]["last_name"],
-                                             name=person_details[0]["name"],
-                                             company_url=person_details[0]["company_url"],
-                                             email_guess=person_details[0]["email_guess"],
-                                             email_score=person_details[0]["email_score"])
-                data_update.save()
-            search_message = "Search Results"
-            try:
-
-                person_details = person_details[0]['email_guess']
-            except:
-                person_details = "domain not found"
-            # person_details = person_details[0]
-            # person_data = Search_details.objects.filter(user=request.user)
-            print person_details, "oooooooooooooooooooooooooooooo"
             form = DocumentForm()
 
             return render(request, 'login/profile.html',
-                          {'details': person_details, 'form': form, "search": search_message})
-        except:
+                          {'data': processed_data, 'documents': documents, 'form': form})
 
-            form = DocumentForm(request.POST, request.FILES)
-
-            if form.is_valid():
-                newdoc = Document(docfile=request.FILES['docfile'], user=request.user)
-                print newdoc, "ooooooooooooooooooooooooooooooooooooooo"
-
-                newdoc.save()
-                # -----------------------------------
-                path = 'media/' + str(newdoc)
-                print path
-                processed_data = validate_email.run(path, request.user, process_count=1)
-                read_credits = Search_credits.objects.filter(user=request.user).count()
-                print read_credits
-                if read_credits == 0:
-                    print "insideeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
-
-                    credits_add = Search_credits(user=request.user, free_credits_used=len(processed_data), paid_credits_used=0)
-                    credits_add.save()
-
-                else:
-                    if int(Search_credits.objects.get(user=request.user).free_credits_used) <= 5:
-                        print read_credits, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
-                        credits_update = Search_credits.objects.get(user=request.user)
-                        credits_update.free_credits_used = (int(credits_update.free_credits_used) + len(processed_data))
-                        credits_update.save()
-                        print (credits_update.free_credits_used)
-
-                    else:
-                        notify = "You don't have enough credits kindly buy new plan and try again"
-                        return render(request, 'login/profile.html',
-                                      {'details': notify})
-
-                    # print processed_data
-                # for i in processed_data:
-                #     print i
-                # for i in processed_data:
-                #     if i["email_score"] > 95:
-                #         data_updates = Search_details(user=request.user, run_id=002, date_pulled=datetime.now(),
-                #                                       first_name=i['first_name'],
-                #                                       last_name=i['last_name'],
-                #                                       name=i['name'], company_url=i['company_url'],
-                #                                       email_guess=i['email_guess'],
-                #                                       email_score=i['email_score'])
-                #         data_updates.save()
-                        # ------------------------------------
-                path = "media/outputFile/"
-                print path
-                keys = processed_data[0].keys()
-                with open(path + str(request.user) + "_output.csv", 'wb') as output_file:
-                    dict_writer = csv.DictWriter(output_file, keys)
-                    dict_writer.writeheader()
-                    dict_writer.writerows(processed_data)
-                    outfile = OutputDocument(user=request.user,
-                                             output_file="outputFile/" + str(request.user) + "_output.csv")
-                    outfile.save()
-
-                documents = OutputDocument.objects.filter(user=request.user).order_by('-id')[0]
-
-                form = DocumentForm()
-
-                return render(request, 'login/profile.html',
-                              {'data': processed_data, 'documents': documents, 'form': form})
-
-            else:
-                form = DocumentForm()
+        else:
+            form = DocumentForm()
 
 
-                # Redirect to the document list after POST
-                return render(request, 'login/profile.html', {'form': form})
+            # Redirect to the document list after POST
+            return render(request, 'login/profile.html', {'form': form})
 
     if request.method == 'GET':
         form = DocumentForm()
