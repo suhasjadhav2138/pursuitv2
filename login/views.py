@@ -1,5 +1,8 @@
 from __future__ import unicode_literals
 import json
+from django.http import HttpRequest
+
+from website.settings import MEDIA_ROOT
 from .form import UserLoginForm, UserRegisterForm, DocumentForm
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, render_to_response
@@ -34,10 +37,11 @@ def index_view(request):
         print data_list
         full_name = first_name + " " + last_name
         ip_data = get_ip_location()
+        ip_data["ip"] = request.META.get('REMOTE_ADDR')
         track_user = Track_guest_details.objects.all()
         data_tracked = []
         for i in track_user:
-            if (ip_data["mac"] == i.mac_address):
+            if (ip_data["ip"] == i.ip_address):
                 data_tracked.append(i.mac_address)
             else:
                 data_tracked = []
@@ -45,7 +49,10 @@ def index_view(request):
         print track_user, "MMMMMMMMMMMMMMMMMMMMMMM"
 
         if data_tracked == []:
-            track_update = Track_guest_details(user="guest", ip_address=ip_data["ip"], mac_address=ip_data["mac"])
+            client_address = request.META.get('HTTP_X_FORWARDED_FOR')
+            print request.META.get('REMOTE_ADDR'),"zzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            print client_address,"yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+            track_update = Track_guest_details(user="guest", ip_address=request.META.get('REMOTE_ADDR'), mac_address=ip_data["mac"])
             track_update.save()
 
             print track_user, "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"
@@ -162,6 +169,14 @@ def logout_view(request):
 # upload csv and read in construction
 @login_required()
 def validate_view(request):
+    if request.method == 'GET':
+        form = DocumentForm()
+        # person_data = Search_details.objects.filter(user=request.user)
+        # for i in person_data:
+        #     print i.first_name, "]]]]]]]]]]]]]]]]]]"
+        # 'details': person_data
+        return render(request, "login/profile.html", {'form': form})
+
     if request.method == 'POST' and not request.FILES:
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
@@ -211,7 +226,7 @@ def validate_view(request):
             credits_add.save()
 
         else:
-            if int(Search_credits.objects.get(user=user).free_credits_used) <= 5:
+            if int(Search_credits.objects.get(user=user).free_credits_used) <= 20:
                 print read_credits, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
                 credits_update = Search_credits.objects.get(user=user)
                 credits_update.free_credits_used = (int(credits_update.free_credits_used) + 1)
@@ -274,7 +289,7 @@ def validate_view(request):
 
             else:
 
-                if int(Search_credits.objects.get(user=request.user).free_credits_used) <= 5:
+                if int(Search_credits.objects.get(user=request.user).free_credits_used) <= 20:
                     processed_data = validate_email.run(path, request.user, process_count=1)
 
                     print read_credits, "8888888888888889999999999999999999999999999999777777777"
@@ -326,13 +341,6 @@ def validate_view(request):
             # Redirect to the document list after POST
             return render(request, 'login/profile.html', {'form': form})
 
-    if request.method == 'GET':
-        form = DocumentForm()
-        # person_data = Search_details.objects.filter(user=request.user)
-        # for i in person_data:
-        #     print i.first_name, "]]]]]]]]]]]]]]]]]]"
-        # 'details': person_data
-        return render(request, "login/profile.html", {'form': form})
 
 # @login_required
 # def list_file(request):
