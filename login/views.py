@@ -37,8 +37,9 @@ def index_view(request):
         ip_data = get_ip_location()
         track_user = Track_guest_details.objects.all()
         data_tracked = []
+        ip_data["ip"]=request.META["REMOTE_ADDR"]
         for i in track_user:
-            if (ip_data["mac"] == i.mac_address):
+            if (ip_data["ip"] == i.ip_address):
                 data_tracked.append(i.mac_address)
             else:
                 data_tracked = []
@@ -46,9 +47,9 @@ def index_view(request):
         print track_user, "MMMMMMMMMMMMMMMMMMMMMMM"
 
         if data_tracked == []:
-            client_address = request.META['HTTP_X_FORWARDED_FOR']
+            # client_address = request.META['HTTP_X_FORWARDED_FOR']
 
-            track_update = Track_guest_details(user="guest", ip_address=ip_data["ip"], mac_address=ip_data["mac"])
+            track_update = Track_guest_details(user="guest", ip_address=request.META['REMOTE_ADDR'], mac_address=ip_data["mac"])
             track_update.save()
 
             print track_user, "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"

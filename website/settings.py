@@ -162,8 +162,9 @@ EMAIL_HOST_USER = 'pursuitupdates@gmail.com'
 EMAIL_HOST_PASSWORD = 'Gr@dy123'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-
-
+# STRIPE_TEST_PUBLIC_KEY = os.environ.get("STRIPE_TEST_PUBLIC_KEY", "pk_test_7nLdqI3hfKky0l404YDBaOkY")
+# STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_TEST_SECRET_KEY", "sk_test_TxB13dcGsgcUHAOWaYrzhr0K")
+STRIPE_LIVE_MODE = False
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
