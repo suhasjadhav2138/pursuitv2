@@ -37,7 +37,7 @@ def index_view(request):
         ip_data = get_ip_location()
         track_user = Track_guest_details.objects.all()
         data_tracked = []
-        ip_data["ip"]=request.META["REMOTE_ADDR"]
+        ip_data["ip"] = request.META["REMOTE_ADDR"]
         print request.META,"****************************************************************"
         for i in track_user:
             if (ip_data["ip"] == i.ip_address):
@@ -91,7 +91,7 @@ def index_view(request):
             print message
             print person_details
             return render(request, 'login/index.html',
-                          {'details': person_details, 'search': search_message, 'msg': message, 'data':request.META})
+                          {'details': person_details, 'search': search_message, 'msg': message})
         else:
             message = """You have used your Only free search, Kindly <a href="/accounts/register"/>Sign Up</a> to get more 19 free credits"""
 

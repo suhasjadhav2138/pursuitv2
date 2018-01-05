@@ -21,12 +21,15 @@ class Sale(models.Model):
 
     # store the stripe charge id for this sale
     charge_id = models.CharField(max_length=32)
+    # stripe_id = models.CharField(max_length=255, default="Stripe id")
+    # plan = models.CharField(max_length=50, default="plan")
+
 
     # you could also store other information about the sale
     # but I'll leave that to you!
 
 
-    def charge(self, price_in_cents, number, exp_month, exp_year, cvc):
+    def charge(self, price_in_cents, number, exp_month, exp_year, user_email, cvc):
         """
         Takes a the price and credit card details: number, exp_month,
         exp_year, cvc.
@@ -48,6 +51,7 @@ class Sale(models.Model):
                     "exp_month": exp_month,
                     "exp_year": exp_year,
                     "cvc": cvc,
+                    "name": user_email,
 
                     #### it is recommended to include the address!
                     # "address_line1" : self.address1,

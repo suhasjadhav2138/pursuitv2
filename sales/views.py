@@ -17,11 +17,12 @@ def charge(request):
     c.update(csrf(request))
     print "pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp"
     if request.method == "POST":
-        form = SalePaymentForm(request.POST)
+        form = SalePaymentForm(request.user, request.POST)
+        print request.POST, "oooooooooooooooooooo"
 
         if form.is_valid(): # charges the card
             print("done!!!!!")
-            return render(request, "login/profile.html", {'form': form},c)
+            return render(request, "login/profile.html", {'form': form}, c)
     else:
-        form = SalePaymentForm()
+        form = SalePaymentForm(request)
     return render(request, "payment/carddetails.html", {'form': form})
