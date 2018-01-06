@@ -14,6 +14,7 @@ from datetime import datetime
 import csv
 from django.core.urlresolvers import reverse
 from models import Search_details, Search_credits
+from sales.models import Sale
 from Controller import validate_email
 from django.contrib.auth.decorators import login_required
 from django.core.files import File
@@ -264,80 +265,86 @@ def validate_view(request):
         return render(request, 'login/profile.html',
                       {'details': person_details, 'form': form, "search": search_message})
     else:
+
         form = DocumentForm(request.POST, request.FILES)
+        user_pay = Sale.objects.filter(user_name=request.user).count()
+        print user_pay
+        if user_pay:
+            if form.is_valid():
+                newdoc = Document(docfile=request.FILES['docfile'], user=request.user)
+                print newdoc, "ooooooooooooooooooooooooooooooooooooooo"
 
-        if form.is_valid():
-            newdoc = Document(docfile=request.FILES['docfile'], user=request.user)
-            print newdoc, "ooooooooooooooooooooooooooooooooooooooo"
-
-            newdoc.save()
-            # -----------------------------------
-            path = 'media/' + str(newdoc)
-            print path
-            read_credits = Search_credits.objects.filter(user=request.user).count()
-            print read_credits
-            if read_credits == 0:
-                processed_data = validate_email.run(path, request.user, process_count=1)
-
-                print "insideeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
-
-                credits_add = Search_credits(user=request.user, free_credits_used=len(processed_data),
-                                             paid_credits_used=0)
-                credits_add.save()
-
-            else:
-
-                if int(Search_credits.objects.get(user=request.user).free_credits_used) <= 20:
+                newdoc.save()
+                # -----------------------------------
+                path = 'media/' + str(newdoc)
+                print path
+                read_credits = Search_credits.objects.filter(user=request.user).count()
+                print read_credits
+                if read_credits == 0:
                     processed_data = validate_email.run(path, request.user, process_count=1)
 
-                    print read_credits, "8888888888888889999999999999999999999999999999777777777"
-                    credits_update = Search_credits.objects.get(user=request.user)
-                    credits_update.free_credits_used = (int(credits_update.free_credits_used) + len(processed_data))
-                    credits_update.save()
-                    print (credits_update.free_credits_used)
+                    print "insideeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+
+                    credits_add = Search_credits(user=request.user, free_credits_used=len(processed_data),
+                                                 paid_credits_used=0)
+                    credits_add.save()
 
                 else:
-                    notify = "You don't have enough credits kindly buy new plan and try again"
-                    return render(request, 'login/profile.html',
-                                  {'details': notify})
 
-                    # print processed_data
-                    # for i in processed_data:
-                    #     print i
-                    # for i in processed_data:
-                    #     if i["email_score"] > 95:
-                    #         data_updates = Search_details(user=request.user, run_id=002, date_pulled=datetime.now(),
-                    #                                       first_name=i['first_name'],
-                    #                                       last_name=i['last_name'],
-                    #                                       name=i['name'], company_url=i['company_url'],
-                    #                                       email_guess=i['email_guess'],
-                    #                                       email_score=i['email_score'])
-                    #         data_updates.save()
-                    # ------------------------------------
-            path = "media/outputFile/"
-            print path
-            keys = processed_data[0].keys()
-            with open(path + str(request.user) + "_output.csv", 'wb') as output_file:
-                dict_writer = csv.DictWriter(output_file, keys)
-                dict_writer.writeheader()
-                dict_writer.writerows(processed_data)
-                outfile = OutputDocument(user=request.user,
-                                         output_file="outputFile/" + str(request.user) + "_output.csv")
-                outfile.save()
+                    if int(Search_credits.objects.get(user=request.user).free_credits_used) <= 20:
+                        processed_data = validate_email.run(path, request.user, process_count=1)
 
-            documents = OutputDocument.objects.filter(user=request.user).order_by('-id')[0]
+                        print read_credits, "8888888888888889999999999999999999999999999999777777777"
+                        credits_update = Search_credits.objects.get(user=request.user)
+                        credits_update.free_credits_used = (int(credits_update.free_credits_used) + len(processed_data))
+                        credits_update.save()
+                        print (credits_update.free_credits_used)
 
-            form = DocumentForm()
+                    else:
+                        notify = "You don't have enough credits kindly buy new plan and try again"
+                        return render(request, 'login/profile.html',
+                                      {'details': notify})
 
-            return render(request, 'login/profile.html',
-                          {'data': processed_data, 'documents': documents, 'form': form})
+                        # print processed_data
+                        # for i in processed_data:
+                        #     print i
+                        # for i in processed_data:
+                        #     if i["email_score"] > 95:
+                        #         data_updates = Search_details(user=request.user, run_id=002, date_pulled=datetime.now(),
+                        #                                       first_name=i['first_name'],
+                        #                                       last_name=i['last_name'],
+                        #                                       name=i['name'], company_url=i['company_url'],
+                        #                                       email_guess=i['email_guess'],
+                        #                                       email_score=i['email_score'])
+                        #         data_updates.save()
+                        # ------------------------------------
+                path = "media/outputFile/"
+                print path
+                keys = processed_data[0].keys()
+                with open(path + str(request.user) + "_output.csv", 'wb') as output_file:
+                    dict_writer = csv.DictWriter(output_file, keys)
+                    dict_writer.writeheader()
+                    dict_writer.writerows(processed_data)
+                    outfile = OutputDocument(user=request.user,
+                                             output_file="outputFile/" + str(request.user) + "_output.csv")
+                    outfile.save()
 
+                documents = OutputDocument.objects.filter(user=request.user).order_by('-id')[0]
+
+                form = DocumentForm()
+
+                return render(request, 'login/profile.html',
+                              {'data': processed_data, 'documents': documents, 'form': form})
+
+            else:
+                form = DocumentForm()
+
+
+                # Redirect to the document list after POST
+                return render(request, 'login/profile.html', {'form': form})
         else:
-            form = DocumentForm()
-
-
-            # Redirect to the document list after POST
-            return render(request, 'login/profile.html', {'form': form})
+           form = DocumentForm()
+           return render(request, 'login/profile.html', {'form': form})
 
 
 # @login_required

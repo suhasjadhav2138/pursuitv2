@@ -105,14 +105,13 @@ class SalePaymentForm(forms.Form):
             exp_month = self.cleaned_data["expiration"].month
             exp_year = self.cleaned_data["expiration"].year
             cvc = self.cleaned_data["cvc"]
-
+            username = self.user
             user_data = User.objects.filter(username=self.user).values('email')
             user_email = user_data.values()[0]['email']
             sale = Sale()
-
             # let's charge $10.00 for this particular item
-            success, instance = sale.charge(amount * 100, number, exp_month,
-                                            exp_year, user_email, cvc)
+            success, instance = sale.charge(amount * 100, number, exp_month, exp_year, username, user_email, cvc)
+
             instance.save()
             if not success:
                 raise forms.ValidationError("Error: %s" % instance.message)
@@ -120,6 +119,9 @@ class SalePaymentForm(forms.Form):
                 print self.user
 
                 trans = sale.save()
+                # transaction_data = PayTransactions(user_name=self.user, email_id=user_email, amount=amount,
+                #                                    date_time=datetime.now())
+                # transaction_data.save()
 
                 # try:
                 #     trans = sale.save()

@@ -80,8 +80,19 @@
     </header>
     <div class="CardDetailsM">
         <div class="container">
+
             <div class="CreateAcco">
+
+
                 <form action="/accounts/register/" method="POST" role="form" class="sign_up">{% csrf_token %}
+                   {% if form.errors %}
+                     <h5 style="color: red">Fields are Missing</h5>
+        <ul>
+            {% for error in form.errors %}
+            <b><li style="color: red">{{ error }}</li></b>
+            {% endfor %}
+        </ul>
+             {% endif %}
                     <h4>Create An Account for 20 FREE Verified Emails</h4>
 
                     <div class="row">
