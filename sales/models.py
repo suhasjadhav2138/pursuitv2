@@ -80,7 +80,7 @@ class Sale(models.Model):
                 self.emails_balance_count = 350
             if self.amount == 39:
                 self.emails_balance_count = 1000
-                self.self.emails_count = 1000
+                self.emails_count = 1000
             if self.amount == 89:
                 self.emails_balance_count = 5000
                 self.emails_count = 5000

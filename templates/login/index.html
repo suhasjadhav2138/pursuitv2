@@ -15,7 +15,7 @@
 {#	<script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>#}
 {#	 <script  type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>#}
 {#  </head>#}
-	<body>
+	<body data-spy="scroll" data-target=".navbar" data-offset="50">
 	{% block content %}
 		<header>
 			<div class="container-fluid">
@@ -38,10 +38,13 @@
 									<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 										<ul class="nav navbar-nav navbar-right">
 											<li class="dropdown">
-												  <a href="http://pursuit.ai/email-finder" class="dropdown-toggle" data-toggle="dropdown">Email Hunter <b class="caret"></b></a>
+												  <a href="http://13.59.50.104/app/" class="dropdown-toggle" data-toggle="dropdown">Email Hunter <b class="caret"></b></a>
 												  <ul class="dropdown-menu">
-													<li><a href="/app/">Free Email Finder</a></li>
-													<li><a href="http://pursuit.ai/pricing/">Plans & Pricing</a></li>
+													<li><a href="https://pursuit.ai/">Free Email Finder</a></li>
+													<li><a href="#section1">Plans & Pricing</a></li>
+													<li>
+														<a href="/accounts/register/" class="RegisA">Register</a>
+													</li>
 												  </ul>
 												</li>
 											<li class="dropdown">
@@ -60,16 +63,13 @@
 													<li><a href="http://pursuit.ai/careers/">Careers</a></li>
 												  </ul>
 												</li>
-											<li class="GetInTouchCls">
-												<a href="http://pursuit.ai/contact/">Get In Touch</a>
+											<li class="GetInTouchCls dropdown">
+												<a href="http://pursuit.ai/contact/">Get In Touch </a>
+												
 											</li>
-											<li>
-													<a href="/accounts/login/">Login</a>
-												</li>
-
-											<li>
-													<a href="/accounts/register/">Register</a>
-												</li>
+											<li class="">
+													<a href="/accounts/login/" class="LoginA">Login </a>
+											</li>
 
 										</ul>
 									</div>
@@ -85,7 +85,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="headerTextMain">
-						<p class="headtextN">Free Email Validation</p>
+						<p class="headtextN">Enter Details To Find Any Business Email Address</p>
 						<p class="text-center headtext">
 {{ msg|safe }}						</p>
 						<form method= "POST" action="/app/" class="text-center csfrom">{% csrf_token %}
@@ -119,11 +119,11 @@
 							<button type="submit" class="btn btn-default Searchresult button">
 								Submit
 							</button>
-							<div class="row customcsvRow">
+							<div class="row customcsvRow landingPopupCls">
 								<div class="col-md-12 cvscols">
 									<table class="table searchreult">
 										<tr>
-												<h3>{{ search }}</h3>
+
 
 											  {% if details %}
                                             <td>
@@ -150,12 +150,13 @@
 						<br/><br/>
 						The verification technology uses advanced tools such as syntax check, MX & SMTP verification, catch-all detection, and disposable email filtering to deliver any business contact’s email along with a confidence score based on our analysis.
 						</p>
-					<button type="submit" class="btn btn-default  Searchresult PlanPriceBtn">
+					<a href="#section2"><button type="submit" class="btn btn-default  Searchresult PlanPriceBtn">
 						Plans & Pricing
 					</button>
+					</a>
 				</div>
 				<div class="col-md-6">
-					<img alt="Image" src="{% static 'images/SecondImg.jpg' %}" />
+					<img alt="Image" src="{% static 'images/4 Images-01.jpg' %}" />
 				</div>
 			</div>
 			</div>
@@ -163,7 +164,7 @@
 			  <div class="container">
 			<div class="row customrowfirst">
 				<div class="col-md-6">
-					<img alt="Image" src="{% static 'images/SecondImg.jpg' %}" />
+					<img alt="Image" src="{% static 'images/4 Images-02.jpg' %}" />
 				</div>
 				<div class="col-md-6">
 					<h2>Easy On Your Budget </h2>
@@ -172,9 +173,10 @@
 							<br/><br/>
 							Not only that, we only charge you for emails that are verified.
 							</p>
-					<button type="submit" class="btn btn-default  Searchresult PlanPriceBtn">
-						Plans & Pricing
+					<a  href="#section2" ><button type="submit" class="btn btn-default  Searchresult PlanPriceBtn">
+						Plans & Pricing 
 					</button>
+					</a>
 				</div>
 			</div>
 			</div>
@@ -188,12 +190,13 @@
 							<br/><br/>
 							All verified emails can be uploaded directly to your CRM for database enrichment.
 						</p>
-					<button type="submit" class="btn btn-default  Searchresult PlanPriceBtn">
+					<a href="#section2" ><button type="submit" class="btn btn-default  Searchresult PlanPriceBtn">
 						Plans & Pricing
 					</button>
+					 </a>
 				</div>
 				<div class="col-md-6">
-					<img alt="Image" src="{% static 'images/SecondImg.jpg' %}" />
+					<img alt="Image" src="{% static 'images/4 Images-03.jpg' %}" />
 				</div>
 			</div>
 			</div>
@@ -201,23 +204,24 @@
 		<div class="container">
 			<div class="row customrowfirst">
 				<div class="col-md-6">
-					<img alt="Image" src="{% static 'images/SecondImg.jpg' %}" />
+					<img alt="Image" src="{% static 'images/4 Images-04.jpg' %}" />
 				</div>
 				<div class="col-md-6">
 					<h2>Safe & Secure API</h2>
 					<p>
 						Verify emails quick and easily using our rest API. <br/><br/>API results are delivered in portable JSON Format. Make a simple request and let our API do the rest.  </p>
-					<button type="submit" class="btn btn-default  Searchresult PlanPriceBtn">
-						Plans & Pricing
+					<a  href="#section2" ><button type="submit" class="btn btn-default  Searchresult PlanPriceBtn">
+						Plans & Pricing 
 					</button>
+					</a>
 				</div>
 			</div>
 			</div>
 			</div>
 		</div>
 			<div class="container">
-				<div class="row">
-					<div class="col-md-12 collandpage">
+				<div class="row" id="section2">
+					<div class="col-md-12 collandpage"  id="section1">
 						<h2 class="text-center TitleCommancls SlectCLasLand">
 						Select Subscription Plan
 					</h2>
@@ -225,63 +229,71 @@
 							<div class="col-md-3 col-sm-6">
 								<div class="Pricingcls">
 									<div class="PricingSub">
-										<h1>Free</h1>
-										<h3>500 email/month</h3>
-										<p>Unlimited verified emails</p>
+										<h1>350 emails</h1>
+										<h3>350 emails - $19/month</h3>
+										<p>Pay for verified emails only</p>
 										<p>Unlimited rollovers</p>
 										<p>Bulk search</p>
-										<p>.cvs export</p>
-										<p>API Accsess</p>
-										<button type="button" class="btn btn-default updatebtn">Sign Up</button>
+										<p>.CSV import/export</p>
+										<p>API access</p>
+										<a href="http://13.59.50.104/accounts/register/" style="color:#fff;">
+											<button type="button" class="btn btn-default updatebtn">Sign Up</button>
+										</a>
 									</div>
 								</div>
 							</div>
 							<div class="col-md-3 col-sm-6">
 								<div class="Pricingcls">
 									<div class="PricingSub">
-										<h1>Free</h1>
-										<h3>500 email/month</h3>
-										<p>Unlimited verified emails</p>
+										<h1>1000 emails</h1>
+										<h3>1000 emails - $39/month</h3>
+										<p>Pay for verified emails only</p>
 										<p>Unlimited rollovers</p>
 										<p>Bulk search</p>
-										<p>.cvs export</p>
-										<p>API Accsess</p>
-										<button type="button" class="btn btn-default updatebtn	">Sign Up</button>
+										<p>.CSV import/export</p>
+										<p>API access</p>
+										<a href="http://13.59.50.104/accounts/register/" style="color:#fff;">
+											<button type="button" class="btn btn-default updatebtn	">Sign Up</button>
+										</a>
 									</div>
 								</div>
 							</div>
 							<div class="col-md-3 col-sm-6">
 								<div class="Pricingcls">
 									<div class="PricingSub ACTIVE">
-										<h1>Free</h1>
-										<h3>500 email/month</h3>
-										<p>Unlimited verified emails</p>
+										<h1>5,000 emails</h1>
+										<h3> 5,000 emails - $89/month</h3>
+										<p>Pay for verified emails only</p>
 										<p>Unlimited rollovers</p>
 										<p>Bulk search</p>
-										<p>.cvs export</p>
-										<p>API Accsess</p>
-										<button type="button" class="btn btn-default  updatebtn	">Sign Up</button>
+										<p>.CSV import/export</p>
+										<p>API access</p>
+										<a href="http://13.59.50.104/accounts/register/"><button type="button" class="btn btn-default  updatebtn	">Sign Up</button></a>
 									</div>
 								</div>
 							</div>
 							<div class="col-md-3 col-sm-6">
 								<div class="Pricingcls">
 									<div class="PricingSub pricLastColumn">
-										<h1>Free</h1>
-										<h3>500 email/month</h3>
-										<p>Unlimited verified emails</p>
+										<h1>10,000 emails</h1>
+										<h3>10,000 emails - $139/month</h3>
+										<p>Pay for verified emails only</p>
 										<p>Unlimited rollovers</p>
 										<p>Bulk search</p>
-										<p>.cvs export</p>
-										<p>API Accsess</p>
+										<p>.CSV import/export</p>
+										<p>API access</p>
+										<a href="http://13.59.50.104/accounts/register/"style="color:#fff;">
 										<button type="button" class="btn btn-default updatebtn">Sign Up</button>
+										</a>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row NeedBtn">
 							<div class="col-md-12 text-center ">
-								<button type="button" class="btn btn-success  needGetBtn">Need A Larger Plan?</button>
+								<a href=" http://pursuit.ai/contact/" style="color:#fff;">
+								<button type="button" class="btn btn-success  needGetBtn">Need A Larger Plan? </button>
+								</a>
 							</div>
 						</div>
 					</div>
@@ -289,45 +301,53 @@
 			</div>
 		 <section class="">
 		<div class="container">
-			<div class="row">
-				<div class="col-md-12 FAQSection">
-					<h2 class="text-center">Frequently Asked Questions </h2>
-					<h4>Why should I use Pursuit over other SDR outsourcing companies? </h4>
-					<p>
-					   There are many reasons why lead generation companies fail to prospect successfully. Most commonly, our competitors are unsuccessful because they use inaccurate data and rely on email software to send generic non-targeted campaigns.
-					</p>
-					<p>
-					   People are smart. They know when someone has done their research before contacting them. Our SDRs use our proprietary software to segment prospects into cohorts and personas so that they can understand a prospect’s triggers and priorities before contacting them. From there, our SDRs write one-to-one emails and use value-centric call scripts to capture a prospect’s interest and communicate the value of your solution. We don’t take the easy way out.
-					</p>
-				</div>
-				<div class="col-md-12 FAQSection">
-					<h4>Can I use Pursuit if I already have SDRs? </h4>
-					<p>
-					   Yes! Using Pursuit is not mutually exclusive. In these scenarios we can prospect into a defined segment/territory or run discovered leads by your CRM before outreach.
-					</p>
-				</div>
-				<div class="col-md-12 FAQSection">
-					<h4>Does Pursuit close the deals too?</h4>
-					<p>
-					   Our expertise strictly lies in sales development. You know your service better than anyone so you are better positioned to close the deals. We’ll battle in the trenches and let you get the glory.
-					</p>
-				</div>
-				 <div class="col-md-12 FAQSection">
-					<h4>Do leads need to be provided? </h4>
-					<p>
-						No! After we have identified your ideal customer profile we will find leads that match the attributes of a successful customer and use the contact information in our database or through our partners to contact the lead.
-					</p>
-					<p>
-					   However, if you would prefer to work out of existing leads in your CRM, we can prospect into those leads instead of identifying new ones.
-					</p>
-				</div>
-				<div class="col-md-12 FAQSection LastFAQ">
-					<h4>What is the commitment period?</h4>
-					<p>
-					   We allow for a 3 month pilot period to verify our performance before entering into an annual contract. In this period our team will identify your ideal customer profile, segment accounts, reach out to prospects and schedule meetings for your sales team. After our systems are implemented, we’re confident that your sales team is going to want us to stick around.
-					</p>
-				</div>
-			</div>
+		<div class="row">
+            <div class="col-md-12 FAQSection">
+                <h2 class="text-center">Frequently Asked Questions </h2>
+                <h4>How do you know an email is verified?</h4>
+                <p>
+                   We assign a quality score to every email we search for. Verified emails are directly validated with the server and maintain at least a 98% deliverability rate.
+
+                </p>
+                <p>
+                </p>
+            </div>
+            <div class="col-md-12 FAQSection">
+                <h4>What about the emails that aren’t verified?</h4>
+                <p>
+                   Emails with lower than a 98% quality score are provided to you for free. We use a color gradient scheme to indicate our level of certainty for each unverified email. 
+
+                </p>
+            </div>
+            <div class="col-md-12 FAQSection">
+                <h4>Do you offer free trials?</h4>
+                <p>
+                   If you register an account <a href="http://13.59.50.104/accounts/register/">here</a> you can evaluate our service and receive 20 verified emails for free. 
+                </p>
+            </div>
+			 <div class="col-md-12 FAQSection">
+                <h4> How do rollovers work? </h4>
+                <p>
+                   If you don’t use all of your email credits in a given month, the credit will be added to your credit for the next month. You will be able to use any of your credits until you cancel.
+
+                </p>
+                <p>
+                </p>
+            </div>
+            <div class="col-md-12 FAQSection ">
+                <h4>What if I need to cancel?</h4>
+                <p>
+                  You may cancel your subscription at any time during the billing period. After you cancel, you will be able to continue using your remaining credits until the end of your billing period. 
+                </p>
+            </div>
+			 <div class="col-md-12 FAQSection LastFAQ">
+                <h4>What if I need more emails validated than the plans you offer?</h4>
+                <p>
+                 Please contact our sales team at <a href="">sales@pursuit.ai.</a>
+
+                </p>
+            </div>
+        </div>
 		</div>
 		 </section>
 		<footer>

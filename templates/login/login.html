@@ -25,10 +25,11 @@
                                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                             <ul class="nav navbar-nav navbar-right">
                                                 <li class="dropdown">
-                                                                  <a href="http://pursuit.ai/email-finder" class="dropdown-toggle" data-toggle="dropdown">Email Hunter <b class="caret"></b></a>
+                                                                  <a href="http://13.59.50.104/app/" class="dropdown-toggle" data-toggle="dropdown">Email Hunter <b class="caret"></b></a>
                                                                   <ul class="dropdown-menu">
-                                                                    <li><a href="#">Free Email</a></li>
-                                                                    <li><a href="http://pursuit.ai/pricing/">Plans & Pricing</a></li>
+                                                                    <li><a href="https://pursuit.ai/">Free Email Finder</a></li>
+                                                                    <li><a href="http://13.59.50.104/app/">Plans & Pricing</a></li>
+																	<li class=""><a href="/accounts/register/" class="LoginA">Signup</a></li>
                                                                   </ul>
                                                 </li>
                                                 <li class="dropdown">
@@ -47,18 +48,16 @@
                                                         <li><a href="http://pursuit.ai/careers/">Careers</a></li>
                                                       </ul>
                                                 </li>
-                                                <li class="GetInTouchCls">
-                                                    <a href="http://pursuit.ai/contact/">Get In Touch</a>
-                                                </li>
-                                                <li>
-                                                        <a href="/app">Home</a>
+												 <li class="GetInTouchCls dropdown">
+													<a href="http://pursuit.ai/contact/" class="dropdown-toggle" data-toggle="dropdown">Get In Touch <b class="caret"></b></a>
+													<ul class="dropdown-menu">
+														<li class="loginlI">
+														  <a href="/app" class="LoginA">Home</a>
+														</li>														
+													</ul>
+												</li>
 
-                                                    </li>
-                                                    <li>
-                                                            <a href="/accounts/register/">Signup</a>
-
-                                                        </li>
-
+                                               
                                             </ul>
                                         </div>
 
@@ -78,7 +77,10 @@
                                 Login 
                             </h2>
                                     <form action="/accounts/login/" method="POST" role="form" class="text-center ">{% csrf_token %}
-                                        <div class="form-group">
+
+
+                                     <h5 style="color:red"> <b>{{ error_message }}</b></h5>		
+					 <div class="form-group">
                                             <input type="text" class="form-control Logininput" placeholder="User Name" name="username" />
                                         </div>
                                         <div class="form-group">

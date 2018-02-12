@@ -26,7 +26,7 @@ SECRET_KEY = '9jdw7_*cwcv4k=j()r*vuuni6tg+8b+hu5rew4ma57=*o5s%!b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['testapp08.herokuapp.com', '0.0.0.0:5000', '127.0.0.1', '192.168.2.131', 'pursuitdemo08.herokuapp.com',
+ALLOWED_HOSTS = ['khavvayyahotel.co.in','testapp08.herokuapp.com', '0.0.0.0:5000', '127.0.0.1', '192.168.2.131', 'pursuitdemo08.herokuapp.com',
                  "13.59.50.104"
                  ]
 STATICFILES_DIRS = [
@@ -85,6 +85,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'website.wsgi.application'
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 
 # Database
@@ -93,10 +94,10 @@ db_from_env = dj_database_url.config()
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'USER': '',
-        'PASSWORD': '',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'pursuit',
+        'USER': 'root',
+        'PASSWORD': 'Pursuit@tyler',
         'HOST': '',
         'PORT': '',
     }

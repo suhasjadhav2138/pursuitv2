@@ -30,11 +30,14 @@
                                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                     <ul class="nav navbar-nav navbar-right">
                                         <li class="dropdown">
-                                            <a href="http://pursuit.ai/email-finder" class="dropdown-toggle"
+                                            <a href="http://13.59.50.104/app/" class="dropdown-toggle"
                                                data-toggle="dropdown">Email Hunter <b class="caret"></b></a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="#">Free Email</a></li>
-                                                <li><a href="http://pursuit.ai/pricing/">Plans & Pricing</a></li>
+                                                <li><a href="https://pursuit.ai/">Free Email Finder</a></li>
+                                                <li><a href="http://13.59.50.104/app/">Plans & Pricing</a></li>
+												<li class="">
+														<a href="/accounts/register/" class="RegisA">Register</a>
+													</li>
                                             </ul>
                                         </li>
                                         <li class="dropdown">
@@ -57,18 +60,13 @@
                                                 <li><a href="http://pursuit.ai/careers/">Careers</a></li>
                                             </ul>
                                         </li>
-                                        <li class="GetInTouchCls">
-                                            <a href="http://pursuit.ai/contact/">Get In Touch</a>
-                                        </li>
-                                        <li>
-                                            <a href="/app ">Home</a>
-
-                                        </li>
-                                        <li>
-                                            <a href="/accounts/login/">Login</a>
-
-                                        </li>
-
+                                       <li class="GetInTouchCls dropdown">
+												<a href="http://pursuit.ai/contact/" class="dropdown-toggle" data-toggle="dropdown">Get In Touch <b class="caret"></b></a>
+												
+										</li>
+										<li class="">
+											<a href="/accounts/login/" class="LoginA">Login</a>
+										</li>
                                     </ul>
                                 </div>
                             </nav>
@@ -84,68 +82,93 @@
             <div class="CreateAcco">
 
 
+
+        
+         
+
                 <form action="/accounts/register/" method="POST" role="form" class="sign_up">{% csrf_token %}
-                   {% if form.errors %}
-                     <h5 style="color: red">Fields are Missing</h5>
-        <ul>
-            {% for error in form.errors %}
-            <b><li style="color: red">{{ error }}</li></b>
-            {% endfor %}
-        </ul>
-             {% endif %}
-                    <h4>Create An Account for 20 FREE Verified Emails</h4>
+
+
+
+                    <h4>Create An Account for 20 FREE Email Searches</h4>
 
                     <div class="row">
                         <div class="col-md-12">
                             <label>
-                                User Name
+                                User Name<span class="req">* </span>
+								<!-- {{ form.username.errors }} -->
                             </label>
                             <input type="text" class="form-control" placeholder="User Name" name="username"/>
-                        </div>
+								{% if  form.username.errors %}
+								<span  class="text-danger">* Please enter your Username!</span>
+                        					{% endif %}
+			</div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
                             <label>
-                                First Name
+                                First Name<span class="req">* </span>
                             </label>
                             <input type="text" class="form-control" placeholder="First Name" name="first_name"/>
-                        </div>
+		{% if form.first_name.errors %}						
+		<span  class="text-danger">* Please enter your First Name!</span>
+        	{% endif %}
+                </div>
                         <div class="col-md-6">
                             <label>
-                                Last Name
+                                Last Name<span class="req">* </span>
                             </label>
                             <input type="text" class="form-control" placeholder="Last Name" name="last_name"/>
+							{% if form.last_name.errors %}
+							<span  class="text-danger">* Please enter your Last Name!</span>
+							{% endif %}
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <label>
-                                Email
+                                Email<span class="req">* </span>
                             </label>
                             <input type="text" class="form-control" placeholder="xyz@gmail.com" name="email"/>
+                                                        {% if form.email.errors %}
+		
+					<span  class="text-danger">* Please enter your Email!</span>
+					{% endif %}
                         </div>
 
                         <div class="col-md-6">
                             <label>
-                                Confirm Email
+                                Confirm Email<span class="req">* </span>
                             </label>
                             <input type="text" class="form-control" placeholder="xyz@gmail.com" name="email2"/>
+
+	                                                        {% if form.email2.errors %}
+						
+	<span  class="text-danger">* Please Confirm your Email!</span>
+		{% endif %}
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <label>
-                                Password
+                                Password<span class="req">* </span>
                             </label>
                             <input type="password" class="form-control" placeholder="Password" name="password"/>
+                                    {% if form.password.errors %}
+		<span  class="text-danger">* Please enter your Password!</span>
+{% endif %}
                         </div>
-                        <!-- <div class="col-md-6">
+                        <div class="col-md-6">
                             <label>
-                                Confirm Password
+                                Confirm Password<span class="req">* </span>
                             </label>
                             <input type="password" class="form-control" placeholder="Confirm Password" />
-                        </div> -->
+                                                        {% if form.password.errors %}				
+	<span  class="text-danger">* Please confirm your Password!</span>
+{% endif %}
+                        </div> 
                     </div>
                     <div class="row">
                         <div class="col-md-12 text-center">
