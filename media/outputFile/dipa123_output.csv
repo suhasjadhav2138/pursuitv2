@@ -1,0 +1,5 @@
+first_name,last_name,name,run_id,company_url,company,email_score,email_guess,user,date_pulled,id
+Ben,Bidner,Ben Bidner,2,ben.bidner@automattic.com,N/A,96.0,ben.bidner@automattic.com,dipa123,2018-02-16 03:18:02.172411+00:00,17
+Paul,Maiorana,Paul Maiorana,2,paul@automattic.com,N/A,96.0,pmaiorana@automattic.com,dipa123,2018-02-16 03:18:06.635993+00:00,18
+Tom,Harbert,Tom Harbert,2,tom@campaignmonitor.com,N/A,96.0,tom.harbert@campaignmonitor.com,dipa123,2018-02-16 03:18:09.184414+00:00,19
+Herry,Wiputra,Herry Wiputra,2,herry@campaignmonitor.com,N/A,96.0,herry.wiputra@campaignmonitor.com,dipa123,2018-02-16 03:18:11.636971+00:00,20

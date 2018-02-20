@@ -1,5 +1,5 @@
 {% extends 'login/base.html' %}
-{% load staticfiles %
+{% load staticfiles %}
 <body>
 {% block content %}
 
@@ -20,7 +20,7 @@
                                     </button>
                                     <div class="logoI">
                                         <a href="http://pursuit.ai/">
-                                            <img src="Images/logo.png" height="30" width="131" alt="Pursuit">
+                                            <img src="{% static 'images/logo.png' %}" height="30" width="131" alt="Pursuit">
                                         </a>
                                     </div>
                                 </div>
@@ -32,7 +32,7 @@
                                                data-toggle="dropdown">Email Hunter <b class="caret"></b></a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="https://pursuit.ai/">Free Email Finder</a></li>
-                                                <li><a href="http://13.59.50.104/app/">Plans & Pricing</a></li>
+                                                <li><a href="http://13.59.50.104/app/#section1">Plans & Pricing</a></li>
 												<li>
 													<a href="/accounts/register/" class="RegisA">Register</a>
 												</li>
@@ -137,12 +137,14 @@
                                         Amount
                                     </label>
                                     {{ form.amount }}
+									<!-- <span  class="text-danger">* Please enter Amount!</span> -->
                                 </div>
                                 <div class="col-md-6">
                                     <label style="display: inherit;">
                                         Card Number
                                     </label>
                                     {{ form.number }}
+									<!-- <br/><span  class="text-danger">* Please enter Card Number!</span> -->
                                 </div>
                             </div>
                             <div class="row">
@@ -151,6 +153,7 @@
                                         Expiry Month
                                     </label><br>
                                     {{ form.expiration }}
+									<!-- <br/><span  class="text-danger">* Please enter Expiry Month!</span> -->
                                 </div>
 
                                 <div class="col-md-6">
@@ -158,6 +161,7 @@
                                         CVV
                                     </label>
                                     {{ form.cvc }}
+									<!-- <br/><span  class="text-danger">* Please enter CVV!</span> -->
                                 </div>
                             </div>
 

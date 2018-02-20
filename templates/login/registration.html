@@ -34,7 +34,7 @@
                                                data-toggle="dropdown">Email Hunter <b class="caret"></b></a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="https://pursuit.ai/">Free Email Finder</a></li>
-                                                <li><a href="http://13.59.50.104/app/">Plans & Pricing</a></li>
+                                                <li><a href="http://13.59.50.104/app/#section1">Plans & Pricing</a></li>
 												<li class="">
 														<a href="/accounts/register/" class="RegisA">Register</a>
 													</li>
@@ -132,10 +132,17 @@
                                 Email<span class="req">* </span>
                             </label>
                             <input type="text" class="form-control" placeholder="xyz@gmail.com" name="email"/>
-                                                        {% if form.email.errors %}
+                    
+                                    {% if form.email.errors %}
 		
 					<span  class="text-danger">* Please enter your Email!</span>
 					{% endif %}
+					{% for i in form.errors %}
+					 {% if i == "__all__" %}
+
+                                        <span  class="text-danger">* Email has already been registered!</span>
+                                        {% endif %}
+					{% endfor %}
                         </div>
 
                         <div class="col-md-6">

@@ -21,6 +21,7 @@ from django.core.files import File
 from os.path import join
 from django.conf import settings
 from sales.models import Sale
+from django.contrib.auth import authenticate, login
 
 import datetime
 # home page of the website
@@ -127,7 +128,11 @@ def register_view(request):
             authenticate(username=user.username, password=password)
             user.is_active = True
             user.save()
-            return HttpResponseRedirect('/accounts/login/')
+            new_user = authenticate(username=form.cleaned_data['username'],
+                                    password=form.cleaned_data['password'],
+                                    )
+            login(request, new_user)
+            return HttpResponseRedirect('/sale/payment/')
 
 	else:
             return render(request, "login/registration.html", {"form":form})
@@ -167,76 +172,74 @@ def validate_view(request):
         return render(request, "login/profile.html", {'form': form})
 
     if request.method == 'POST' and not request.FILES:
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        title = 'CEO'
+ 
+	    first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
+            title = 'CEO'
         
-        company_website = request.POST.get('company_website')
+            company_website = request.POST.get('company_website')
 
  
-        data_list = [first_name, last_name, title, company_website]
-        name_search = first_name + " " + last_name
-        filter_records = Search_details.objects.filter(user=request.user).values()
+            data_list = [first_name, last_name, title, company_website]
+            name_search = first_name + " " + last_name
+            filter_records = Search_details.objects.filter(user=request.user).values()
  
-        for i in filter_records:
-            if (i["name"] == name_search) and (i["company_url"] == company_website):
+            for i in filter_records:
+                if (i["name"] == name_search) and (i["company_url"] == company_website):
         
 
                 
-                try:
+                    try:
 
-                    person_details = i['email_guess']
-                except:
-                    person_details = "domain not found"
+                        person_details = i['email_guess']
+                    except:
+                        person_details = "domain not found"
                 
                 
-                form = DocumentForm()
+                    form = DocumentForm()
 
-                return render(request, 'login/profile.html',
-                              {'details': person_details, 'form': form})
+                    return render(request, 'login/profile.html', {'details': person_details, 'form': form})
 
 
 
 
         
-        user = request.user
+            user = request.user
         # if user in
 
-        read_credits = Search_credits.objects.filter(user=user).count()
-        if read_credits == 0:
+            read_credits = Search_credits.objects.filter(user=user).count()
+            if read_credits == 0:
         
 
-            credits_add = Search_credits(user=user, free_credits_used=1, paid_credits_used=0)
-            credits_add.save()
+                credits_add = Search_credits(user=user, free_credits_used=1, paid_credits_used=0)
+                credits_add.save()
 
-        else:
-            if int(Search_credits.objects.get(user=user).free_credits_used) <= 20:
-        
-                credits_update = Search_credits.objects.get(user=user)
-                credits_update.free_credits_used = (int(credits_update.free_credits_used) + 1)
-                credits_update.save()
-        
             else:
-                notify = "Kindly Buy membership to increase credits and enable Upload csv option"
-                return render(request, 'login/profile.html',
-                              {'search': notify})
+                if int(Search_credits.objects.get(user=user).free_credits_used) <= 20:
+        
+                    credits_update = Search_credits.objects.get(user=user)
+                    credits_update.free_credits_used = (int(credits_update.free_credits_used) + 1)
+                    credits_update.save()
+        
+                else:
+                    notify = "Kindly Buy membership to increase credits and enable Upload csv option"
+                    return render(request, 'login/profile.html', {'search': notify})
 
 
-        person_details = validate_email.select_type(request.user, data_list)
+            person_details = validate_email.select_type(request.user, data_list)
 
         
         
-        try:
+            try:
 
-            person_details = person_details[0]['email_guess']
-        except:
-            person_details = "domain not found"
+                person_details = person_details[0]['email_guess']
+            except:
+                person_details = "domain not found"
         
         
-        form = DocumentForm()
+            form = DocumentForm()
 
-        return render(request, 'login/profile.html',
-                      {'details': person_details, 'form': form})
+            return render(request, 'login/profile.html', {'details': person_details, 'form': form})
     else:
 
         form = DocumentForm(request.POST, request.FILES)
@@ -249,7 +252,7 @@ def validate_view(request):
 
                 newdoc.save()
                 # -----------------------------------
-                path = 'media/' + str(newdoc)
+                path = '/home/ubuntu/project/pursuitt/media/' + str(newdoc)
         
                 read_credits = Search_credits.objects.filter(user=request.user).count()
         
@@ -277,7 +280,7 @@ def validate_view(request):
                         return render(request, 'login/profile.html',
                                       {'details': notify})
 
-                path = "media/outputFile/"
+                path = "/home/ubuntu/project/pursuitt/media/outputFile/"
         
                 keys = processed_data[0].keys()
                 with open(path + str(request.user) + "_output.csv", 'wb') as output_file:
