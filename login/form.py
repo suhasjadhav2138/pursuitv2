@@ -31,6 +31,7 @@ class UserRegisterForm(forms.ModelForm):
     email = forms.EmailField(label="Email")
     email2 = forms.EmailField(label="Confirm Email")
     password = forms.CharField(widget=forms.PasswordInput)
+    confirm_password = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
         model = User
@@ -40,7 +41,8 @@ class UserRegisterForm(forms.ModelForm):
             'last_name',
             'email',
             'email2',
-            'password'
+            'password',
+            'confirm_password'
         ]
 
     def clean(self, *args, **kwargs):

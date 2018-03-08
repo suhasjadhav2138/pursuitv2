@@ -154,7 +154,7 @@ def run(file_name, user, process_count=1):
     processed_rows = list(itertools.chain.from_iterable(filter(None, processed_rows)))
     print(processed_rows), "////////////////////////////////////////////////////////////////////"
     print(len(processed_rows))
-    email_count_update = Sale.objects.get(user_name=user)
+    email_count_update = Sale.objects.filter(user_name=user).last()
     print email_count_update
     email_count_update.emails_balance_count = (int(email_count_update.emails_balance_count) - len(processed_rows))
     email_count_update.save()

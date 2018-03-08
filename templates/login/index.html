@@ -1,5 +1,5 @@
-{% extends 'login/base.html' %}
-{% load staticfiles %}
+{% extends 'login/base.html' %} {% load staticfiles %}
+<!-- 
 {##}
 {#<!DOCTYPE html>#}
 {#<html lang="en">#}
@@ -14,427 +14,412 @@
 {#    <link href="{% static 'css/custom.css' %}" rel="stylesheet">#}
 {#	<script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>#}
 {#	 <script  type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>#}
-{#  </head>#}
-	<body data-spy="scroll" data-target=".navbar" data-offset="50">
-	{% block content %}
-		<header>
-			<div class="container-fluid">
-				<div class="row ">
-					<div class="col-md-12 customnav">
-						<div id="header-wrap">
-							<div id="header" class="clear">
-								<nav class="navbar navbar-default" role="navigation">
-									<div class="navbar-header">
-										<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-											<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-										</button>
-										<div class="logoI">
-											<a href="http://pursuit.ai/">
+{#  </head>#} -->
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+    {% block content %}
+    <header>
+        <div class="container-fluid">
+            <div class="row ">
+                <div class="col-md-12 customnav">
+                    <div id="header-wrap">
+                        <div id="header" class="clear">
+                            <nav class="navbar navbar-default" role="navigation">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                        <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                                    </button>
+                                    <div class="logoI">
+                                        <a href="http://pursuit.ai/">
 												<img src="{% static 'images/logo.png' %}" height="30" width="131" alt="Pursuit">
 											</a>
-										</div>
-									</div>
-
-									<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-										<ul class="nav navbar-nav navbar-right">
-											<li class="dropdown">
-												  <a href="http://13.59.50.104/app/" class="dropdown-toggle" data-toggle="dropdown">Email Hunter <b class="caret"></b></a>
-												  <ul class="dropdown-menu">
-													<li><a href="https://pursuit.ai/">Free Email Finder</a></li>
-													<li><a href="#section1">Plans & Pricing</a></li>
-													<li>
-														<a href="/accounts/register/" class="RegisA">Register</a>
-													</li>
-												  </ul>
-												</li>
-											<li class="dropdown">
-												  <a href="#" class="dropdown-toggle" data-toggle="dropdown">SDR Outsourcing <b class="caret"></b></a>
-												  <ul class="dropdown-menu">
-													<li><a href="http://pursuit.ai/lead-generation/">Lead Generation</a></li>
-													<li><a href="http://pursuit.ai/prospect-outreach/">Prospect Outreach</a></li>
-													<li><a href="http://pursuit.ai/sdr-oursourcing/">Why Outsource?</a></li>
-													<li><a href="http://pursuit.ai/pricing/">Plans & Pricing</a></li>
-												  </ul>
-												</li>
-										   <li class="dropdown">
-												  <a href="http://pursuit.ai/about/" class="dropdown-toggle" data-toggle="dropdown">Company <b class="caret"></b></a>
-												  <ul class="dropdown-menu">
-													<li><a href="http://pursuit.ai/blog/">Blog</a></li>
-													<li><a href="http://pursuit.ai/careers/">Careers</a></li>
-												  </ul>
-												</li>
-											<li class="GetInTouchCls dropdown">
-												<a href="http://pursuit.ai/contact/">Get In Touch </a>
-												
-											</li>
-											<li class="">
-													<a href="/accounts/login/" class="LoginA">Login </a>
-											</li>
-
-										</ul>
-									</div>
-								</nav>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
-		<div class="fading-header" style="display:none"></div>
-			<div class="CustRowOne">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="headerTextMain">
-						<p class="headtextN">Enter Details To Find Any Business Email Address</p>
-						<p class="text-center headtext">
-{{ msg|safe }}						</p>
-						<form method= "POST" action="/app/" class="text-center csfrom">{% csrf_token %}
-							<div class="row">
-								<div class="col-md-6 text-left">
-									<label>
-										First Name
-									</label>
-									<input type="text" class="form-control" placeholder="First Name" name="first_name" />
-								</div>
-								<div class="col-md-6 text-left">
-									<label>
-										Last Name
-									</label>
-									<input type="text" class="form-control" placeholder="Last Name" name="last_name" />
-								</div>
-							</div>
-							<br>
-							<div class="row">
-
-							<div class="col-md-12 text-left">
-								<div class="form-group">
-									<label>
-										 Company Website
-									</label>
-									<input type="text" class="form-control headinput" placeholder="Company Website" name="company_website" />
-								</div>
-
-								</div>
-							</div>
-							<button type="submit" class="btn btn-default Searchresult button">
-								Submit
-							</button>
-							<div class="row customcsvRow landingPopupCls">
-								<div class="col-md-12 cvscols">
-									<table class="table searchreult">
-										<tr>
-
-
-											  {% if details %}
-                                            <td>
-                                                <span class="xyz">{{ details }}</span>
-                                                <!-- {{ details }} -->
-                                            </td>
-                                        {% endif %}
-										</tr>
-									</table>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-			</div>
-		<div class="">
-		 <div class="container BGSectionWhite">
-			<div class="row customrowfirst">
-				<div class="col-md-6">
-					<h2> Find Any Business Email Address  </h2>
-					<p>
-						Email Hunter uses direct server validation in conjunction with user verified data to ensure that you only send email to real customers and high-value contacts.
-						<br/><br/>
-						The verification technology uses advanced tools such as syntax check, MX & SMTP verification, catch-all detection, and disposable email filtering to deliver any business contact’s email along with a confidence score based on our analysis.
-						</p>
-					<a href="#section2"><button type="submit" class="btn btn-default  Searchresult PlanPriceBtn">
-						Plans & Pricing
-					</button>
-					</a>
-				</div>
-				<div class="col-md-6">
-					<img alt="Image" src="{% static 'images/4 Images-01.jpg' %}" />
-				</div>
-			</div>
-			</div>
-			 <div class="BGSection">
-			  <div class="container">
-			<div class="row customrowfirst">
-				<div class="col-md-6">
-					<img alt="Image" src="{% static 'images/4 Images-02.jpg' %}" />
-				</div>
-				<div class="col-md-6">
-					<h2>Easy On Your Budget </h2>
-					<p>
-						Stop paying for expensive stale leads lists. Using Pursuit’s Email Hunter you can verify thousands of emails at a fraction of the cost.
-							<br/><br/>
-							Not only that, we only charge you for emails that are verified.
-							</p>
-					<a  href="#section2" ><button type="submit" class="btn btn-default  Searchresult PlanPriceBtn">
-						Plans & Pricing 
-					</button>
-					</a>
-				</div>
-			</div>
-			</div>
-			</div>
-			  <div class="container BGSectionWhite">
-			<div class="row customrowfirst">
-				<div class="col-md-6">
-					<h2>Find Emails in Bulk </h2>
-					<p>
-						Our easy to use interface allows you to upload thousands of records via .csv and receive server verified emails in minutes.
-							<br/><br/>
-							All verified emails can be uploaded directly to your CRM for database enrichment.
-						</p>
-					<a href="#section2" ><button type="submit" class="btn btn-default  Searchresult PlanPriceBtn">
-						Plans & Pricing
-					</button>
-					 </a>
-				</div>
-				<div class="col-md-6">
-					<img alt="Image" src="{% static 'images/4 Images-03.jpg' %}" />
-				</div>
-			</div>
-			</div>
-			<div class="BGSection">
-		<div class="container">
-			<div class="row customrowfirst">
-				<div class="col-md-6">
-					<img alt="Image" src="{% static 'images/4 Images-04.jpg' %}" />
-				</div>
-				<div class="col-md-6">
-					<h2>Safe & Secure API</h2>
-					<p>
-						Verify emails quick and easily using our rest API. <br/><br/>API results are delivered in portable JSON Format. Make a simple request and let our API do the rest.  </p>
-					<a  href="#section2" ><button type="submit" class="btn btn-default  Searchresult PlanPriceBtn">
-						Plans & Pricing 
-					</button>
-					</a>
-				</div>
-			</div>
-			</div>
-			</div>
-		</div>
-			<div class="container">
-				<div class="row" id="section2">
-					<div class="col-md-12 collandpage"  id="section1">
-						<h2 class="text-center TitleCommancls SlectCLasLand">
-						Select Subscription Plan
-					</h2>
-						<div class="row prcingRow">
-							<div class="col-md-3 col-sm-6">
-								<div class="Pricingcls">
-									<div class="PricingSub">
-										<h1>350 emails</h1>
-										<h3> $19/month</h3>
-										<p>Pay for verified emails only</p>
-										<p>Unlimited rollovers</p>
-										<p>Bulk search</p>
-										<p>.CSV import/export</p>
-										<p>API access</p>
-										<a href="http://13.59.50.104/accounts/register/" style="color:#fff;">
-											<button type="button" class="btn btn-default updatebtn">Sign Up</button>
-										</a>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-6">
-								<div class="Pricingcls">
-									<div class="PricingSub">
-										<h1>1000 emails</h1>
-										<h3> $39/month</h3>
-										<p>Pay for verified emails only</p>
-										<p>Unlimited rollovers</p>
-										<p>Bulk search</p>
-										<p>.CSV import/export</p>
-										<p>API access</p>
-										<a href="http://13.59.50.104/accounts/register/" style="color:#fff;">
-											<button type="button" class="btn btn-default updatebtn	">Sign Up</button>
-										</a>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-6">
-								<div class="Pricingcls">
-									<div class="PricingSub ACTIVE">
-										<h1>5,000 emails</h1>
-										<h3> $89/month</h3>
-										<p>Pay for verified emails only</p>
-										<p>Unlimited rollovers</p>
-										<p>Bulk search</p>
-										<p>.CSV import/export</p>
-										<p>API access</p>
-										<a href="http://13.59.50.104/accounts/register/"><button type="button" class="btn btn-default  updatebtn	">Sign Up</button></a>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-6">
-								<div class="Pricingcls">
-									<div class="PricingSub pricLastColumn">
-										<h1>10,000 emails</h1>
-										<h3> $139/month</h3>
-										<p>Pay for verified emails only</p>
-										<p>Unlimited rollovers</p>
-										<p>Bulk search</p>
-										<p>.CSV import/export</p>
-										<p>API access</p>
-										<a href="http://13.59.50.104/accounts/register/"style="color:#fff;">
-										<button type="button" class="btn btn-default updatebtn">Sign Up</button>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row NeedBtn">
-							<div class="col-md-12 text-center ">
-								<a href=" http://pursuit.ai/contact/" style="color:#fff;">
-								<button type="button" class="btn btn-success  needGetBtn">Need A Larger Plan? </button>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		 <section class="">
-		<div class="container">
-		<div class="row">
-            <div class="col-md-12 FAQSection">
-                <h2 class="text-center">Frequently Asked Questions </h2>
-                <h4>How do you know an email is verified?</h4>
-                <p>
-                   We assign a quality score to every email we search for. Verified emails are directly validated with the server and maintain at least a 98% deliverability rate.
-
-                </p>
-                <p>
-                </p>
-            </div>
-            <div class="col-md-12 FAQSection">
-                <h4>What about the emails that aren’t verified?</h4>
-                <p>
-                   Emails with lower than a 98% quality score are provided to you for free. We use a color gradient scheme to indicate our level of certainty for each unverified email. 
-
-                </p>
-            </div>
-            <div class="col-md-12 FAQSection">
-                <h4>Do you offer free trials?</h4>
-                <p>
-                   If you register an account <a href="http://13.59.50.104/accounts/register/">here</a> you can evaluate our service and receive 20 verified emails for free. 
-                </p>
-            </div>
-			 <div class="col-md-12 FAQSection">
-                <h4> How do rollovers work? </h4>
-                <p>
-                   If you don’t use all of your email credits in a given month, the credit will be added to your credit for the next month. You will be able to use any of your credits until you cancel.
-
-                </p>
-                <p>
-                </p>
-            </div>
-            <div class="col-md-12 FAQSection ">
-                <h4>What if I need to cancel?</h4>
-                <p>
-                  You may cancel your subscription at any time during the billing period. After you cancel, you will be able to continue using your remaining credits until the end of your billing period. 
-                </p>
-            </div>
-			 <div class="col-md-12 FAQSection LastFAQ">
-                <h4>What if I need more emails validated than the plans you offer?</h4>
-                <p>
-                 Please contact our sales team at <a href="">sales@pursuit.ai.</a>
-
-                </p>
+                                    </div>
+                                </div>
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li class="dropdown">
+                                            <a href="http://13.59.50.104/app/" class="dropdown-toggle" data-toggle="dropdown">Email Hunter <b class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="https://pursuit.ai/">Free Email Finder</a></li>
+                                                <li><a href="#section1">Plans & Pricing</a></li>
+                                                <li>
+                                                    <a href="/accounts/register/" class="RegisA">Register</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">SDR Outsourcing <b class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="http://pursuit.ai/lead-generation/">Lead Generation</a></li>
+                                                <li><a href="http://pursuit.ai/prospect-outreach/">Prospect Outreach</a></li>
+                                                <li><a href="http://pursuit.ai/sdr-oursourcing/">Why Outsource?</a></li>
+                                                <li><a href="http://pursuit.ai/pricing/">Plans & Pricing</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="http://pursuit.ai/about/" class="dropdown-toggle" data-toggle="dropdown">Company <b class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="http://pursuit.ai/blog/">Blog</a></li>
+                                                <li><a href="http://pursuit.ai/careers/">Careers</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="GetInTouchCls dropdown">
+                                            <a href="http://pursuit.ai/contact/">Get In Touch </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="/accounts/login/" class="LoginA">Login </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-		</div>
-		 </section>
-		<footer>
-			<div class="row FooterMain">
-				<div class="col-md-1"></div>
-				<div class="col-md-10">
-					<div class="col-md-3 col-sm-6 text-center FooterOne">
-						<h4>About</h4>
-						<p>Pursuit finds prospects and schedules meetings for your sales team</p>
-						<h4 class="ConnectFooter">Connect</h4>
-						<a href="https://www.facebook.com/PursuitSDR/"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
-						<a href="https://twitter.com/pursuit_sdr"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
-						<a href="https://www.linkedin.com/pursuitsdr"><i id="social-gp" class="fa fa-linkedin-square fa-3x social"></i></a>
+    </header>
+    <div class="fading-header" style="display:none"></div>
+    <div class="CustRowOne">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="headerTextMain">
+                    <p class="headtextN">Enter Details To Find Any Business Email Address</p>
+                    <p class="text-center headtext">{{ msg|safe }}</p>
+                    <form method="POST" action="/app/" class="text-center csfrom">{% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6 text-left">
+                                <label>
+                                    First Name
+                                </label>
+                                <input type="text" class="form-control" placeholder="First Name" name="first_name" />
+                            </div>
+                            <div class="col-md-6 text-left">
+                                <label>
+                                    Last Name
+                                </label>
+                                <input type="text" class="form-control" placeholder="Last Name" name="last_name" />
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12 text-left">
+                                <div class="form-group">
+                                    <label>
+                                        Company Website
+                                    </label>
+                                    <input type="text" class="form-control headinput" placeholder="Company Website" name="company_website" />
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-default Searchresult button">
+                            Submit
+                        </button>
+                        <div class="row customcsvRow landingPopupCls">
+                            <div class="col-md-12 cvscols">
+                                <table class="table searchreult">
+                                    <tr>
+                                        {% if details %}
+                                        <td>
+                                            <span class="xyz">{{ details }}</span>
+                                            <!-- {{ details }} -->
+                                        </td>
+                                        {% endif %}
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="">
+        <div class="container BGSectionWhite">
+            <div class="row customrowfirst">
+                <div class="col-md-6">
+                    <h2> Find Any Business Email Address  </h2>
+                    <p>
+                        Email Hunter uses direct server validation in conjunction with user verified data to ensure that you only send email to real customers and high-value contacts.
+                        <br/>
+                        <br/> The verification technology uses advanced tools such as syntax check, MX & SMTP verification, catch-all detection, and disposable email filtering to deliver any business contact’s email along with a confidence score based on our analysis.
+                    </p>
+                    <a href="#section2">
+                        <button type="submit" class="btn btn-default  Searchresult PlanPriceBtn">
+                            Plans & Pricing
+                        </button>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <img alt="Image" src="{% static 'images/4 Images-01.jpg' %}" />
+                </div>
+            </div>
+        </div>
+        <div class="BGSection">
+            <div class="container">
+                <div class="row customrowfirst">
+                    <div class="col-md-6">
+                        <img alt="Image" src="{% static 'images/4 Images-02.jpg' %}" />
+                    </div>
+                    <div class="col-md-6">
+                        <h2>Easy On Your Budget </h2>
+                        <p>
+                            Stop paying for expensive stale leads lists. Using Pursuit’s Email Hunter you can verify thousands of emails at a fraction of the cost.
+                            <br/>
+                            <br/> Not only that, we only charge you for emails that are verified.
+                        </p>
+                        <a href="#section2">
+                            <button type="submit" class="btn btn-default  Searchresult PlanPriceBtn">
+                                Plans & Pricing
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container BGSectionWhite">
+            <div class="row customrowfirst">
+                <div class="col-md-6">
+                    <h2>Find Emails in Bulk </h2>
+                    <p>
+                        Our easy to use interface allows you to upload thousands of records via .csv and receive server verified emails in minutes.
+                        <br/>
+                        <br/> All verified emails can be uploaded directly to your CRM for database enrichment.
+                    </p>
+                    <a href="#section2">
+                        <button type="submit" class="btn btn-default  Searchresult PlanPriceBtn">
+                            Plans & Pricing
+                        </button>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <img alt="Image" src="{% static 'images/4 Images-03.jpg' %}" />
+                </div>
+            </div>
+        </div>
+        <div class="BGSection">
+            <div class="container">
+                <div class="row customrowfirst">
+                    <div class="col-md-6">
+                        <img alt="Image" src="{% static 'images/4 Images-04.jpg' %}" />
+                    </div>
+                    <div class="col-md-6">
+                        <h2>Safe & Secure API</h2>
+                        <p>
+                            Verify emails quick and easily using our rest API.
+                            <br/>
+                            <br/>API results are delivered in portable JSON Format. Make a simple request and let our API do the rest. </p>
+                        <a href="#section2">
+                            <button type="submit" class="btn btn-default  Searchresult PlanPriceBtn">
+                                Plans & Pricing
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row" id="section2">
+            <div class="col-md-12 collandpage" id="section1">
+                <h2 class="text-center TitleCommancls SlectCLasLand">
+						Select Subscription Plan
+					</h2>
+                <div class="row prcingRow">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="Pricingcls">
+                            <div class="PricingSub">
+                                <h1>350 emails</h1>
+                                <h3> $19/month</h3>
+                                <p>Pay for verified emails only</p>
+                                <p>Unlimited rollovers</p>
+                                <p>Bulk search</p>
+                                <p>.CSV import/export</p>
+                                <p>API access</p>
+                                <a href="http://13.59.50.104/accounts/register/" style="color:#fff;">
+                                    <button type="button" class="btn btn-default updatebtn">Sign Up</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="Pricingcls">
+                            <div class="PricingSub">
+                                <h1>1000 emails</h1>
+                                <h3> $39/month</h3>
+                                <p>Pay for verified emails only</p>
+                                <p>Unlimited rollovers</p>
+                                <p>Bulk search</p>
+                                <p>.CSV import/export</p>
+                                <p>API access</p>
+                                <a href="http://13.59.50.104/accounts/register/" style="color:#fff;">
+                                    <button type="button" class="btn btn-default updatebtn	">Sign Up</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="Pricingcls">
+                            <div class="PricingSub ACTIVE">
+                                <h1>5,000 emails</h1>
+                                <h3> $89/month</h3>
+                                <p>Pay for verified emails only</p>
+                                <p>Unlimited rollovers</p>
+                                <p>Bulk search</p>
+                                <p>.CSV import/export</p>
+                                <p>API access</p>
+                                <a href="http://13.59.50.104/accounts/register/">
+                                    <button type="button" class="btn btn-default  updatebtn	">Sign Up</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="Pricingcls">
+                            <div class="PricingSub pricLastColumn">
+                                <h1>10,000 emails</h1>
+                                <h3> $139/month</h3>
+                                <p>Pay for verified emails only</p>
+                                <p>Unlimited rollovers</p>
+                                <p>Bulk search</p>
+                                <p>.CSV import/export</p>
+                                <p>API access</p>
+                                <a href="http://13.59.50.104/accounts/register/" style="color:#fff;">
+                                    <button type="button" class="btn btn-default updatebtn">Sign Up</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row NeedBtn">
+                    <div class="col-md-12 text-center ">
+                        <a href=" http://pursuit.ai/contact/" style="color:#fff;">
+                            <button type="button" class="btn btn-success  needGetBtn">Need A Larger Plan? </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 FAQSection">
+                    <h2 class="text-center">Frequently Asked Questions </h2>
+                    <h4>How do you know an email is verified?</h4>
+                    <p>
+                        We assign a quality score to every email we search for. Verified emails are directly validated with the server and maintain at least a 98% deliverability rate.
+                    </p>
+                    <p>
+                    </p>
+                </div>
+                <div class="col-md-12 FAQSection">
+                    <h4>What about the emails that aren’t verified?</h4>
+                    <p>
+                        Emails with lower than a 98% quality score are provided to you for free. We use a color gradient scheme to indicate our level of certainty for each unverified email.
+                    </p>
+                </div>
+                <div class="col-md-12 FAQSection">
+                    <h4>Do you offer free trials?</h4>
+                    <p>
+                        If you register an account <a href="http://13.59.50.104/accounts/register/">here</a> you can evaluate our service and receive 20 verified emails for free.
+                    </p>
+                </div>
+                <div class="col-md-12 FAQSection">
+                    <h4> How do rollovers work? </h4>
+                    <p>
+                        If you don’t use all of your email credits in a given month, the credit will be added to your credit for the next month. You will be able to use any of your credits until you cancel.
+                    </p>
+                    <p>
+                    </p>
+                </div>
+                <div class="col-md-12 FAQSection ">
+                    <h4>What if I need to cancel?</h4>
+                    <p>
+                        You may cancel your subscription at any time during the billing period. After you cancel, you will be able to continue using your remaining credits until the end of your billing period.
+                    </p>
+                </div>
+                <div class="col-md-12 FAQSection LastFAQ">
+                    <h4>What if I need more emails validated than the plans you offer?</h4>
+                    <p>
+                        Please contact our sales team at <a href="">sales@pursuit.ai.</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="row FooterMain">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="col-md-3 col-sm-6 text-center FooterOne">
+                    <h4>About</h4>
+                    <p>Pursuit finds prospects and schedules meetings for your sales team</p>
+                    <h4 class="ConnectFooter">Connect</h4>
+                    <a href="https://www.facebook.com/PursuitSDR/"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
+                    <a href="https://twitter.com/pursuit_sdr"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
+                    <a href="https://www.linkedin.com/pursuitsdr"><i id="social-gp" class="fa fa-linkedin-square fa-3x social"></i></a>
+                </div>
+                <div class="col-md-3 col-sm-6 text-center FooterCom">
+                    <h4>Platform</h4>
+                    <ul id="menu-footer-1" class="menu">
+                        <li class="menu-email-hunter"><a href="http://pursuit.ai/email-finder">Email Hunter</a></li>
+                        <li class="menu-lead-generation"><a href="http://pursuit.ai/lead-generation/">Lead Generation</a></li>
+                        <li class="menu-prospect-outreach"><a href="http://pursuit.ai/prospect-outreach/">Prospect Outreach</a></li>
+                        <li class="menu-why-outsource"><a href="http://pursuit.ai/sdr-oursourcing/">Why Outsource?</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 text-center FooterCom">
+                    <h4>Company</h4>
+                    <ul>
+                        <li class="menu-about"><a href="http://pursuit.ai/about/">About</a></li>
+                        <li class="menu-blog"><a href="http://pursuit.ai/blog/">Blog</a></li>
+                        <li class="menu-careers"><a href="http://pursuit.ai/careers/">Careers</a></li>
+                        <li class="menu-pricing"><a href="http://pursuit.ai/pricingplans/">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 text-center">
+                    <h4>Contact</h4>
+                    <div class="form-area footFrom">
+                        <form role="form">
+                            <br style="clear:both">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="email" name="email" placeholder="Email" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" type="textarea" id="message" placeholder="Message"></textarea>
+                            </div>
+                            <button type="button" id="submit" name="submit" class="btn btn-primary SubmitFooterBtn">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="footer-btm-bar">
+                <div class="footer-copyright row">
+                    <div class="col-md-12">
+                        <p><span class="footer_copy">&nbsp;© 2017 Remote Society</span> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    {#
+    <script>
+    #} {# var previousScroll = 0,
+            # } {# headerOrgOffset = $('#header').offset().top;# } {##} {##} {#
+        $(window).scroll(function() {#} {# var currentScroll = $(this).scrollTop();# } {# console.log(currentScroll + " and " + previousScroll + " and " + headerOrgOffset);# } {#
+            if (currentScroll > headerOrgOffset) {#} {#
+                if (currentScroll > previousScroll) {#} {# $('#header').fadeIn();# } {# $('#header').addClass('fixed');# } {##} {#} else {#} {# $('#header').fadeIn();# } {# $('#header').addClass('fixed');# } {#}#
+            } {#} else {#} {# $('#header').removeClass('fixed');# } {#}#
+        } {# previousScroll = currentScroll;# } {#});#
+    } {#
+    </script>#} {#
+    <script src="{% static 'js/jquery.min.js' %}"></script>#} {#
+    <script src="{% static 'js/script.js' %}"></script>#} {% endblock %}
+</body>
+{#
 
-					</div>
-					<div class="col-md-3 col-sm-6 text-center FooterCom">
-						<h4>Platform</h4>
-						<ul id="menu-footer-1" class="menu"><li class="menu-email-hunter"><a href="http://pursuit.ai/email-finder">Email Hunter</a></li>
-							<li class="menu-lead-generation"><a href="http://pursuit.ai/lead-generation/">Lead Generation</a></li>
-							<li class="menu-prospect-outreach"><a href="http://pursuit.ai/prospect-outreach/">Prospect Outreach</a></li>
-							<li class="menu-why-outsource"><a href="http://pursuit.ai/sdr-oursourcing/">Why Outsource?</a></li>
-						</ul>
-					</div>
-					<div class="col-md-3 col-sm-6 text-center FooterCom">
-						<h4>Company</h4>
-						<ul>
-							<li class="menu-about"><a href="http://pursuit.ai/about/">About</a></li>
-							<li class="menu-blog"><a href="http://pursuit.ai/blog/">Blog</a></li>
-							<li class="menu-careers"><a href="http://pursuit.ai/careers/">Careers</a></li>
-							<li class="menu-pricing"><a href="http://pursuit.ai/pricingplans/">Pricing</a></li>
-						</ul>
-					</div>
-					<div class="col-md-3 col-sm-6 text-center">
-						<h4>Contact</h4>
-						<div class="form-area footFrom">
-							<form role="form">
-								<br style="clear:both">
-								<div class="form-group">
-									<input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" id="email" name="email" placeholder="Email" required>
-								</div>
-								<div class="form-group">
-									<textarea class="form-control" type="textarea" id="message" placeholder="Message" ></textarea>
-								</div>
-
-								<button type="button" id="submit" name="submit" class="btn btn-primary SubmitFooterBtn">Submit</button>
-							</form>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-1"></div>
-				<div class="footer-btm-bar">
-					<div class="footer-copyright row">
-						<div class="col-md-12">
-							<p><span class="footer_copy">&nbsp;© 2017 Remote Society</span> </p>
-						</div>
-					</div>
-				</div>
-		</div>
-		</footer>
-{#		<script>#}
-{#			var previousScroll = 0,#}
-{#				headerOrgOffset = $('#header').offset().top;#}
-{#	#}
-{#	#}
-{#			$(window).scroll(function() {#}
-{#				var currentScroll = $(this).scrollTop();#}
-{#				console.log(currentScroll + " and " + previousScroll + " and " + headerOrgOffset);#}
-{#				if (currentScroll > headerOrgOffset) {#}
-{#					if (currentScroll > previousScroll) {#}
-{#						$('#header').fadeIn();#}
-{#						$('#header').addClass('fixed');#}
-{#						#}
-{#					} else {#}
-{#						$('#header').fadeIn();#}
-{#						$('#header').addClass('fixed');#}
-{#					}#}
-{#				} else {#}
-{#					$('#header').removeClass('fixed');#}
-{#				}#}
-{#				previousScroll = currentScroll;#}
-{#			});#}
-{#        </script>#}
-{#	<script src="{% static 'js/jquery.min.js' %}"></script>#}
-{#    <script src="{% static 'js/script.js' %}"></script>#}
-    {% endblock %}
-  </body>
-{#</html>#}
+</html>#}

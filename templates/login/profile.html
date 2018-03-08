@@ -1,10 +1,7 @@
-{% extends 'login/base.html' %}
-{% load staticfiles %}
+{% extends 'login/base.html' %} {% load staticfiles %}
+
 <body>
-
-{% block content %}
-
-
+    {% block content %}
     <header>
         <div class="container-fluid">
             <div class="row">
@@ -13,11 +10,8 @@
                         <div id="header" class="clear">
                             <nav class="navbar navbar-default" role="navigation">
                                 <div class="navbar-header">
-                                    <button type="button" class="navbar-toggle" data-toggle="collapse"
-                                            data-target="#bs-example-navbar-collapse-1">
-                                        <span class="sr-only">Toggle navigation</span><span
-                                            class="icon-bar"></span><span class="icon-bar"></span><span
-                                            class="icon-bar"></span>
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                        <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                                     </button>
                                     <div class="logoI">
                                         <a href="http://pursuit.ai/">
@@ -26,12 +20,10 @@
                                         </a>
                                     </div>
                                 </div>
-
                                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                     <ul class="nav navbar-nav navbar-right">
                                         <li class="dropdown">
-                                            <a href="http://pursuit.ai/email-finder" class="dropdown-toggle"
-                                               data-toggle="dropdown">Email Hunter <b class="caret"></b></a>
+                                            <a href="http://pursuit.ai/email-finder" class="dropdown-toggle" data-toggle="dropdown">Email Hunter <b class="caret"></b></a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="https://pursuit.ai/">Free Email Finder</a></li>
                                                 <li><a href="http://13.59.50.104/app/#section1">Plans & Pricing</a></li>
@@ -50,8 +42,7 @@
                                             </ul>
                                         </li>
                                         <li class="dropdown">
-                                            <a href="http://pursuit.ai/about/" class="dropdown-toggle"
-                                               data-toggle="dropdown">Company <b class="caret"></b></a>
+                                            <a href="http://pursuit.ai/about/" class="dropdown-toggle" data-toggle="dropdown">Company <b class="caret"></b></a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="http://pursuit.ai/blog/">Blog</a></li>
                                                 <li><a href="http://pursuit.ai/careers/">Careers</a></li>
@@ -62,21 +53,17 @@
                                         </li>
                                         <li>
                                             <a href="/app">Home</a>
-
                                         </li>
                                         <li>
                                             <a href="/accounts/logout/">Logout</a>
-
                                         </li>
-{#                                        ---------------------------------------------------#}
+                                        {# ---------------------------------------------------#}
                                         <li>
                                             <a href="/sale/payment/">Pay</a>
-
                                         </li>
-{#                                        -----------------------------------------------------#}
+                                        {# -----------------------------------------------------#}
                                     </ul>
                                 </div>
-
                             </nav>
                         </div>
                     </div>
@@ -84,69 +71,58 @@
             </div>
         </div>
     </header>
-
     <div class="CSVPageBg">
         <div class="row">
             <div class="col-md-12">
                 <div class="CSVPageF">
-                    <form id="myid"  method="POST" action="" class="text-center csfrom">{% csrf_token %}
+                    <p class="headtextN">Enter Details To Find Any Business Email Address</p>
+                    <br>
+                    <form id="myid" method="POST" action="/profile/" class="text-center csfrom">{% csrf_token %}
                         <div class="row">
                             <div class="col-md-6 text-left">
                                 <label>
                                     First Name
                                 </label>
-                                <input type="text" class="form-control" placeholder="First Name" name="first_name"/>
-				 </div>
+                                <input type="text" class="form-control" placeholder="First Name" name="first_name" />
+                            </div>
                             <div class="col-md-6 text-left">
                                 <label>
                                     Last Name
                                 </label>
-                                <input type="text" class="form-control" placeholder="Last Name" name="last_name"/>
-				 </div>
+                                <input type="text" class="form-control" placeholder="Last Name" name="last_name" />
+                            </div>
                         </div>
                         <br>
-
                         <div class="row">
-
                             <div class="col-md-12 text-left">
                                 <div class="form-group">
                                     <label>
                                         Company Website
                                     </label>
-                                    <input type="text" class="form-control headinput" placeholder="Company Website"
-                                           name="company_website"/>
-
-
+                                    <input type="text" class="form-control headinput" placeholder="Company Website" name="company_website" />
                                 </div>
-
                             </div>
                         </div>
-                        <input id="submit" type="submit" name ="submit" value="Save" class="btn btn-default Searchresult">
-                           
+                        <input id="submit" type="submit" name="submit" value="Search" class="btn btn-default Searchresult">
                         <div class="row customcsvRow">
                             <div class="col-md-12 cvscols">
                                 <table class="table searchreult">
                                     <tr>
-                                       {% if details %}
-                                            <td>
-                                                <span class="xyz">{{ details }}</span>
-{#                                                <!-- {{ details }} -->#}
-                                            </td>
+                                        {% if details %}
+                                        <td>
+                                            <span style="" class="xyz">{{ details }}</span>
+                                            <!-- {{ details }} -->
+                                        </td>
                                         {% endif %}
-
                                     </tr>
                                 </table>
                             </div>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
     </div>
-
-
-
     <div class="container">
         <div class="row customcsvRow">
             <div class="exort">
@@ -155,12 +131,11 @@
             </div>
             <div class="col-md-12 cvscols">
                 {% if data %}
-                    <table class="table">
-                        <thead>
-
+                <table class="table">
+                    <thead>
                         <tr>
                             <th class="cvsCheckbox">
-                                <input class="" type="checkbox"/>
+                                <input class="" type="checkbox" />
                             </th>
                             <th>First Name</th>
                             <th>Last Name</th>
@@ -168,59 +143,44 @@
                             <th>Email Score</th>
                             <th>Email guess</th>
                             <th>
-
                             </th>
                         </tr>
-
-                        </thead>
-                        <tbody>
+                    </thead>
+                    <tbody>
                         {% for i in data %}
-
-                            <tr>
-                                <td class="cvsCheckbox">
-                                    <input class="" type="checkbox"/>
-                                </td>
-                                <td>
-                                    {{ i.first_name }}
-                                </td>
-                                <td>
-                                    {{ i.last_name }}
-                                </td>
-                                <td>
-                                    {{ i.company_url }}
-                                </td>
-                                <td>
-                                    {{ i.email_score }}
-                                </td>
-                                <td>
-                                    {{ i.email_guess }}
-                                </td>
-                                <td style="padding: 15px 0px;">
-                                    <div class="Tablecircle CircleTwo"></div>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td class="cvsCheckbox">
+                                <input class="" type="checkbox" />
+                            </td>
+                            <td>
+                                {{ i.first_name }}
+                            </td>
+                            <td>
+                                {{ i.last_name }}
+                            </td>
+                            <td>
+                                {{ i.company_url }}
+                            </td>
+                            <td>
+                                {{ i.email_score }}
+                            </td>
+                            <td>
+                                {{ i.email_guess }}
+                            </td>
+                            <td style="padding: 15px 0px;">
+                                <div class="Tablecircle CircleTwo"></div>
+                            </td>
+                        </tr>
                         {% endfor %}
-
-                        </tbody>
-                    </table>
+                    </tbody>
+                </table>
                 {% endif %}
                 <div class="col-md-12 text-center">
-                    <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+                    <form action="/profile/" method="post" enctype="multipart/form-data">{% csrf_token %}
                         <p>{{ form.non_field_errors }}</p>
-
-                        {#            <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}click here to select file</p>#}
-                        {##}
-                        {#            <p>#}
-                        {#                {{ form.docfile.errors }}#}
-                        {#                <p class="btn btn-success  tableBo<p><inn LoginUploadBtn" >{{ form.docfile }}</p><br>#}
-
-
-                        {{ form.docfile }}<input type="submit" class="btn btn-success  tableBo<p><inn LoginUploadBtn"
-                                                 value="Upload"/>
+                        {{ form.docfile }}
+                        <input type="submit" class="btn btn-success  tableBo<p><inn LoginUploadBtn" value="Upload" />
                     </form>
-                    {#                    <button type="submit" class="btn btn-success  tableBo<p><inn LoginUploadBtn">#}
-                    {#                        Upload CSV#}
-                    {#                    </button>#}
                 </div>
             </div>
         </div>
@@ -231,7 +191,6 @@
             <div class="col-md-10">
                 <div class="col-md-3 col-sm-6 text-center FooterOne">
                     <h4>About</h4>
-
                     <p>Pursuit finds prospects and schedules meetings for your sales team</p>
                     <h4 class="ConnectFooter">Connect</h4>
                     <a href="https://www.facebook.com/PursuitSDR/"><i id="social-fb"
@@ -240,7 +199,6 @@
                                                                  class="fa fa-twitter-square fa-3x social"></i></a>
                     <a href="https://www.linkedin.com/pursuitsdr"><i id="social-gp"
                                                                      class="fa fa-linkedin-square fa-3x social"></i></a>
-
                 </div>
                 <div class="col-md-3 col-sm-6 text-center FooterCom">
                     <h4>Platform</h4>
@@ -265,24 +223,18 @@
                 </div>
                 <div class="col-md-3 col-sm-6 text-center">
                     <h4>Contact</h4>
-
                     <div class="form-area footFrom">
                         <form role="form">
                             <br style="clear:both">
-
                             <div class="form-group">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Name"
-                                       required>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="email" name="email" placeholder="Email"
-                                       required>
+                                <input type="text" class="form-control" id="email" name="email" placeholder="Email" required>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" type="textarea" id="message" placeholder="Message"
-                                          rows="7"></textarea>
+                                <textarea class="form-control" type="textarea" id="message" placeholder="Message" rows="7"></textarea>
                             </div>
-
                             <button type="button" id="submit" name="submit" class="btn btn-primary SubmitFooterBtn">
                                 Submit
                             </button>
@@ -300,22 +252,19 @@
             </div>
         </div>
     </footer>
-
-
-<script>
- var $form = $("#myid"),
+    <script>
+    var $form = $("#myid"),
         $errorMsg = $("<span class='error'>This field is required..!!</span>");
 
-    $("#submit").on("click", function () {
+    $("#submit").on("click", function() {
         var toReturn = true;
-        $("input", $form).each(function () {
+        $("input", $form).each(function() {
             if ($(this).val() == "") {
                 if (!$(this).data("error")) {
                     $(this).data("error", $errorMsg.clone().insertAfter($(this)));
                 }
                 toReturn = false;
-            }
-            else {
+            } else {
                 if ($(this).data("error")) {
                     $(this).data("error").remove();
                     $(this).removeData("error");
@@ -324,7 +273,6 @@
         });
         return toReturn;
     });
-</script>
-
-{% endblock %}
+    </script>
+    {% endblock %}
 </body>

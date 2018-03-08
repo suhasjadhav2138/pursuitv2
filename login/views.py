@@ -1,3 +1,5 @@
+
+
 from __future__ import unicode_literals
 import json
 from website.settings import MEDIA_ROOT
@@ -24,6 +26,8 @@ from sales.models import Sale
 from django.contrib.auth import authenticate, login
 
 import datetime
+
+
 # home page of the website
 def index_view(request):
     if request.method == 'POST':
@@ -32,7 +36,18 @@ def index_view(request):
         title = 'CEO'
         # company_email = request.POST.get('company_email')
         company_website = request.POST.get('company_website')
+        empty_fields = []
+        if first_name == "":
+            empty_fields.append("First Name")
+        if last_name == "":
+            empty_fields.append("Last Name")
+        if company_website == "":
+            empty_fields.append("Website Name")
 
+        if first_name == "" or last_name == "" or company_website == "":
+            message_empty = "Kindly Fill All The Details To Initiate Search"
+            message_empty1 = "Missing Fields : " + ", ".join(x for x in empty_fields)
+            return render(request, 'login/profile.html', {'details': message_empty1})
 
         data_list = [first_name, last_name, title, company_website]
 
@@ -48,21 +63,17 @@ def index_view(request):
             else:
                 data_tracked = []
 
-
-
         if data_tracked == []:
             # client_address = request.META['HTTP_X_FORWARDED_FOR']
 
-            track_update = Track_guest_details(user="guest", ip_address=request.META['REMOTE_ADDR'], mac_address=ip_data["mac"])
+            track_update = Track_guest_details(user="guest", ip_address=request.META['REMOTE_ADDR'],
+                                               mac_address=ip_data["mac"])
             track_update.save()
-
-
 
             user = "Guest"
 
             person_details = validate_email.select_type(user, data_list)
 
-         
             message = ""
             try:
                 message = """<a href="/accounts/register"/>Sign Up</a> to get more 19 free credits"""
@@ -70,8 +81,6 @@ def index_view(request):
             except:
                 person_details = "domain not found"
 
-           
-          
             return render(request, 'login/index.html',
                           {'details': person_details, 'msg': message})
         else:
@@ -98,12 +107,13 @@ def login_view(request):
                 login(request, user)
                 request.session['userid'] = user.id
                 user_data = Sale.objects.filter(user_name=user).values()
-		if user_data:
-               	    return HttpResponseRedirect('/profile/')
-		else:
-		    return HttpResponseRedirect('/sale/payment/')
+                if user_data:
+                    return HttpResponseRedirect('/profile/')
+                else:
+                    return HttpResponseRedirect('/sale/payment/')
             else:
                 return render(request, 'login/login.html', {'error_message': 'Your account has been disabled'})
+
         else:
             return render(request, 'login/login.html', {'error_message': 'Enter correct username or password'})
     return render(request, "login/login.html", {})
@@ -111,7 +121,6 @@ def login_view(request):
 
 # registration page
 @csrf_exempt
-
 def register_view(request):
     title = "Register"
     if request.method == "POST":
@@ -124,6 +133,13 @@ def register_view(request):
             email = form.cleaned_data.get('email')
             usern = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
+            confirm_password = form.cleaned_data.get("confirm_password")
+
+            if password != confirm_password:
+                form = UserRegisterForm()
+                msg = "password didnt match" + str(password) + str(confirm_password)
+
+                return render(request, "login/registration.html", {'form': form, 'msg': msg})
             user.set_password(password)
             authenticate(username=user.username, password=password)
             user.is_active = True
@@ -134,16 +150,10 @@ def register_view(request):
             login(request, new_user)
             return HttpResponseRedirect('/sale/payment/')
 
-	else:
-            return render(request, "login/registration.html", {"form":form})
+        else:
+            return render(request, "login/registration.html", {"form": form})
 
-           # form = UserRegisterForm()
-           # context = {
-            #    "form": form,
-             #   "title": title,
-              #  "message":"Please fill All the details"
-           # }
-            return render(request, "login/registration.html")
+
     else:
         form = UserRegisterForm()
         context = {
@@ -152,136 +162,131 @@ def register_view(request):
         }
         return render(request, "login/registration.html", context)
 
-    return render(request, "login/registration.html")
-
 
 # logout user from his profile to the homePage
 def logout_view(request):
     logout(request)
- 
 
     return render(request, "login/index.html", {})
 
 
-#load csv and read in construction
+# load csv and read in construction
 @login_required()
 def validate_view(request):
     if request.method == 'GET':
         form = DocumentForm()
- 
+
         return render(request, "login/profile.html", {'form': form})
 
     if request.method == 'POST' and not request.FILES:
- 
-	    first_name = request.POST.get('first_name')
-            last_name = request.POST.get('last_name')
-            title = 'CEO'
-        
-            company_website = request.POST.get('company_website')
 
- 
-            data_list = [first_name, last_name, title, company_website]
-            name_search = first_name + " " + last_name
-            filter_records = Search_details.objects.filter(user=request.user).values()
- 
-            for i in filter_records:
-                if (i["name"] == name_search) and (i["company_url"] == company_website):
-        
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        title = 'CEO'
+        form = DocumentForm()
 
-                
-                    try:
+        company_website = request.POST.get('company_website')
+        empty_fields = []
+        if first_name == "":
+            empty_fields.append("First Name")
+        if last_name == "":
+            empty_fields.append("Last Name")
+        if company_website == "":
+            empty_fields.append("Website Name")
 
-                        person_details = i['email_guess']
-                    except:
-                        person_details = "domain not found"
-                
-                
-                    form = DocumentForm()
+        if first_name == "" or last_name == "" or company_website == "":
+            message_empty = "Kindly Fill All The Details To Initiate Search"
+            message_empty1 = "Missing Fields : " + ", ".join(x for x in empty_fields)
+            return render(request, 'login/profile.html', {'details': message_empty1, 'form': form})
+        data_list = [first_name, last_name, title, company_website]
+        name_search = first_name + " " + last_name
+        filter_records = Search_details.objects.filter(user=request.user).values()
 
-                    return render(request, 'login/profile.html', {'details': person_details, 'form': form})
+        for i in filter_records:
+            if (i["name"] == name_search) and (i["company_url"] == company_website):
 
+                try:
 
+                    person_details = i['email_guess']
+                except:
+                    person_details = "domain not found"
 
+                form = DocumentForm()
 
-        
-            user = request.user
+                return render(request, 'login/profile.html', {'details': person_details, 'form': form})
+
+        user = request.user
         # if user in
 
-            read_credits = Search_credits.objects.filter(user=user).count()
-            if read_credits == 0:
-        
+        read_credits = Search_credits.objects.filter(user=user).count()
+        if read_credits == 0:
 
-                credits_add = Search_credits(user=user, free_credits_used=1, paid_credits_used=0)
-                credits_add.save()
+            credits_add = Search_credits(user=user, free_credits_used=1, paid_credits_used=0)
+            credits_add.save()
+
+        else:
+            if int(Search_credits.objects.get(user=user).free_credits_used) <= 20:
+
+                credits_update = Search_credits.objects.get(user=user)
+                credits_update.free_credits_used = (int(credits_update.free_credits_used) + 1)
+                credits_update.save()
 
             else:
-                if int(Search_credits.objects.get(user=user).free_credits_used) <= 20:
-        
-                    credits_update = Search_credits.objects.get(user=user)
-                    credits_update.free_credits_used = (int(credits_update.free_credits_used) + 1)
-                    credits_update.save()
-        
-                else:
-                    notify = "Kindly Buy membership to increase credits and enable Upload csv option"
-                    return render(request, 'login/profile.html', {'search': notify})
+                notify = "Kindly Buy membership to increase credits and enable Upload csv option"
+                return render(request, 'login/profile.html', {'search': notify})
 
+        person_details = validate_email.select_type(request.user, data_list)
 
-            person_details = validate_email.select_type(request.user, data_list)
+        try:
 
-        
-        
-            try:
+            person_details = person_details[0]['email_guess']
+        except:
+            person_details = "domain not found"
 
-                person_details = person_details[0]['email_guess']
-            except:
-                person_details = "domain not found"
-        
-        
-            form = DocumentForm()
+        form = DocumentForm()
 
-            return render(request, 'login/profile.html', {'details': person_details, 'form': form})
+        return render(request, 'login/profile.html', {'details': person_details, 'form': form})
     else:
 
         form = DocumentForm(request.POST, request.FILES)
         user_pay = Sale.objects.filter(user_name=request.user).count()
-        
+
         if user_pay:
             if form.is_valid():
                 newdoc = Document(docfile=request.FILES['docfile'], user=request.user)
-        
 
                 newdoc.save()
                 # -----------------------------------
                 path = '/home/ubuntu/project/pursuitt/media/' + str(newdoc)
-        
-                read_credits = Search_credits.objects.filter(user=request.user).count()
-        
-                if read_credits == 0:
+
+                read_credits = Sale.objects.filter(user_name=request.user).last().emails_balance_count
+
+                if read_credits > 0:
                     processed_data = validate_email.run(path, request.user, process_count=1)
 
-        
 
-                    credits_add = Search_credits(user=request.user, free_credits_used=len(processed_data),
-                                                 paid_credits_used=0)
-                    credits_add.save()
+
+                # credits_add = Search_credits(user=request.user, free_credits_used=len(processed_data),
+                #                                  paid_credits_used=0)
+                #     credits_add.save()
+
+                # else:
+
+                #     if int(Search_credits.objects.get(user=request.user).free_credits_used) <= 20:
+                #         processed_data = validate_email.run(path, request.user, process_count=1)
+
+
+                #         credits_update = Search_credits.objects.get(user=request.user)
+                #         credits_update.free_credits_used = (int(credits_update.free_credits_used) + len(processed_data))
+                #         credits_update.save()
 
                 else:
-
-                    if int(Search_credits.objects.get(user=request.user).free_credits_used) <= 20:
-                        processed_data = validate_email.run(path, request.user, process_count=1)
-
-        
-                        credits_update = Search_credits.objects.get(user=request.user)
-                        credits_update.free_credits_used = (int(credits_update.free_credits_used) + len(processed_data))
-                        credits_update.save()
-        
-                    else:
-                        notify = "You don't have enough credits kindly buy new plan and try again"
-                        return render(request, 'login/profile.html',
-                                      {'details': notify})
+                    notify = "You don't have enough credits kindly buy new plan and try again"
+                    return render(request, 'login/profile.html',
+                                  {'details': notify})
 
                 path = "/home/ubuntu/project/pursuitt/media/outputFile/"
-        
+
                 keys = processed_data[0].keys()
                 with open(path + str(request.user) + "_output.csv", 'wb') as output_file:
                     dict_writer = csv.DictWriter(output_file, keys)
@@ -305,5 +310,5 @@ def validate_view(request):
                 # Redirect to the document list after POST
                 return render(request, 'login/profile.html', {'form': form})
         else:
-           form = DocumentForm()
-           return render(request, 'login/profile.html', {'form': form})
+            form = DocumentForm()
+            return render(request, 'login/profile.html', {'form': form})
