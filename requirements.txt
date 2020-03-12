@@ -41,7 +41,7 @@ PasteDeploy==1.5.2
 Persistence==2.13.2
 persistent==4.2.4.2
 poster==0.8.1
-psutil==5.3.1
+psutil==5.6.6
 psycopg2==2.7.3.1
 pyasn1==0.3.1
 pyasn1-modules==0.0.10
